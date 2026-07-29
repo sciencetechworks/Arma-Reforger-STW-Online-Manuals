@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>STW Heavy Weapons Manual</title>
+  <style>
+    :root { --ink:#e9edf0; --muted:#b9c4cb; --panel:#152128; --panel2:#1c2c34; --line:#39505b; --accent:#e9a53f; --green:#8fbd74; --page:#0c151a; }
+    * { box-sizing:border-box; } body { margin:0; background:linear-gradient(135deg,#081014,#101d23 55%,#0c151a); color:var(--ink); font:16px/1.62 system-ui,-apple-system,"Segoe UI",sans-serif; }
+    main { max-width:1000px; margin:auto; padding:42px 24px 64px; } header { border:1px solid var(--line); border-left:7px solid var(--accent); padding:34px; background:linear-gradient(120deg,rgba(31,48,57,.96),rgba(17,31,37,.96)); box-shadow:0 12px 35px #0006; }
+    h1,h2,h3 { line-height:1.2; } h1 { margin:0 0 8px; font-size:clamp(2.15rem,6vw,4rem); letter-spacing:.025em; } h2 { color:var(--accent); margin:44px 0 14px; font-size:1.65rem; } h3 { margin:24px 0 8px; color:#fff; } p { margin:10px 0; } .eyebrow { color:var(--green); font-weight:750; text-transform:uppercase; letter-spacing:.13em; font-size:.79rem; } .lead { font-size:1.14rem; color:#d6e0e4; max-width:760px; } section, .callout { background:rgba(21,33,40,.9); border:1px solid var(--line); padding:24px 28px; margin-top:22px; } section h2:first-child { margin-top:0; } .callout { border-left:5px solid var(--green); background:#15251f; } .warning { border-left-color:var(--accent); background:#2c251a; } ul,ol { padding-left:1.35rem; } li { margin:7px 0; } code { color:#ffe0ad; background:#0b1216; padding:2px 5px; border-radius:3px; overflow-wrap:anywhere; } table { width:100%; border-collapse:collapse; margin:14px 0; } th,td { text-align:left; vertical-align:top; padding:11px 10px; border-bottom:1px solid var(--line); } th { color:var(--green); } .steps { counter-reset:step; list-style:none; padding:0; } .steps li { position:relative; padding-left:42px; min-height:30px; } .steps li:before { counter-increment:step; content:counter(step); position:absolute; left:0; top:1px; width:27px; height:27px; border-radius:50%; background:var(--accent); color:#162026; text-align:center; font-weight:800; line-height:27px; } .contact { display:flex; gap:26px; align-items:center; margin-top:42px; padding:26px; background:#152128; border:1px solid var(--line); } .contact img { width:132px; height:auto; object-fit:contain; } a { color:#ffd27d; } .small { color:var(--muted); font-size:.92rem; } @media (max-width:600px) { main { padding:20px 14px 42px; } header,section,.callout { padding:22px 18px; } .contact { align-items:flex-start; flex-direction:column; } table { font-size:.9rem; } }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="eyebrow">ScienceTechWorks &bull; STW suite</div>
+    <h1>STW Heavy Weapons</h1>
+    <p class="lead">Put proper support weapons into the field: defended machine-gun positions, mortar posts, useful supplies, map awareness and artillery that feels like part of a living battlefield&mdash;not a button that dispenses explosions.</p>
+    <p class="small">A player and server-admin guide by STW (ScienceTechWorks).</p>
+  </header>
+
+  <section>
+    <h2>What this mod brings to the fight</h2>
+    <p>STW Heavy Weapons turns static weapons into complete battlefield posts. Instead of dropping a lonely tripod into the mud and hoping for the best, a post can have a faction, crew, guards, nearby supplies and a clear role on the map.</p>
+    <ul>
+      <li><strong>RPK machine-gun posts</strong> for holding roads, compounds and bad ideas at bay.</li>
+      <li><strong>Mortar posts</strong> for indirect fire support, with crews that can receive artillery missions.</li>
+      <li><strong>Optional arsenals and STW Crates</strong> near a post, so its defenders are not sent to war with pockets full of optimism.</li>
+      <li><strong>Persistent posts</strong> that can be saved and restored across server restarts.</li>
+      <li><strong>Map markers</strong> with public, zoom-based or hidden visibility choices.</li>
+      <li><strong>Automatic population</strong> that can turn suitable weapon placements into staffed posts.</li>
+      <li><strong>Terrain mortar networks</strong> that can seed a map with faction-owned mortar positions at startup.</li>
+      <li><strong>Mortar fire control</strong> with cooldowns, fatigue/stress, accuracy variation and player-safety options.</li>
+    </ul>
+    <p>It is designed to sit comfortably alongside the wider <strong>STW suite of mods</strong>. In particular, enabling STW Crates lets posts use the supply ecosystem already familiar to STW communities.</p>
+  </section>
+
+  <section>
+    <h2>Using it in Game Master</h2>
+    <p>Open the Game Master entity browser and look for the STW Heavy Weapons placeables. The mod provides an <strong>STW RPK</strong> model and an <strong>STW Mortar</strong> model. Place one where it has sensible ground, a useful field of fire and enough room for its friends.</p>
+    <ol class="steps">
+      <li>Place an STW RPK or STW Mortar.</li>
+      <li>Select the placed post and open its attributes.</li>
+      <li>Set <strong>Post Faction</strong> to decide who owns and mans it.</li>
+      <li>Choose the number of <strong>Guards</strong> to station alongside the weapon.</li>
+      <li>Use <strong>Force Arsenal</strong> if this post should always receive an arsenal.</li>
+      <li>Use <strong>Force STW Crate</strong> if it should always receive a nearby STW Crate (when STW Crates integration is enabled).</li>
+    </ol>
+    <p>The system builds the working post around the placed model. A mortar crew is registered for artillery duty; an RPK post becomes a compact defensive position. Place them with intent: a mortar benefits from breathing room, while a machine gun sings when it watches a choke point.</p>
+  </section>
+
+  <section>
+    <h2>Firing mortars</h2>
+    <p>Mortar posts can support artillery missions through Arma Reforger's normal command/artillery flow. The exact order-giving experience depends on the game mode and the server's chosen assignment strategy, but the guiding rule is simple: select or assign an available mortar crew, then designate the target through the usual artillery order.</p>
+    <p>STW Heavy Weapons adds a little battlefield character. Mortars do not have endless energy or perfect aim: each completed salvo adds stress, stress fades over time, and firing delays and accuracy can vary. This keeps artillery powerful without turning it into a meteorological event.</p>
+    <div class="callout">
+      <strong>For players:</strong> stay aware of the target area and your squad's position. Server owners can protect friendly players near an AI target, but common sense remains the most reliable safety system ever shipped.
+    </div>
+  </section>
+
+  <section>
+    <h2>Server configuration</h2>
+    <p>On first server start, the mod creates its configuration files under <code>$profile:STW/HeavyWeapons/</code>. Stop the server before editing them, make a backup, then restart it after saving. Values outside safe limits are gently corrected by the mod, so the server does not have to learn physics the hard way.</p>
+
+    <h3>1. System settings &mdash; <code>STWHeavyWeaponsSystemConfig.json</code></h3>
+    <table><thead><tr><th>Setting</th><th>What it controls</th><th>Good starting point</th></tr></thead><tbody>
+      <tr><td><code>heavyWeaponsSystemEnabled</code></td><td>Master switch for the Heavy Weapons system.</td><td><code>true</code></td></tr>
+      <tr><td><code>persistenceEnabled</code></td><td>Saves and restores managed posts between restarts.</td><td><code>true</code> for long-running servers.</td></tr>
+      <tr><td><code>persistenceIntervalMinutes</code></td><td>How often the system saves its state.</td><td><code>30</code>; lower values save more often.</td></tr>
+      <tr><td><code>persistenceRestoreInitialDelaySeconds</code>, <code>persistenceRestoreBatchSize</code>, <code>persistenceRestoreBatchDelayMilliseconds</code></td><td>How gently saved posts return after startup.</td><td>Leave defaults unless startup performance needs tuning.</td></tr>
+      <tr><td><code>maximumActivePosts</code></td><td>Ceiling for active managed weapon posts.</td><td><code>20</code>; raise gradually after performance testing.</td></tr>
+      <tr><td><code>maximumGeneratedSoldiers</code></td><td>Ceiling for AI created for posts.</td><td><code>60</code>; match it to your server's AI budget.</td></tr>
+      <tr><td><code>sharedPostResourceRadiusMeters</code></td><td>How close a crate may be to be shared by a post.</td><td><code>25</code> metres.</td></tr>
+      <tr><td><code>markerVisibility</code></td><td><code>0</code> hides markers, <code>1</code> shows them only when zoomed in, <code>2</code> shows them normally.</td><td><code>2</code> for admin-friendly maps.</td></tr>
+      <tr><td><code>markerZoomThreshold</code></td><td>Map zoom level used by zoom-based markers.</td><td><code>1.5</code>.</td></tr>
+      <tr><td><code>useRandomOffsetForPublicMarkers</code>, <code>maximumPublicMarkerOffsetMeters</code></td><td>Can deliberately blur public marker positions.</td><td>Enable for fog-of-war flavor.</td></tr>
+      <tr><td><code>enableSTWCrates</code></td><td>Allows integration with STW Crates.</td><td><code>true</code> when that STW mod is installed.</td></tr>
+      <tr><td><code>gameMasterFactions</code></td><td>Factions that Game Master may use for posts.</td><td>Keep only factions present on your server.</td></tr>
+    </tbody></table>
+
+    <h3>2. Automatic posts &mdash; <code>STWAutoPopulationConfig.json</code></h3>
+    <p>Automatic population is off by default. When enabled, the server periodically reviews relevant weapon placements and can turn them into staffed posts. It respects the active-post and soldier limits above.</p>
+    <table><thead><tr><th>Setting</th><th>Plain-English purpose</th></tr></thead><tbody>
+      <tr><td><code>automaticPopulationEnabled</code></td><td>Turns automatic post creation on or off.</td></tr>
+      <tr><td><code>runtimeReconciliationSeconds</code></td><td>How often the server checks for new suitable placements.</td></tr>
+      <tr><td><code>machineGunPostChancePercent</code>, <code>mortarPostChancePercent</code></td><td>Chance that each eligible weapon type becomes a post.</td></tr>
+      <tr><td><code>minimumSoldiersPerPost</code>, <code>maximumSoldiersPerPost</code></td><td>How many defenders each generated post receives (1&ndash;3).</td></tr>
+      <tr><td><code>factionExclusionRadiusMeters</code></td><td>Keeps competing faction posts from appearing too close together; minimum is 500 m.</td></tr>
+      <tr><td><code>arsenalDistanceMinMeters</code>, <code>arsenalDistanceMaxMeters</code></td><td>How near a generated arsenal sits to its post.</td></tr>
+      <tr><td><code>guardDistanceMinMeters</code>, <code>guardDistanceMaxMeters</code></td><td>How far guards spread from their weapon.</td></tr>
+      <tr><td><code>enableGuardDefendActivity</code></td><td>Lets guards use a defend activity instead of simply standing their ground.</td></tr>
+      <tr><td><code>crateDistanceMinMeters</code>, <code>crateDistanceMaxMeters</code>, <code>crateNearArsenalChancePercent</code></td><td>Controls crate placement and the chance it appears beside the arsenal.</td></tr>
+      <tr><td><code>machineGunFactionWeights</code>, <code>mortarFactionWeights</code></td><td>Choose which factions are most likely to receive generated posts. Higher weight means more likely.</td></tr>
+    </tbody></table>
+
+    <h3>3. Terrain mortar network &mdash; <code>STWMortarTerrainConfig.json</code></h3>
+    <p>This creates a limited set of mortar posts across suitable terrain during startup. It avoids unsuitable locations such as water, awkward slopes and crowded areas, then works toward the faction quotas you set.</p>
+    <ul>
+      <li><code>terrainMortarPlacementEnabled</code> turns the network on or off.</li>
+      <li><code>terrainMortarFactionQuotas</code> sets how many mortars each faction should receive. A quota of <code>0</code> means none.</li>
+      <li><code>terrainMortarMaximumPosts</code> is the overall safety cap.</li>
+      <li><code>terrainMortarCoverageRadiusMeters</code> defines the placement search coverage.</li>
+      <li><code>terrainMortarDifferentFactionMinimumSeparationMeters</code> and <code>terrainMortarSameFactionMinimumSeparationMeters</code> prevent mortar parks from becoming a very loud roommate situation.</li>
+      <li><code>terrainMortarDisabledFactions</code> excludes factions even if they appear elsewhere in the configuration.</li>
+    </ul>
+
+    <h3>4. Mortar behavior &mdash; <code>STWMortarFireConfig.json</code></h3>
+    <p>These settings shape how managed mortars respond to missions. The defaults make them formidable but not robotic.</p>
+    <table><thead><tr><th>Setting group</th><th>What it means</th></tr></thead><tbody>
+      <tr><td><code>enabled</code>, <code>interceptionScope</code></td><td>Enable fire control and choose whether it handles STW-managed mortars only, an allowlist of prefab paths, or all static artillery.</td></tr>
+      <tr><td><code>cooldownMinimumSeconds</code>, <code>cooldownMaximumSeconds</code></td><td>Random delay between available missions.</td></tr>
+      <tr><td><code>stressMaximum</code>, <code>stressAddedPerCompletedSalvo</code>, <code>stressDecayPerMinute</code></td><td>How much firing fatigue builds up and how fast it recovers.</td></tr>
+      <tr><td><code>autonomousFireChanceRestedPercent</code>, <code>autonomousFireChanceMaximumStressPercent</code></td><td>How likely AI mortar activity is when rested versus stressed.</td></tr>
+      <tr><td><code>aiAimError...</code></td><td>Minimum/maximum aim variation for rested and stressed AI fire, in metres. Bigger values mean less precise impacts.</td></tr>
+      <tr><td><code>aiFriendlyPlayerSafetyEnabled</code>, <code>aiFriendlyPlayerSafetyRadiusMeters</code>, <code>aiSafetyOffsetAttempts</code></td><td>Helps prevent AI mortar fire from landing near friendly players.</td></tr>
+      <tr><td><code>unknownPlayerFactionPolicy</code></td><td>How the safety system treats players whose faction is unclear: hostile, protected or ignored.</td></tr>
+      <tr><td><code>unexpectedMissionSourcePolicy</code></td><td>Whether unusual mission sources are rejected, passed through, or treated as AI orders.</td></tr>
+      <tr><td><code>additionalArtilleryPrefabPaths</code></td><td>Extra artillery prefabs to include when using the prefab allowlist scope.</td></tr>
+    </tbody></table>
+    <div class="callout warning"><strong>Configuration tip:</strong> change one family of settings at a time and test on a quiet server. More posts, guards and frequent checks all add activity; a battlefield should be dramatic, not a performance benchmark.</div>
+  </section>
+
+  <section>
+    <h2>A sensible first setup</h2>
+    <p>For a cooperative server, keep persistence on, set a modest active-post limit, use map markers while you learn the system, and begin with automatic population disabled. Place a few posts manually, test factions and artillery behavior, then enable automatic population at conservative chances. Once it feels right, experiment with a small terrain mortar quota for each side.</p>
+    <p>For a more mysterious campaign, hide or offset public markers, retain the friendly-player safety radius, and let the terrain mortar network create objectives worth scouting. That first distant thump is much more interesting when nobody has a flashing map pin explaining it.</p>
+  </section>
+
+  <footer class="contact">
+    <img src="images/CaptainSprocketPatch.png" alt="Captain Sprocket patch">
+    <div>
+      <div class="eyebrow">Join the community</div>
+      <h2 style="margin:6px 0 8px">Captain Sprocket</h2>
+      <p><strong>Arma Reforger server:</strong> STW Reforger<br><strong>Community:</strong> <a href="https://discord.gg/T2AZp6GGMJ">https://discord.gg/T2AZp6GGMJ</a></p>
+      <p class="small">Created by STW (ScienceTechWorks) &mdash; sciencetechworks@gmail.com. See you in the field, and try not to stand where the mortar is about to land.</p>
+    </div>
+  </footer>
+</main>
+</body>
+</html>

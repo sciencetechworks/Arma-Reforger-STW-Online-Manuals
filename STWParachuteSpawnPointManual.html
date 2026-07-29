@@ -88,6 +88,15 @@
     <h2>Detailed server configuration</h2>
     <p>On its first start, the server creates configuration files in <code>$profile:STW/ParachuteSpawn/</code>. Stop the server before editing them, keep a backup, and restart afterwards. Invalid or extreme values are kept within safe ranges automatically, but small, deliberate changes are still the best way to tune a server.</p>
 
+    <h3>Where configuration lives</h3>
+    <p>There are two different configuration locations. They serve different jobs, so it is worth knowing which cupboard you are opening before moving the furniture.</p>
+    <table><thead><tr><th>Folder</th><th>Who uses it</th><th>What it contains</th></tr></thead><tbody>
+      <tr><td><code>$profile:STW/ParachuteSpawn/</code></td><td>Server owners</td><td>The live server settings created automatically after the mod starts: <code>STWParachutesConfig.json</code> and <code>STWLiveTeleportConfig.json</code>. Edit these files to change how your server behaves.</td></tr>
+      <tr><td><code>STWParachuteSpawnPoint/Configs/</code></td><td>Mission makers and Workbench users</td><td>Editor configuration that makes the STW Parachute Spawnpoint available and configurable in Arma Reforger Workbench/Game Master. It includes the placeable-entity catalogue and editable attribute definitions.</td></tr>
+    </tbody></table>
+    <div class="callout"><strong>Server-owner rule of thumb:</strong> edit the files in <code>$profile:STW/ParachuteSpawn/</code>, not the mod's installed <code>Configs/</code> folder. The profile folder preserves your server choices when the mod is updated; the mod folder is part of the add-on itself and is best left for development or mission-editing work.</div>
+    <p>On a hosted server, <code>$profile:</code> means that server's profile directory. Its exact Windows/Linux path depends on the host and launch setup, but the STW subfolders and filenames remain the same. If the folder is not there yet, start the server once with the mod enabled, stop it cleanly, then edit the generated files.</p>
+
     <h3>Air spawn rules &mdash; <code>STWParachutesConfig.json</code></h3>
     <table><thead><tr><th>Setting</th><th>What it means in practice</th><th>Default</th></tr></thead><tbody>
       <tr><td><code>Enabled</code></td><td>Master switch for the air-spawn system.</td><td><code>true</code></td></tr>

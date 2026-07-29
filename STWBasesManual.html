@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>STW/Bases Manual</title>
+  <style>
+    :root{--page:#091217;--panel:#142229;--panel2:#1c3039;--ink:#edf3f4;--muted:#b6c5ca;--line:#3d5660;--accent:#eaa840;--green:#94c77b;--code:#0a1115}*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#071014,#102128 55%,#0a1419);color:var(--ink);font:16px/1.62 system-ui,-apple-system,"Segoe UI",sans-serif}main{max-width:1050px;margin:auto;padding:42px 24px 64px}header,section,.callout,footer{border:1px solid var(--line);background:rgba(20,34,41,.94);box-shadow:0 10px 30px #0004}header{border-left:7px solid var(--accent);padding:34px;background:linear-gradient(120deg,rgba(30,51,60,.97),rgba(17,31,37,.97))}section{padding:25px 28px;margin-top:22px}h1,h2,h3{line-height:1.18}h1{font-size:clamp(2.2rem,6vw,4.1rem);margin:0 0 8px;letter-spacing:.02em}h2{color:var(--accent);font-size:1.7rem;margin:0 0 14px}h3{margin:28px 0 8px;color:#fff}.eyebrow{color:var(--green);font-size:.79rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase}.lead{font-size:1.15rem;color:#dbe5e8;max-width:800px}.small{color:var(--muted);font-size:.92rem}.callout{padding:18px 21px;margin:18px 0;border-left:5px solid var(--green);background:#14271f}.warning{border-left-color:var(--accent);background:#30281a}ul,ol{padding-left:1.35rem}li{margin:7px 0}code{background:var(--code);color:#ffe0a8;padding:2px 5px;border-radius:3px;overflow-wrap:anywhere}table{width:100%;border-collapse:collapse;margin:14px 0}th,td{padding:10px;vertical-align:top;text-align:left;border-bottom:1px solid var(--line)}th{color:var(--green)}.steps{counter-reset:step;list-style:none;padding:0}.steps li{position:relative;padding-left:42px;min-height:30px}.steps li:before{counter-increment:step;content:counter(step);position:absolute;left:0;top:1px;width:27px;height:27px;border-radius:50%;background:var(--accent);color:#172127;text-align:center;font-weight:800;line-height:27px}a{color:#ffd27d}.contact{display:flex;gap:26px;align-items:center;padding:26px;margin-top:42px}.contact img{width:132px;height:auto;object-fit:contain}@media(max-width:600px){main{padding:20px 14px 42px}header,section{padding:22px 18px}.contact{align-items:flex-start;flex-direction:column}table{font-size:.9rem}}
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="eyebrow">ScienceTechWorks &bull; STW suite</div>
+    <h1>STW/Bases</h1>
+    <p class="lead">A server-side base generator for <strong>Arma Reforger</strong> by Bohemia Interactive. STW/Bases creates faction spawn points, optional nearby arsenals and clear static base markers when a scenario starts&mdash;so a Game Master can begin with a usable battlefield instead of placing every base by hand.</p>
+    <p class="small">Created by STW (ScienceTechWorks, sciencetechworks@gmail.com). The system is server-authoritative, works from the active scenario's existing factions, and does not require a custom Game Master prefab or a separate Game Master save.</p>
+  </header>
+
+  <section>
+    <h2>What STW/Bases adds</h2>
+    <ul>
+      <li>Automatic faction spawn-point placement at server startup.</li>
+      <li>Two placement strategies: broad <code>RANDOM</code> placement and <code>MILITARY_POI</code> placement near detected military-style locations.</li>
+      <li>Optional faction arsenals placed near generated spawn points.</li>
+      <li>Optional static <code>FLAG3</code> map markers, with faction-only visibility and faction colours.</li>
+      <li>Optional automatic activation of configured factions that already exist in the scenario.</li>
+      <li>Scenario-and-map-specific persistence for the generated spawn points and arsenals.</li>
+    </ul>
+    <p>Placement rejects water, terrain that is too steep, occupied ground and locations that violate configured spacing. Bases for opposing configured factions are also kept farther apart. If the map cannot provide a valid location within the configured attempts, that individual spawn point is skipped and a warning is logged.</p>
+  </section>
+
+  <section>
+    <h2>Players and Game Masters</h2>
+    <h3>For players</h3>
+    <p>There is no player menu or special interaction to learn. Join a scenario where the server has STW/Bases enabled, select a playable configured faction, and use its generated spawn points as normal. When base markers are enabled and visible to your faction, they appear as static flag markers; their text uses the nearest named map location followed by the configured label, such as <em>Montignac Base</em>.</p>
+    <p>The optional arsenal is a normal spawned arsenal prefab beside a base. Its available equipment comes from that prefab and the rest of the server's loaded content, not from an STW/Bases inventory menu.</p>
+    <h3>For Game Masters and scenario authors</h3>
+    <p>STW/Bases starts automatically on the server shortly after the game world is available. No Game Master placement is required. It hooks the base game mode rather than replacing a complete mode, so it is intended to be comfortable in Game Master scenarios and other compatible game modes.</p>
+    <ul>
+      <li>Make sure each configured <code>factionKey</code> is actually present in the scenario. STW/Bases can make an existing faction playable, but it never creates a new faction.</li>
+      <li>Use markers while testing a new configuration; faction-only markers are a useful way to keep each side's base information private.</li>
+      <li>For custom factions, provide valid spawn-point and arsenal prefab paths yourself. The included defaults are for US, USSR and FIA.</li>
+      <li>Other server-side mods can read the generated-base snapshot through <code>STW_BasesAPI</code> after it reports ready. This is for mod integrations, not a player-facing feature.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Server setup</h2>
+    <ol class="steps">
+      <li>Load STW/Bases on the server with the scenario and any content providing the factions/prefabs you plan to use.</li>
+      <li>Start the server once. STW/Bases creates its default configuration automatically.</li>
+      <li>Stop the server, back up the generated JSON, then adjust it with a plain-text editor.</li>
+      <li>Restart and check the server log for <code>[STW] BaseGenerator</code>, <code>SpawnPointGenerator</code> and <code>Persistence</code> messages.</li>
+    </ol>
+    <p>The mod's project dependency is Arma Reforger's base content. No other STW mod is required for STW/Bases itself. The optional <strong>STW Bases Crates Integration</strong> add-on requires both <strong>STW/Bases</strong> and <strong>STW Crates</strong>; when installed, it can create or reuse a faction crate for each generated base.</p>
+    <div class="callout"><strong>A practical first run:</strong> leave the default US, USSR and FIA entries intact, use <code>RANDOM</code>, start with three spawns per faction, and keep persistence and markers enabled. Tune one factor at a time after you have seen the map's results.</div>
+  </section>
+
+  <section>
+    <h2>Configuration files and safe editing</h2>
+    <p>Configuration lives in the server profile, not in the downloaded mod. <code>$profile</code> means the profile directory selected by the server's <code>-profile</code> parameter. Run the server once to create these folders:</p>
+    <table><thead><tr><th>Folder / file</th><th>Purpose</th></tr></thead><tbody>
+      <tr><td><code>$profile:STW/Bases/STWBasesConfig.json</code></td><td>The only STW/Bases settings file: master switches and faction-by-faction base settings.</td></tr>
+      <tr><td><code>$profile:STW/Persistence/</code></td><td>Generated spawn-point and arsenal layouts, kept separately from the settings.</td></tr>
+      <tr><td><code>$profile:STW/BasesCratesIntegration/STWBasesCratesIntegrationConfig.json</code></td><td>Only present when the separate STW Bases Crates Integration add-on is installed; controls its crate placement.</td></tr>
+    </tbody></table>
+    <div class="callout warning"><strong>Safe editing routine:</strong> stop the server; copy the JSON file to a backup; edit valid JSON only; save; then restart. Do not edit the persistence files while the server is running. The mod migrates older configuration versions to its current schema (version 8), but a backup remains the calmest way to experiment.</div>
+
+    <h3>Global settings in <code>STWBasesConfig.json</code></h3>
+    <table><thead><tr><th>Setting</th><th>Meaning</th></tr></thead><tbody>
+      <tr><td><code>Version</code></td><td>Configuration schema version. Leave it to the mod's generated/migrated value.</td></tr>
+      <tr><td><code>Enabled</code></td><td>Master switch. When false, the mod publishes an empty integration snapshot and creates nothing.</td></tr>
+      <tr><td><code>ForcePlayableFactions</code></td><td>Makes enabled configured factions playable if those factions exist in the scenario.</td></tr>
+      <tr><td><code>GenerateArsenals</code></td><td>Allows per-faction arsenal generation.</td></tr>
+      <tr><td><code>GenerateMarkers</code></td><td>Allows per-faction static base markers.</td></tr>
+      <tr><td><code>PersistenceEnabled</code></td><td>Uses STW/Bases' own JSON layout files. Set false for a fresh layout on every server start.</td></tr>
+      <tr><td><code>GenerationRevision</code></td><td>Changes the persistence revision. Increase it when you intentionally want existing saved layouts treated as stale and regenerated.</td></tr>
+      <tr><td><code>Factions</code></td><td>Array of faction configurations. Defaults: US, USSR and FIA, with vanilla spawn-point and arsenal prefabs.</td></tr>
+    </tbody></table>
+
+    <h3>Per-faction settings</h3>
+    <table><thead><tr><th>Setting</th><th>Meaning</th></tr></thead><tbody>
+      <tr><td><code>Enabled</code>, <code>factionKey</code></td><td>Enables the entry and identifies an existing scenario faction, for example <code>US</code>, <code>USSR</code> or <code>FIA</code>.</td></tr>
+      <tr><td><code>SpawnPoint.Enabled</code>, <code>Count</code>, <code>Prefab</code></td><td>Whether to generate spawns, how many (default 3), and the spawn-point prefab. An empty prefab means that faction receives no generated spawn point.</td></tr>
+      <tr><td><code>SpawnPoint.Strategy</code></td><td><code>RANDOM</code> searches across the map. <code>MILITARY_POI</code> searches around detected military, barrack, bunker, arsenal, headquarters, checkpoint, watchtower or hangar-style entities; it falls back to random placement if no candidates are found.</td></tr>
+      <tr><td><code>MinimumSeparation</code></td><td>Minimum distance between all generated spawn points (default 750 m).</td></tr>
+      <tr><td><code>MinimumHostileSeparation</code></td><td>Minimum distance from a spawn point belonging to another configured faction (default 1,250 m).</td></tr>
+      <tr><td><code>MaximumSlopeDegrees</code>, <code>MaximumPlacementAttempts</code></td><td>Terrain steepness limit (default 12) and attempts per spawn (default 300). More attempts can help difficult maps but adds startup work.</td></tr>
+      <tr><td><code>Arsenal.Enabled</code>, <code>Prefab</code></td><td>Whether the faction may receive an arsenal and which prefab it uses.</td></tr>
+      <tr><td><code>SpawnProbabilityPercent</code></td><td>Independent chance per generated spawn point: 0 never, 100 always, default 100.</td></tr>
+      <tr><td><code>MinimumDistance</code>, <code>MaximumDistance</code></td><td>Arsenal distance from its base; defaults to 3&ndash;6 m. The mod tries up to 40 safe placements.</td></tr>
+      <tr><td><code>Marker.Enabled</code>, <code>FactionOnly</code>, <code>Text</code></td><td>Controls each faction's static marker, whether only that faction can see it (default true), and the label (default <code>Base</code>).</td></tr>
+      <tr><td><code>MarkerColor</code></td><td>Built-in custom-marker colour. Defaults are US blue, USSR red, FIA green and orange for other/custom factions.</td></tr>
+    </tbody></table>
+    <p>Invalid numeric values are constrained to safe ranges: percentages stay 0&ndash;100, counts and distances cannot be negative, placement attempts are at least one, and an arsenal maximum distance cannot be lower than its minimum.</p>
+  </section>
+
+  <section>
+    <h2>Persistence: keeping a base layout</h2>
+    <p>With <code>PersistenceEnabled</code> true, STW/Bases saves the generated spawn points and arsenals independently. The files are scoped to the active scenario and loaded map, with names like:</p>
+    <p><code>$profile:STW/Persistence/STW_SpawnPoints_SCENARIO_MAP.json</code><br><code>$profile:STW/Persistence/STW_Arsenals_SCENARIO_MAP.json</code></p>
+    <p>The actual <code>SCENARIO_MAP</code> portion is derived from the mission/scenario name and world file name, sanitized for a safe filename. This prevents one map's generated entities being restored onto another map.</p>
+    <table><thead><tr><th>File</th><th>What it stores</th></tr></thead><tbody>
+      <tr><td><code>STW_SpawnPoints_*.json</code></td><td>Spawn-point prefab, faction key, position, facing, map name, generation identifier and generation revision.</td></tr>
+      <tr><td><code>STW_Arsenals_*.json</code></td><td>The corresponding arsenal prefab, faction, position, facing and its association with a base, plus generation/map identifiers.</td></tr>
+    </tbody></table>
+    <p>On a later restart, valid saved spawn points are recreated first, their static markers are recreated, and valid matching arsenals are restored. If the spawn-point file is missing, stale, uses a different map, has a different generation revision, or no longer matches the configured faction counts, STW/Bases generates a new layout. Because arsenals depend on that layout, their file is also regenerated when spawn points are regenerated.</p>
+    <h3>Resetting one scenario/map safely</h3>
+    <ol class="steps">
+      <li>Stop the server completely.</li>
+      <li>Open <code>$profile:STW/Persistence/</code> and identify the two files whose scenario/map suffix matches the scenario you want to reset.</li>
+      <li>Copy both files somewhere safe, then remove or rename both matching files.</li>
+      <li>Start the server. STW/Bases creates a fresh layout and new files for that scenario/map only.</li>
+    </ol>
+    <div class="callout"><strong>Performance note:</strong> base generation happens at startup. Large counts, restrictive separation, steepness limits, and high attempt counts make placement searches longer. Persistence avoids repeating that search on every restart, so it is normally the friendlier choice for a busy Captain Sprocket server.</div>
+  </section>
+
+  <section>
+    <h2>STW suite connection</h2>
+    <p>STW/Bases is designed to stand on its own while offering a clean server-side API for companion mods. The dedicated <strong>STW Bases Crates Integration</strong> add-on is the direct STW-suite companion: with <strong>STW Crates</strong> also installed, it waits until STW/Bases and STW Crates are ready, then creates or reuses a faction crate near each generated base. By default it prefers placement beside an available arsenal, otherwise beside the base.</p>
+    <p>That integration has its own profile configuration and does not change STW/Bases' spawn-point, arsenal, marker or persistence settings. Install it only if you want crates at bases; STW/Bases itself needs neither it nor STW Crates to operate.</p>
+  </section>
+
+  <footer class="contact">
+    <img src="images/CaptainSprocketPatch.png" alt="Captain Sprocket patch">
+    <div>
+      <div class="eyebrow">Community</div>
+      <h2 style="margin:6px 0 8px">Captain Sprocket</h2>
+      <p><strong>Arma Reforger server:</strong> STW Reforger<br><strong>Community:</strong> <a href="https://discord.gg/T2AZp6GGMJ">https://discord.gg/T2AZp6GGMJ</a></p>
+      <p class="small">Created by STW (ScienceTechWorks, sciencetechworks@gmail.com). Captain Sprocket recommends a backup before any heroic JSON experiment.</p>
+    </div>
+  </footer>
+</main>
+</body>
+</html>

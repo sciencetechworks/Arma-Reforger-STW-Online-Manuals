@@ -32,7 +32,6 @@
       <li>Per-item enablement, supply cost and faction exclusions.</li>
       <li>A complete packaged master catalog, copied to the server profile on first start, from which curated active catalogs can be made.</li>
       <li>Server-to-client synchronization of injected entries, including entries that need runtime fallback handling.</li>
-      <li>A Workbench Resource Manager scanner to add selected eligible character/item prefabs to the active catalog.</li>
     </ul>
     <div class="callout"><strong>Content requirement:</strong> STW/Clothes does not manufacture clothing. A catalog entry can only be added when its prefab is available from Arma Reforger or another content mod loaded for the session. Missing or unsuitable entries are skipped.</div>
   </section>
@@ -46,7 +45,6 @@
   <section id="gm">
     <h2>Game Master and scenario-author use</h2>
     <p>For a locally hosted Game Master session, prepare the profile catalog and restart the session after changing it. STW/Clothes injects into existing faction item catalogs; it does not require a Game Master placeable or a scenario prefab. Scenario authors normally only need to ensure the required clothing-content mods and STW/Clothes are loaded, then choose target faction keys that exist in their scenario.</p>
-    <p>In Workbench, the <strong>ScienceTechWorks &gt; STW Clothes: Scan selected folders</strong> Resource Manager plugin can scan selected folders/resources. It accepts <code>.et</code> prefabs under <code>Prefabs/Characters/</code> or <code>Prefabs/Items/</code>, adds new entries to <code>STWClothes.json</code>, and labels entries with their addon root where it can identify it. Restart the Game Master session after scanning.</p>
   </section>
 
   <section id="server">
@@ -98,12 +96,12 @@
     </tbody></table>
 
     <h3><code>STWClothes.json</code> item entries</h3>
-    <p>The file contains an <code>items</code> array. Curator-generated entries and Workbench scanner entries use the following fields:</p>
+    <p>The file contains an <code>items</code> array. Curator-generated entries use the following fields:</p>
     <table><thead><tr><th>Field</th><th>Meaning</th></tr></thead><tbody>
       <tr><td><code>prefab</code></td><td>Fully qualified prefab path for the clothing/equipment item.</td></tr>
       <tr><td><code>sourceMod</code></td><td>Addon root name recorded for catalog organization. The runtime does not use it as an automatic mod download or dependency installer.</td></tr>
       <tr><td><code>enabled</code></td><td>Global item switch; <code>true</code> by default. False retains the entry but prevents injection.</td></tr>
-      <tr><td><code>manualFallback</code></td><td>Allows runtime insertion when a suitable source arsenal entry cannot be found. New scanner/default assignments use <code>true</code>.</td></tr>
+      <tr><td><code>manualFallback</code></td><td>Allows runtime insertion when a suitable source arsenal entry cannot be found. Packaged assignments use <code>true</code>.</td></tr>
       <tr><td><code>supplyCost</code></td><td>Cost applied to a runtime fallback entry; default <code>10</code>.</td></tr>
       <tr><td><code>disabledFactionKeys</code></td><td>Array of factions that must not receive this otherwise enabled item; an empty array allows all configured target factions.</td></tr>
     </tbody></table>

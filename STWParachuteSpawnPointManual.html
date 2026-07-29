@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>STW Parachute Spawn Point Manual</title>
+  <style>
+    :root { --ink:#e9edf0; --muted:#b9c4cb; --panel:#152128; --panel2:#1c2c34; --line:#39505b; --accent:#e9a53f; --green:#8fbd74; --sky:#72bfd3; --page:#0c151a; }
+    * { box-sizing:border-box; } body { margin:0; background:linear-gradient(135deg,#081014,#10242d 55%,#0c151a); color:var(--ink); font:16px/1.62 system-ui,-apple-system,"Segoe UI",sans-serif; }
+    main { max-width:1000px; margin:auto; padding:42px 24px 64px; } header { border:1px solid var(--line); border-left:7px solid var(--accent); padding:34px; background:linear-gradient(120deg,rgba(31,48,57,.96),rgba(17,31,37,.96)); box-shadow:0 12px 35px #0006; }
+    h1,h2,h3 { line-height:1.2; } h1 { margin:0 0 8px; font-size:clamp(2.15rem,6vw,4rem); letter-spacing:.025em; } h2 { color:var(--accent); margin:44px 0 14px; font-size:1.65rem; } h3 { margin:24px 0 8px; color:#fff; } p { margin:10px 0; } .eyebrow { color:var(--green); font-weight:750; text-transform:uppercase; letter-spacing:.13em; font-size:.79rem; } .lead { font-size:1.14rem; color:#d6e0e4; max-width:790px; }
+    section,.callout { background:rgba(21,33,40,.9); border:1px solid var(--line); padding:24px 28px; margin-top:22px; } section h2:first-child { margin-top:0; } .callout { border-left:5px solid var(--green); background:#15251f; } .warning { border-left-color:var(--accent); background:#2c251a; } .sky { border-left-color:var(--sky); background:#13262e; }
+    ul,ol { padding-left:1.35rem; } li { margin:7px 0; } code { color:#ffe0ad; background:#0b1216; padding:2px 5px; border-radius:3px; overflow-wrap:anywhere; } table { width:100%; border-collapse:collapse; margin:14px 0; } th,td { text-align:left; vertical-align:top; padding:11px 10px; border-bottom:1px solid var(--line); } th { color:var(--green); }
+    .steps { counter-reset:step; list-style:none; padding:0; } .steps li { position:relative; padding-left:42px; min-height:30px; } .steps li:before { counter-increment:step; content:counter(step); position:absolute; left:0; top:1px; width:27px; height:27px; border-radius:50%; background:var(--accent); color:#162026; text-align:center; font-weight:800; line-height:27px; }
+    .contact { display:flex; gap:26px; align-items:center; margin-top:42px; padding:26px; background:#152128; border:1px solid var(--line); } .contact img { width:132px; height:auto; object-fit:contain; } a { color:#ffd27d; } .small { color:var(--muted); font-size:.92rem; } .two { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; } .two > div { padding:16px; background:var(--panel2); border:1px solid var(--line); }
+    @media (max-width:600px) { main { padding:20px 14px 42px; } header,section,.callout { padding:22px 18px; } .contact { align-items:flex-start; flex-direction:column; } table { font-size:.9rem; } .two { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="eyebrow">ScienceTechWorks &bull; STW suite</div>
+    <h1>STW Parachute Spawn Point</h1>
+    <p class="lead">Bring a little vertical ambition to Arma Reforger. This STW mod creates faction-safe airborne spawn points and lets eligible players make a controlled parachute jump to reinforce the fight, rather than taking the scenic route in a truck.</p>
+    <p class="small">A player, Game Master and server-owner guide by STW (ScienceTechWorks).</p>
+  </header>
+
+  <section>
+    <h2>What it adds</h2>
+    <p>STW Parachute Spawn Point adds a practical way to insert soldiers from the sky. Each air spawn point belongs to one faction: friendly players can see and use it, while opposing forces cannot use it as a convenient intelligence service.</p>
+    <ul>
+      <li><strong>Faction-only air spawn points</strong> that deploy players at a chosen height above the ground.</li>
+      <li><strong>Player marker requests:</strong> a group leader can request a point by placing a map marker containing the word <code>Parachute</code>.</li>
+      <li><strong>Game Master placement</strong> with editable faction, altitude, lifetime and live-jump permission.</li>
+      <li><strong>Live Parachute Deployment:</strong> living players can choose an eligible friendly point from the pause menu, confirm, then jump after a short countdown.</li>
+      <li><strong>Server guardrails:</strong> limits, spacing, cooldowns and optional parachute checks keep airborne reinforcements useful without turning the map into a rainstorm of boots.</li>
+    </ul>
+    <p>It is part of the wider <strong>STW suite of mods</strong>, built by ScienceTechWorks to make Reforger servers feel more alive, organised and occasionally delightfully chaotic.</p>
+  </section>
+
+  <section>
+    <h2>Before you jump: the important bit</h2>
+    <div class="callout warning"><strong>Pack a parachute.</strong> Before an air deployment, equip a recognised parachute in your backpack slot. Without one, gravity will conduct a very brief and decisive debrief. A parachute that has already been used cannot be used again.</div>
+    <p>A good routine is to equip the parachute, save that loadout, and select it before spawning or using Parachute Deployment. If your usual backpack matters, consider storing it in a leg bag first. The server can be configured not to require a recognised parachute, but Captain Sprocket strongly recommends treating that as an emergency setting rather than an invitation to test terminal velocity.</p>
+    <p>Common compatible choices include MFF Parachute, Prontos Parachutes and Parachute SOA V2; the server decides which equipment it recognises.</p>
+  </section>
+
+  <section>
+    <h2>For players: request a new air spawn point</h2>
+    <p>On servers that allow requests, a group leader can ask for a new insertion point directly from the map. The marker text is flexible: <code>Parachute</code>, <code>Parachute Spawn</code>, or another name containing that word will work, regardless of capital letters.</p>
+    <ol class="steps">
+      <li>Make sure you are the group leader and belong to the faction that needs the point.</li>
+      <li>Open the map and place a marker at the intended insertion area.</li>
+      <li>Name it with a phrase containing <strong>Parachute</strong>.</li>
+      <li>Wait a moment. The server checks the request, then removes the request marker.</li>
+      <li>On success, your faction receives an air spawn marker. On refusal, look for the short radio/chat message explaining why.</li>
+    </ol>
+    <p>Requests may be denied if your faction already has its maximum number of points, or if you are trying to place one too close to an existing friendly air spawn. Enemy points do not count against your side’s spacing rule. This is a tactical system, not a queue for the world’s least comfortable airport.</p>
+  </section>
+
+  <section>
+    <h2>For living players: Parachute Deployment</h2>
+    <p>Air spawn points are not only for respawning. If the server has enabled live deployment and the Game Master allowed it on that point, you can use a friendly point while alive.</p>
+    <ol class="steps">
+      <li>Equip your parachute and move somewhere safe and still.</li>
+      <li>Open the pause menu and select <strong>Parachute Deployment</strong>.</li>
+      <li>Choose an eligible air spawn point from your faction’s list.</li>
+      <li>Confirm the jump and stay put for the countdown.</li>
+      <li>Deploy, open your chute in good time, and aim for terrain that looks less pointy than the alternatives.</li>
+    </ol>
+    <p>Depending on the server settings, movement, incoming damage, being inside a vehicle, a recent deployment cooldown, or a missing parachute can cancel the attempt. Only same-faction points appear in the list.</p>
+  </section>
+
+  <section>
+    <h2>For Game Masters</h2>
+    <p>Game Masters can create a dependable insertion point without waiting for a player request. In the Entity Browser, search for <strong>STW</strong>, <strong>Parachute</strong>, or <strong>Spawnpoint</strong>, then place <strong>STW Parachute Spawnpoint</strong>.</p>
+    <ol class="steps">
+      <li>Place the spawn point where the insertion should be located.</li>
+      <li>Select it and open its attributes.</li>
+      <li>Choose the faction that may see and use it.</li>
+      <li>Set its altitude above ground level and its Time To Live.</li>
+      <li>Choose whether living players may use it through Parachute Deployment.</li>
+    </ol>
+    <p>The editable Game Master icon stays at ground level so it remains easy for GMs to find. Players, meanwhile, are deployed at the configured altitude. Set <strong>Time To Live</strong> to <code>0</code> for a permanent point; otherwise it disappears after the selected number of minutes.</p>
+  </section>
+
+  <section>
+    <h2>Detailed server configuration</h2>
+    <p>On its first start, the server creates configuration files in <code>$profile:STW/ParachuteSpawn/</code>. Stop the server before editing them, keep a backup, and restart afterwards. Invalid or extreme values are kept within safe ranges automatically, but small, deliberate changes are still the best way to tune a server.</p>
+
+    <h3>Air spawn rules &mdash; <code>STWParachutesConfig.json</code></h3>
+    <table><thead><tr><th>Setting</th><th>What it means in practice</th><th>Default</th></tr></thead><tbody>
+      <tr><td><code>Enabled</code></td><td>Master switch for the air-spawn system.</td><td><code>true</code></td></tr>
+      <tr><td><code>EnableMarkerRequests</code></td><td>Lets players request points using map markers. Turn it off for GM-only placement.</td><td><code>true</code></td></tr>
+      <tr><td><code>RequireGroupLeaderForMarkerRequests</code></td><td>Restricts marker requests to group leaders, preventing duplicate requests from a busy squad.</td><td><code>true</code></td></tr>
+      <tr><td><code>MarkerScanIntervalSeconds</code></td><td>How often the server looks for request markers. Lower is quicker but does more checking.</td><td><code>2</code></td></tr>
+      <tr><td><code>MarkerProcessingDelaySeconds</code></td><td>A short pause before a new marker is processed.</td><td><code>2</code></td></tr>
+      <tr><td><code>DefaultAltitudeAGL</code></td><td>Default jump height above the ground (AGL), in metres. The minimum is 100 m.</td><td><code>320</code></td></tr>
+      <tr><td><code>DefaultTimeToLiveMinutes</code></td><td>How long newly created points last. Use <code>0</code> for permanent points; maximum is 1,440 minutes.</td><td><code>30</code></td></tr>
+      <tr><td><code>MinimumSameFactionSeparation</code></td><td>Minimum spacing in metres between points belonging to the same faction.</td><td><code>500</code></td></tr>
+      <tr><td><code>MaximumSpawnPointsPerFaction</code></td><td>Maximum active points per faction. The allowed range is 1&ndash;100.</td><td><code>10</code></td></tr>
+      <tr><td><code>DefaultGameMasterFaction</code></td><td>Faction used for a GM point when no other faction is chosen.</td><td><code>US</code></td></tr>
+      <tr><td><code>RequiredMarkerWords</code></td><td>Words recognised in player request markers. The default <code>parachute</code> also accepts longer labels containing it.</td><td><code>["parachute"]</code></td></tr>
+      <tr><td><code>SupportedFactions</code></td><td>Faction keys that may use the feature. Keep this aligned with factions available in your scenario.</td><td><code>US, USSR, FIA, RHS_USAF, RHS_AFRF</code></td></tr>
+    </tbody></table>
+    <div class="callout sky"><strong>Faction note:</strong> RHS USAF and RHS AFRF entries work when the active scenario supplies those factions. The mod does not directly require RHS assets, so there is no compulsory RHS dependency.</div>
+
+    <h3>Live deployment rules &mdash; <code>STWLiveTeleportConfig.json</code></h3>
+    <table><thead><tr><th>Setting</th><th>What it controls</th><th>Default</th></tr></thead><tbody>
+      <tr><td><code>Enabled</code></td><td>Turns the pause-menu Parachute Deployment feature on or off.</td><td><code>true</code></td></tr>
+      <tr><td><code>RequireGroupLeader</code></td><td>When enabled, only group leaders may make live deployments.</td><td><code>false</code></td></tr>
+      <tr><td><code>AllowFromVehicle</code></td><td>Allows a player to start the deployment process while in a vehicle.</td><td><code>false</code></td></tr>
+      <tr><td><code>RequireConfirmation</code></td><td>Shows a confirmation step before committing to the jump.</td><td><code>true</code></td></tr>
+      <tr><td><code>CancelOnDamage</code></td><td>Cancels the countdown if the player takes damage.</td><td><code>true</code></td></tr>
+      <tr><td><code>EnableCombatLockout</code></td><td>Enables the server’s combat restriction for live deployment when desired.</td><td><code>false</code></td></tr>
+      <tr><td><code>RequireRecognizedParachute</code></td><td>Requires approved parachute equipment before the player can deploy.</td><td><code>true</code></td></tr>
+      <tr><td><code>CountdownSeconds</code></td><td>How long the player must wait before jumping. Allowed range: 0&ndash;30 seconds.</td><td><code>3</code></td></tr>
+      <tr><td><code>MaximumMovementDuringCountdown</code></td><td>How far, in metres, a player may move during the countdown before it cancels.</td><td><code>1</code></td></tr>
+      <tr><td><code>CooldownSeconds</code></td><td>Wait time after a live deployment before another one can begin. Allowed range: 0&ndash;86,400 seconds.</td><td><code>300</code></td></tr>
+    </tbody></table>
+  </section>
+
+  <section>
+    <h2>A sensible first setup</h2>
+    <div class="two"><div><h3>Co-op server</h3><p>Keep parachute checks and damage cancellation on, use the 320 m default altitude, and leave the 500 m spacing rule in place. Ten points per faction is generous; start lower if you prefer a tighter operation.</p></div><div><h3>Game Master event</h3><p>Place a few permanent points yourself, give each side its own route into the action, and decide which ones allow live deployment. This keeps the drama high without making the whole map a spawn menu.</p></div></div>
+    <p>If something does not work, first check faction ownership, distance to nearby friendly points, the faction limit, and whether the player has the required parachute. Those four checks solve most airborne mysteries before anyone needs to blame the weather.</p>
+  </section>
+
+  <footer class="contact">
+    <img src="images/CaptainSprocketPatch.png" alt="Captain Sprocket patch">
+    <div>
+      <div class="eyebrow">Join the community</div>
+      <h2 style="margin:6px 0 8px">Captain Sprocket</h2>
+      <p><strong>Arma Reforger server:</strong> STW Reforger<br><strong>Community:</strong> <a href="https://discord.gg/T2AZp6GGMJ">https://discord.gg/T2AZp6GGMJ</a></p>
+      <p class="small">Created by STW (ScienceTechWorks) &mdash; sciencetechworks@gmail.com. See you in the field, and remember: a good landing is one you get to describe afterwards.</p>
+    </div>
+  </footer>
+</main>
+</body>
+</html>

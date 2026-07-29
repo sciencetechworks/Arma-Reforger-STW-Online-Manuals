@@ -15,7 +15,7 @@
     <h1>STW/Clothes</h1>
     <p class="lead">A server-managed clothing and equipment catalog for <strong>Arma Reforger</strong> by <strong>Bohemia Interactive</strong>. It lets an administrator curate selected third-party clothing and equipment, then adds the enabled selection to US, USSR and FIA faction arsenals.</p>
     <p class="small">STW/Clothes works through the ordinary faction arsenal. It does not add a separate player menu, placeable object, or clothing content of its own.</p>
-    <nav aria-label="Manual contents"><a href="#suite">STW suite</a><a href="#adds">What it adds</a><a href="#players">Players</a><a href="#gm">Game Master</a><a href="#server">Server setup</a><a href="#curator">Catalog Curator</a><a href="#config">Configuration</a><a href="#persistence">Persistence</a></nav>
+    <nav aria-label="Manual contents"><a href="#suite">STW suite</a><a href="#adds">What it adds</a><a href="#players">Players</a><a href="#gm">Game Master</a><a href="#server">Server setup</a><a href="#curator">Catalog Curator</a><a href="#config">Configuration</a></nav>
   </header>
 
   <section id="suite">
@@ -107,13 +107,6 @@
       <tr><td><code>supplyCost</code></td><td>Cost applied to a runtime fallback entry; default <code>10</code>.</td></tr>
       <tr><td><code>disabledFactionKeys</code></td><td>Array of factions that must not receive this otherwise enabled item; an empty array allows all configured target factions.</td></tr>
     </tbody></table>
-  </section>
-
-  <section id="persistence">
-    <h2>Persistence</h2>
-    <p>STW/Clothes does <strong>not</strong> provide scenario/map or player-state persistence. It does not save placed entities, player inventories, progress, or a restore point.</p>
-    <p>It does persist its administrator-managed configuration and catalog files in <code>$profile:STW/Clothes/</code>. On each server startup those files are loaded; when startup injection completes, the current configuration and active catalog are saved back. The master catalog is only created if it is missing, so it is not normally overwritten by updates.</p>
-    <p>To reset the clothing selection safely for one server profile/scenario, stop that server/session, back up its <code>STWClothes.json</code>, then replace it with a newly generated curator catalog (or remove only that active catalog and start once to recreate an empty one). Keep <code>STWClothesFull.json</code> unless you intentionally want to rebuild the master source. Restart afterward. For performance, favor a smaller active catalog and use the batching settings if startup needs to be spread out.</p>
   </section>
 
   <section class="contact" aria-label="Captain Sprocket community">

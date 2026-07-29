@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>STW/Clothes Manual</title>
+  <style>
+    :root{--bg:#081217;--panel:#12242c;--panel2:#18323b;--ink:#eff6f7;--muted:#b7c8cc;--line:#3d5962;--gold:#e6a442;--green:#92c27b}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(135deg,#071014,#10242c 58%,#081217);color:var(--ink);font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}main{max-width:1080px;margin:auto;padding:42px 22px 64px}header,section,.callout{border:1px solid var(--line);background:rgba(18,36,44,.94);box-shadow:0 12px 34px #0005}header{border-left:7px solid var(--gold);padding:34px}section,.callout{padding:25px 29px;margin-top:22px}h1,h2,h3{line-height:1.2}h1{font-size:clamp(2.3rem,6vw,4.2rem);margin:0 0 8px}h2{margin:0 0 14px;color:var(--gold);font-size:1.7rem}h3{margin:27px 0 8px;color:#fff}.eyebrow{color:var(--green);font-weight:750;font-size:.8rem;letter-spacing:.13em;text-transform:uppercase}.lead{font-size:1.16rem;max-width:850px;color:#dce8eb}.small{font-size:.93rem;color:var(--muted)}nav{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}nav a{border:1px solid var(--line);padding:5px 9px;color:#ffe0a3;text-decoration:none;font-size:.88rem}nav a:hover{background:#25414b}a{color:#ffd27d}ul,ol{padding-left:1.35rem}li{margin:7px 0}code{color:#ffe0ad;background:#091317;padding:2px 5px;border-radius:3px;overflow-wrap:anywhere}table{width:100%;border-collapse:collapse;margin:14px 0}th,td{padding:11px 10px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}th{color:var(--green)}.callout{border-left:5px solid var(--green);background:#14291f}.warning{border-left-color:var(--gold);background:#2c2519}.steps{list-style:none;padding:0;counter-reset:step}.steps li{position:relative;padding-left:42px;min-height:31px}.steps li:before{counter-increment:step;content:counter(step);position:absolute;left:0;top:1px;width:27px;height:27px;border-radius:50%;line-height:27px;text-align:center;background:var(--gold);color:#17252a;font-weight:800}.contact{display:flex;align-items:center;gap:26px;margin-top:42px;padding:26px;border:1px solid var(--line);background:var(--panel)}.contact img{width:132px;height:auto;object-fit:contain}@media(max-width:620px){main{padding:20px 13px 42px}header,section,.callout{padding:21px 17px}.contact{align-items:flex-start;flex-direction:column}table{font-size:.89rem}}
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="eyebrow">ScienceTechWorks &bull; STW suite</div>
+    <h1>STW/Clothes</h1>
+    <p class="lead">A server-managed clothing and equipment catalog for <strong>Arma Reforger</strong> by <strong>Bohemia Interactive</strong>. It lets an administrator curate selected third-party clothing and equipment, then adds the enabled selection to US, USSR and FIA faction arsenals.</p>
+    <p class="small">STW/Clothes works through the ordinary faction arsenal. It does not add a separate player menu, placeable object, or clothing content of its own.</p>
+    <nav aria-label="Manual contents"><a href="#suite">STW suite</a><a href="#adds">What it adds</a><a href="#players">Players</a><a href="#gm">Game Master</a><a href="#server">Server setup</a><a href="#curator">Catalog Curator</a><a href="#config">Configuration</a><a href="#persistence">Persistence</a></nav>
+  </header>
+
+  <section id="suite">
+    <h2>STW suite connection</h2>
+    <p>STW/Clothes is part of the STW suite by <strong>STW (ScienceTechWorks, sciencetechworks@gmail.com)</strong>. It is designed to expose a deliberate, manageable selection of clothing and equipment supplied by the content mods already loaded by a server, without editing the original faction configurations.</p>
+    <p><strong>STW Clothes Arsenal Refresh</strong> is the companion integration for dedicated multiplayer servers and remote clients. It refreshes arsenals after STW/Clothes has injected the selected items, so they display correctly. It is not normally needed for local single-player or a locally hosted Game Master session.</p>
+  </section>
+
+  <section id="adds">
+    <h2>What STW/Clothes adds</h2>
+    <p>On the server, STW/Clothes reads an active catalog and inserts each enabled, available entry into the item arsenal of the configured target factions. The default targets are <code>US</code>, <code>USSR</code> and <code>FIA</code>. Each entry can be excluded from individual factions and assigned an arsenal supply cost.</p>
+    <ul>
+      <li>A deliberately curated clothing and equipment selection rather than a full, slow-to-open clothing list.</li>
+      <li>Per-item enablement, supply cost and faction exclusions.</li>
+      <li>A complete packaged master catalog, copied to the server profile on first start, from which curated active catalogs can be made.</li>
+      <li>Server-to-client synchronization of injected entries, including entries that need runtime fallback handling.</li>
+      <li>A Workbench Resource Manager scanner to add selected eligible character/item prefabs to the active catalog.</li>
+    </ul>
+    <div class="callout"><strong>Content requirement:</strong> STW/Clothes does not manufacture clothing. A catalog entry can only be added when its prefab is available from Arma Reforger or another content mod loaded for the session. Missing or unsuitable entries are skipped.</div>
+  </section>
+
+  <section id="players">
+    <h2>For players</h2>
+    <p>Players use the usual faction arsenal in the scenario. After the server has completed its startup injection, the enabled clothing and equipment chosen by the administrator appear in the normal arsenal for the relevant faction. There is no player-side configuration file or special STW/Clothes interaction.</p>
+    <p>On multiplayer clients, the server sends its injected catalog after the player connects. Items deliberately disabled globally or for that faction will not be added.</p>
+  </section>
+
+  <section id="gm">
+    <h2>Game Master and scenario-author use</h2>
+    <p>For a locally hosted Game Master session, prepare the profile catalog and restart the session after changing it. STW/Clothes injects into existing faction item catalogs; it does not require a Game Master placeable or a scenario prefab. Scenario authors normally only need to ensure the required clothing-content mods and STW/Clothes are loaded, then choose target faction keys that exist in their scenario.</p>
+    <p>In Workbench, the <strong>ScienceTechWorks &gt; STW Clothes: Scan selected folders</strong> Resource Manager plugin can scan selected folders/resources. It accepts <code>.et</code> prefabs under <code>Prefabs/Characters/</code> or <code>Prefabs/Items/</code>, adds new entries to <code>STWClothes.json</code>, and labels entries with their addon root where it can identify it. Restart the Game Master session after scanning.</p>
+  </section>
+
+  <section id="server">
+    <h2>Server setup</h2>
+    <ol class="steps">
+      <li>Load STW/Clothes plus the clothing/equipment content mods whose prefabs you want to offer.</li>
+      <li>For a dedicated multiplayer server or remote clients, also include <strong>STW Clothes Arsenal Refresh</strong> (ID <code>69F662416CF0D216</code>). It is optional for local single-player and locally hosted Game Master use.</li>
+      <li>Start the server once. The profile folder and its JSON files are created automatically.</li>
+      <li>Use the Clothes Catalog Curator to create a small active selection from the master catalog, then replace the active catalog while the server is stopped.</li>
+      <li>Restart the server. In Game Master, restart the session. The server injects the active selection and synchronizes it to joining clients.</li>
+    </ol>
+    <p>The project documentation identifies the Arsenal Refresh companion above as the multiplayer refresh integration. No other named STW companion is required by STW/Clothes. Third-party clothing mods are only needed when their selected prefabs are present in your catalog.</p>
+  </section>
+
+  <section id="curator">
+    <h2>Clothes Catalog Curator webpages</h2>
+    <p>STW/Clothes intentionally starts with an empty active catalog so a very large clothing list does not slow the arsenal. Captain Sprocket’s recommended workflow is to use the curator to produce the selection your server actually needs.</p>
+    <p><a href="https://sciencetechworks.github.io/Arma-Reforger-STW-Clothes-Catalog-Curator-/STWClothesCatalogCuratorGuide.html">Guide: Clothes Catalog Curator</a><br><a href="https://sciencetechworks.github.io/Arma-Reforger-STW-Clothes-Catalog-Curator-/STWClothesCatalogCurator.html">Curator: Clothes Catalog Curator</a></p>
+    <ol class="steps">
+      <li>Start the server once, then stop it.</li>
+      <li>Open the curator and choose <code>STWClothesFull.json</code> from the profile folder.</li>
+      <li>Select the source mods to use and set category limits. Smaller choices generally open faster in multiplayer.</li>
+      <li>Generate the reduced catalog. The browser downloads <code>STWClothes.json</code>.</li>
+      <li>Copy that download into the profile folder, replacing the empty/current <code>STWClothes.json</code>, then restart.</li>
+    </ol>
+    <p>The webpage does not modify the server directly; it only downloads the active catalog for the administrator to place in the profile folder.</p>
+  </section>
+
+  <section id="config">
+    <h2>Configuration</h2>
+    <p>Live settings are stored in the server or hosted-session profile:</p>
+    <p><code>$profile:STW/Clothes/</code></p>
+    <p><code>$profile</code> is the profile directory supplied when the server starts (for example, via its <code>-profile</code> parameter). Its exact disk location depends on the server installation; open that profile directory and look for <code>STW/Clothes</code>.</p>
+    <table><thead><tr><th>File</th><th>What it does</th></tr></thead><tbody>
+      <tr><td><code>STWClothesConfig.json</code></td><td>System settings: master enablement, defaults, batch handling, logging and target factions.</td></tr>
+      <tr><td><code>STWClothesFull.json</code></td><td>The complete master catalog copied from the packaged default on first start. Keep it unchanged for normal use; it is the source file for making new curated selections. An existing file is not replaced.</td></tr>
+      <tr><td><code>STWClothes.json</code></td><td>The active curated catalog actually injected into faction arsenals. A new installation creates it empty.</td></tr>
+    </tbody></table>
+    <div class="callout warning"><strong>Safe editing routine:</strong> stop the server or end the Game Master session; make a backup copy; edit with a plain-text editor; preserve valid JSON; then restart. Do not edit during injection: the mod writes its current configuration and active catalog when injection finishes. If the active catalog is invalid, the mod logs a warning and uses an empty catalog for that load.</div>
+
+    <h3><code>STWClothesConfig.json</code> settings</h3>
+    <table><thead><tr><th>Setting</th><th>Default</th><th>Plain-language behavior</th></tr></thead><tbody>
+      <tr><td><code>enabled</code></td><td><code>true</code></td><td>Master switch for catalog injection. Set false to leave STW/Clothes inactive.</td></tr>
+      <tr><td><code>defaultSupplyCost</code></td><td><code>10</code></td><td>Default cost for newly created catalog entries. The source clamps it to <code>0</code>–<code>10000</code>.</td></tr>
+      <tr><td><code>itemsPerBatch</code></td><td><code>12</code></td><td>How many catalog entries are processed per injection batch. Valid stored values are clamped to <code>1</code>–<code>100</code>. Smaller values spread startup work across more batches.</td></tr>
+      <tr><td><code>batchDelayMilliseconds</code></td><td><code>25</code></td><td>Delay between injection batches, clamped to <code>0</code>–<code>1000</code>. Larger values make injection take longer but distribute its work.</td></tr>
+      <tr><td><code>verboseLogging</code></td><td><code>false</code></td><td>When true, writes detailed messages for individual additions and skipped entries to the server log.</td></tr>
+      <tr><td><code>targetFactionKeys</code></td><td><code>["US", "USSR", "FIA"]</code></td><td>Faction keys that receive enabled items. Use keys that exist in the running scenario; unavailable factions are skipped.</td></tr>
+    </tbody></table>
+
+    <h3><code>STWClothes.json</code> item entries</h3>
+    <p>The file contains an <code>items</code> array. Curator-generated entries and Workbench scanner entries use the following fields:</p>
+    <table><thead><tr><th>Field</th><th>Meaning</th></tr></thead><tbody>
+      <tr><td><code>prefab</code></td><td>Fully qualified prefab path for the clothing/equipment item.</td></tr>
+      <tr><td><code>sourceMod</code></td><td>Addon root name recorded for catalog organization. The runtime does not use it as an automatic mod download or dependency installer.</td></tr>
+      <tr><td><code>enabled</code></td><td>Global item switch; <code>true</code> by default. False retains the entry but prevents injection.</td></tr>
+      <tr><td><code>manualFallback</code></td><td>Allows runtime insertion when a suitable source arsenal entry cannot be found. New scanner/default assignments use <code>true</code>.</td></tr>
+      <tr><td><code>supplyCost</code></td><td>Cost applied to a runtime fallback entry; default <code>10</code>.</td></tr>
+      <tr><td><code>disabledFactionKeys</code></td><td>Array of factions that must not receive this otherwise enabled item; an empty array allows all configured target factions.</td></tr>
+    </tbody></table>
+  </section>
+
+  <section id="persistence">
+    <h2>Persistence</h2>
+    <p>STW/Clothes does <strong>not</strong> provide scenario/map or player-state persistence. It does not save placed entities, player inventories, progress, or a restore point.</p>
+    <p>It does persist its administrator-managed configuration and catalog files in <code>$profile:STW/Clothes/</code>. On each server startup those files are loaded; when startup injection completes, the current configuration and active catalog are saved back. The master catalog is only created if it is missing, so it is not normally overwritten by updates.</p>
+    <p>To reset the clothing selection safely for one server profile/scenario, stop that server/session, back up its <code>STWClothes.json</code>, then replace it with a newly generated curator catalog (or remove only that active catalog and start once to recreate an empty one). Keep <code>STWClothesFull.json</code> unless you intentionally want to rebuild the master source. Restart afterward. For performance, favor a smaller active catalog and use the batching settings if startup needs to be spread out.</p>
+  </section>
+
+  <section class="contact" aria-label="Captain Sprocket community">
+    <img src="images/CaptainSprocketPatch.png" alt="Captain Sprocket patch">
+    <div><h2>Captain Sprocket community</h2><p><strong>Captain Sprocket</strong><br>Arma Reforger server: <strong>STW Reforger</strong><br>Community: <a href="https://discord.gg/T2AZp6GGMJ">https://discord.gg/T2AZp6GGMJ</a></p><p class="small">Manual home: <a href="https://sciencetechworks.github.io/Arma-Reforger-STW-Online-Manuals/">STW Online Manuals</a></p></div>
+  </section>
+</main>
+</body>
+</html>

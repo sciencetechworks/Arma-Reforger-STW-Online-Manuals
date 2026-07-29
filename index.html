@@ -28,6 +28,18 @@
     .contact a { color:#ffd27d; }
     footer { margin-top:42px; color:var(--muted); font-size:.92rem; }
     @media (max-width:600px) { main { padding:20px 14px 42px; } header { padding:22px 18px; } .contact { align-items:flex-start; flex-direction:column; } }
+    /* Shared STW Online Manuals visual language */
+    :root { --ink:#12202c; --muted:#536371; --panel:#fff; --line:#d6e0e4; --accent:#197a75; --green:#a9e8df; }
+    body { background:#f3f6f7; color:var(--ink); }
+    main { max-width:1080px; padding:0 24px 64px; }
+    header { margin:0 -24px; padding:4.5rem max(24px,calc((100vw - 1032px)/2)) 4rem; border:0; background:linear-gradient(125deg,#102b3a,#17656a); box-shadow:none; }
+    .eyebrow { color:var(--green); } .lead { color:#e1f4f1; }
+    h2 { color:#123846; } .manual { min-height:210px; background:#fff; border-color:var(--line); border-radius:14px; box-shadow:0 4px 18px #2740570a; }
+    .manual h3 { color:#123846; } .manual a { background:var(--accent); color:#fff; border-radius:6px; }
+    .manual a:hover,.manual a:focus-visible { background:#0d5d61; }
+    .contact { background:#fff; border-color:var(--line); border-radius:14px; box-shadow:0 4px 18px #2740570a; }
+    .contact p,footer { color:var(--muted); } .contact a { color:#096c70; }
+    @media (max-width:600px) { main { padding:0 14px 42px; } header { margin:0 -14px; padding:3rem 14px; } }
   </style>
 </head>
 <body>

@@ -18,14 +18,14 @@
     <div class="eyebrow">ScienceTechWorks &bull; STW suite</div>
     <h1>STW Weapons</h1>
     <p class="lead">A universal, server-side weapons-to-arsenal injector for <strong>Arma Reforger</strong> by <strong>Bohemia Interactive</strong>. It gathers supported equipment already exposed by loaded faction item catalogs, then makes that equipment available through the faction arsenals you choose.</p>
-    <p class="small">This manual covers the server runtime, Game Master use and the optional Workbench scanner. STW Weapons changes faction item catalogs at session startup; it does not place weapons in the world or add a separate player menu.</p>
-    <nav aria-label="Manual contents"><a href="#suite">STW suite</a><a href="#adds">What it adds</a><a href="#players">Players</a><a href="#gm">Game Master &amp; authors</a><a href="#server">Server setup</a><a href="#configuration">Configuration</a><a href="#scanner">Scanner</a><a href="#persistence">Persistence</a></nav>
+    <p class="small">This manual covers the server runtime, Game Master use and configuration. STW Weapons changes faction item catalogs at session startup; it does not place weapons in the world or add a separate player menu.</p>
+    <nav aria-label="Manual contents"><a href="#suite">STW suite</a><a href="#adds">What it adds</a><a href="#players">Players</a><a href="#gm">Game Master &amp; authors</a><a href="#server">Server setup</a><a href="#configuration">Configuration</a><a href="#persistence">Persistence</a></nav>
   </header>
 
   <section id="suite">
     <h2>STW suite connection</h2>
     <p>STW Weapons is part of the STW suite by <strong>STW (ScienceTechWorks, sciencetechworks@gmail.com)</strong>. It is intended to let a server use equipment published by the faction catalogs of its loaded mods without editing the vanilla faction configurations themselves.</p>
-    <p>For dedicated servers and hosted multiplayer/custom scenarios, use the companion <strong>STW Weapons Arsenal Refresh</strong> (Workshop ID <code>69F5566BFE90EF98</code>) alongside STW Weapons. That companion refreshes arsenals so injected items appear correctly. It is an integration required for those multiplayer uses, but it is normally <strong>not needed</strong> when using the Workbench scanner.</p>
+    <p>For dedicated servers and hosted multiplayer/custom scenarios, use the companion <strong>STW Weapons Arsenal Refresh</strong> (Workshop ID <code>69F5566BFE90EF98</code>) alongside STW Weapons. That companion refreshes arsenals so injected items appear correctly.</p>
   </section>
 
   <section id="adds">
@@ -36,7 +36,7 @@
       <li>Weapons, magazines/ammunition and attachments retain the classification and supply cost supplied by their original faction catalog whenever a source entry exists.</li>
       <li>Compatibility-aware ammunition handling: default compatible ammunition is kept, while optional variant matching can include additional compatible magazine/ammunition variants.</li>
       <li>Per-item enablement and per-faction exclusions in a persistent JSON catalog.</li>
-      <li>A runtime fallback path for scanner-added prefabs that are not exposed through a standard faction item catalog.</li>
+      <li>A runtime fallback path for catalog entries that are not exposed through a standard faction item catalog.</li>
       <li>Server-to-client synchronization of the injected catalog, including entries added through the fallback path.</li>
     </ul>
     <div class="callout"><strong>What it does not do:</strong> STW Weapons does not manufacture weapon content. The equipment must be supplied by Arma Reforger or another loaded mod, and unavailable or invalid prefabs are skipped. It also avoids duplicates already present in a target arsenal.</div>
@@ -51,7 +51,6 @@
   <section id="gm">
     <h2>Game Master and scenario-author use</h2>
     <p>In a Game Master session, configure the server/profile files first, then restart the Game Master session. STW Weapons injects into existing faction item catalogs rather than adding a Game Master placeable or scenario entity. A scenario author therefore normally needs no prefab placement or faction-config edit for the injector itself.</p>
-    <p>For content that does not publish weapons through standard faction item catalogs, use the Workbench scanner described below. It appends new fallback entries to the same server catalog; restart the Game Master session after scanning so the new entries are loaded.</p>
   </section>
 
   <section id="server">
@@ -95,7 +94,7 @@
       <tr><td><code>prefab</code></td><td>The fully qualified item prefab path.</td></tr>
       <tr><td><code>enabled</code></td><td>Global on/off switch for that entry. False retains it in the catalog but does not inject it.</td></tr>
       <tr><td><code>disabledFactionKeys</code></td><td>Array of faction keys that must not receive this otherwise enabled item, such as <code>["FIA"]</code>.</td></tr>
-      <tr><td><code>manualFallback</code></td><td>Allows runtime insertion when no source faction catalog entry can be found. Scanner-added entries use <code>true</code>; packaged/default entries use the original catalog where available.</td></tr>
+      <tr><td><code>manualFallback</code></td><td>Allows runtime insertion when no source faction catalog entry can be found. Entries using it have <code>true</code>; packaged/default entries use the original catalog where available.</td></tr>
       <tr><td><code>itemType</code></td><td>Runtime category. Supported values used by the injector include <code>RIFLE</code>, <code>SNIPER_RIFLE</code>, <code>MACHINE_GUN</code>, <code>ROCKET_LAUNCHER</code>, <code>PISTOL</code>, <code>WEAPON_ATTACHMENT</code>, <code>LETHAL_THROWABLE</code>, <code>NON_LETHAL_THROWABLE</code>, <code>EXPLOSIVES</code> and <code>MORTARS</code>.</td></tr>
       <tr><td><code>itemMode</code></td><td>Runtime mode: <code>WEAPON</code>, <code>WEAPON_VARIANTS</code>, <code>AMMUNITION</code>, <code>ATTACHMENT</code> or <code>CONSUMABLE</code>.</td></tr>
       <tr><td><code>supplyCost</code></td><td>Cost used by a runtime fallback entry. The default value in a new assignment is <code>10</code>; source-catalog entries keep their authored cost.</td></tr>
@@ -109,14 +108,6 @@
   "supplyCost": 10,
   "disabledFactionKeys": ["FIA"]
 }</pre>
-  </section>
-
-  <section id="scanner">
-    <h2>Workbench scanner for non-standard catalogs</h2>
-    <p>Some mods do not expose equipment through standard faction item catalogs. In Workbench's Resource Browser, select one or more mod folders or prefab files, then run:</p>
-    <p><code>Plugins &gt; ScienceTechWorks &gt; STW Weapons: Scan selected folders</code></p>
-    <p>The scanner considers selected <code>.et</code> prefabs under paths containing <code>Prefabs/Weapons/</code>, <code>Prefabs/Ammunition/</code>, <code>Prefabs/Explosives/</code> or <code>Prefabs/Throwables/</code>. It adds only prefabs not already in <code>STWWeapons.json</code>, marks them as enabled manual-fallback entries, and infers a category/mode from the path. It leaves an invalid existing catalog untouched and reports the problem instead.</p>
-    <div class="callout"><strong>After scanning:</strong> restart the Game Master session to load the updated catalog. Review inferred category, mode and supply cost in <code>STWWeapons.json</code> when the source mod uses unusual folder naming.</div>
   </section>
 
   <section id="persistence">

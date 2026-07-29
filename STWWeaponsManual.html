@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>STW Weapons Manual</title>
+  <style>
+    :root { --ink:#edf2f3; --muted:#b9c7cc; --panel:#142229; --panel2:#1a2c34; --line:#3b5560; --accent:#e8a440; --green:#91bf76; --page:#091216; }
+    * { box-sizing:border-box; } html { scroll-behavior:smooth; } body { margin:0; background:linear-gradient(135deg,#071014,#102028 58%,#0b151a); color:var(--ink); font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif; }
+    main { max-width:1040px; margin:auto; padding:42px 24px 64px; } header { border:1px solid var(--line); border-left:7px solid var(--accent); padding:34px; background:linear-gradient(120deg,rgba(31,49,58,.97),rgba(16,30,36,.97)); box-shadow:0 12px 35px #0007; }
+    h1,h2,h3 { line-height:1.2; } h1 { margin:0 0 8px; font-size:clamp(2.2rem,6vw,4rem); letter-spacing:.025em; } h2 { color:var(--accent); margin:42px 0 14px; font-size:1.65rem; } h3 { margin:26px 0 8px; color:#fff; } p { margin:10px 0; } .eyebrow { color:var(--green); font-weight:750; text-transform:uppercase; letter-spacing:.13em; font-size:.79rem; } .lead { font-size:1.15rem; color:#d8e3e7; max-width:820px; } .small { color:var(--muted); font-size:.92rem; }
+    nav { display:flex; flex-wrap:wrap; gap:8px; padding:16px 0 0; } nav a { color:#ffe0a3; text-decoration:none; border:1px solid var(--line); padding:5px 9px; font-size:.88rem; } nav a:hover { background:#243c46; } section,.callout { background:rgba(20,34,41,.92); border:1px solid var(--line); padding:24px 28px; margin-top:22px; } section h2:first-child { margin-top:0; } .callout { border-left:5px solid var(--green); background:#15261f; } .warning { border-left-color:var(--accent); background:#2c251a; } ul,ol { padding-left:1.35rem; } li { margin:7px 0; } code { color:#ffe0ad; background:#0a1216; padding:2px 5px; border-radius:3px; overflow-wrap:anywhere; } pre { overflow:auto; padding:14px; background:#0a1216; border:1px solid #314852; color:#e9edef; font-size:.88rem; } table { width:100%; border-collapse:collapse; margin:14px 0; } th,td { text-align:left; vertical-align:top; padding:11px 10px; border-bottom:1px solid var(--line); } th { color:var(--green); } .steps { counter-reset:step; list-style:none; padding:0; } .steps li { position:relative; padding-left:42px; min-height:30px; } .steps li:before { counter-increment:step; content:counter(step); position:absolute; left:0; top:1px; width:27px; height:27px; border-radius:50%; background:var(--accent); color:#162026; text-align:center; font-weight:800; line-height:27px; } .contact { display:flex; gap:26px; align-items:center; margin-top:42px; padding:26px; background:#142229; border:1px solid var(--line); } .contact img { width:132px; height:auto; object-fit:contain; } a { color:#ffd27d; } @media (max-width:600px) { main { padding:20px 14px 42px; } header,section,.callout { padding:22px 18px; } .contact { align-items:flex-start; flex-direction:column; } table { font-size:.89rem; } }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="eyebrow">ScienceTechWorks &bull; STW suite</div>
+    <h1>STW Weapons</h1>
+    <p class="lead">A universal, server-side weapons-to-arsenal injector for <strong>Arma Reforger</strong> by <strong>Bohemia Interactive</strong>. It gathers supported equipment already exposed by loaded faction item catalogs, then makes that equipment available through the faction arsenals you choose.</p>
+    <p class="small">This manual covers the server runtime, Game Master use and the optional Workbench scanner. STW Weapons changes faction item catalogs at session startup; it does not place weapons in the world or add a separate player menu.</p>
+    <nav aria-label="Manual contents"><a href="#suite">STW suite</a><a href="#adds">What it adds</a><a href="#players">Players</a><a href="#gm">Game Master &amp; authors</a><a href="#server">Server setup</a><a href="#configuration">Configuration</a><a href="#scanner">Scanner</a><a href="#persistence">Persistence</a></nav>
+  </header>
+
+  <section id="suite">
+    <h2>STW suite connection</h2>
+    <p>STW Weapons is part of the STW suite by <strong>STW (ScienceTechWorks, sciencetechworks@gmail.com)</strong>. It is intended to let a server use equipment published by the faction catalogs of its loaded mods without editing the vanilla faction configurations themselves.</p>
+    <p>For dedicated servers and hosted multiplayer/custom scenarios, use the companion <strong>STW Weapons Arsenal Refresh</strong> (Workshop ID <code>69F5566BFE90EF98</code>) alongside STW Weapons. That companion refreshes arsenals so injected items appear correctly. It is an integration required for those multiplayer uses, but it is normally <strong>not needed</strong> when using the Workbench scanner.</p>
+  </section>
+
+  <section id="adds">
+    <h2>What STW Weapons adds</h2>
+    <p>At server startup, STW Weapons reads its catalog and injects enabled entries into each configured target faction's standard item arsenal. By default the targets are <code>US</code>, <code>USSR</code> and <code>FIA</code>. The injector can also discover eligible entries already present in loaded faction item catalogs and add any newly found entries to its own server catalog.</p>
+    <ul>
+      <li>Automatic catalog discovery for supported rifles, sniper rifles, machine guns, launchers, pistols, attachments, throwables, explosives and mortars.</li>
+      <li>Weapons, magazines/ammunition and attachments retain the classification and supply cost supplied by their original faction catalog whenever a source entry exists.</li>
+      <li>Compatibility-aware ammunition handling: default compatible ammunition is kept, while optional variant matching can include additional compatible magazine/ammunition variants.</li>
+      <li>Per-item enablement and per-faction exclusions in a persistent JSON catalog.</li>
+      <li>A runtime fallback path for scanner-added prefabs that are not exposed through a standard faction item catalog.</li>
+      <li>Server-to-client synchronization of the injected catalog, including entries added through the fallback path.</li>
+    </ul>
+    <div class="callout"><strong>What it does not do:</strong> STW Weapons does not manufacture weapon content. The equipment must be supplied by Arma Reforger or another loaded mod, and unavailable or invalid prefabs are skipped. It also avoids duplicates already present in a target arsenal.</div>
+  </section>
+
+  <section id="players">
+    <h2>For players</h2>
+    <p>Players use STW Weapons through the ordinary faction arsenal available in the scenario. Once the server has finished startup injection, enabled catalog items appear under the normal arsenal categories for the faction selected by the server administrator.</p>
+    <p>There is no player-side configuration file or special interaction to learn. A joining client receives the server's injected catalog. If an item is deliberately disabled for that faction, it will not be added there; if the item does not exist in the loaded content, it cannot be provided.</p>
+  </section>
+
+  <section id="gm">
+    <h2>Game Master and scenario-author use</h2>
+    <p>In a Game Master session, configure the server/profile files first, then restart the Game Master session. STW Weapons injects into existing faction item catalogs rather than adding a Game Master placeable or scenario entity. A scenario author therefore normally needs no prefab placement or faction-config edit for the injector itself.</p>
+    <p>For content that does not publish weapons through standard faction item catalogs, use the Workbench scanner described below. It appends new fallback entries to the same server catalog; restart the Game Master session after scanning so the new entries are loaded.</p>
+  </section>
+
+  <section id="server">
+    <h2>Server setup</h2>
+    <ol class="steps">
+      <li>Load STW Weapons and the weapon/content mods whose catalog items you want to make available.</li>
+      <li>For dedicated or hosted multiplayer/custom scenarios, add <strong>STW Weapons Arsenal Refresh</strong> (ID <code>69F5566BFE90EF98</code>) to the mod list.</li>
+      <li>Start the server once. STW Weapons creates its configuration folder and both JSON files in the server profile.</li>
+      <li>Stop the server, make any desired JSON changes, then start it again. For Game Master, restart the session after edits.</li>
+      <li>Watch the server log during startup. Catalog progress is always reported in 10% increments; enable verbose logging if you need item-by-item diagnostics.</li>
+    </ol>
+    <p>The addon project's active configuration declares only its core project dependency. The project documentation explicitly identifies STW Weapons Arsenal Refresh as the companion needed for the multiplayer/hosted refresh behavior above; no other named STW companion is required by STW Weapons.</p>
+  </section>
+
+  <section id="configuration">
+    <h2>Configuration</h2>
+    <p>STW Weapons keeps its live settings in the server profile, not inside the downloaded mod. Start once to generate the files:</p>
+    <p><code>$profile:STW/Weapons/</code></p>
+    <p><code>$profile</code> is the profile directory selected when the server is started (for example by its <code>-profile</code> startup parameter). The exact disk location is installation-specific; look for the <code>STW</code> folder inside that profile.</p>
+    <table><thead><tr><th>File</th><th>Purpose</th></tr></thead><tbody>
+      <tr><td><code>$profile:STW/Weapons/STWWeaponsConfig.json</code></td><td>The system settings: master enablement, discovery, target factions, ammunition matching, batching and log detail.</td></tr>
+      <tr><td><code>$profile:STW/Weapons/STWWeapons.json</code></td><td>The item catalog: each prefab's enabled state, fallback metadata, type/mode, supply cost and faction exclusions.</td></tr>
+    </tbody></table>
+    <div class="callout warning"><strong>Safe editing routine:</strong> stop the server or end the Game Master session, copy the JSON file as a backup, edit it in a plain-text editor, save valid JSON, then restart. Do not edit while the session is running: the mod saves its catalog at the end of injection. If a JSON file cannot be read, the mod logs a warning and uses defaults for that load, then writes its current data back out.</div>
+
+    <h3>System settings &mdash; <code>STWWeaponsConfig.json</code></h3>
+    <table><thead><tr><th>Setting</th><th>Default</th><th>Meaning and valid behavior</th></tr></thead><tbody>
+      <tr><td><code>enabled</code></td><td><code>true</code></td><td>Master switch. When false, configuration is still initialized but catalog injection does not run.</td></tr>
+      <tr><td><code>autoDiscoverArsenalItems</code></td><td><code>true</code></td><td>Searches loaded factions' item catalogs for supported entries and records new ones in <code>STWWeapons.json</code>.</td></tr>
+      <tr><td><code>autoAssignDiscoveredItems</code></td><td><code>true</code></td><td>Sets the initial <code>enabled</code> value for newly discovered items. Set false to review each discovery before it is injected.</td></tr>
+      <tr><td><code>includeCompatibleAmmunitionVariants</code></td><td><code>false</code></td><td>False keeps only default compatible ammunition. True also permits compatible variants matched through the weapon's magazine wells.</td></tr>
+      <tr><td><code>itemsPerBatch</code></td><td><code>12</code></td><td>Items processed at a time. Accepted values are clamped to <code>1</code>&ndash;<code>100</code>. Smaller batches spread startup work out more.</td></tr>
+      <tr><td><code>batchDelayMilliseconds</code></td><td><code>25</code></td><td>Pause between processing batches. It is clamped to <code>0</code>&ndash;<code>1000</code>; a higher value makes injection gentler but longer.</td></tr>
+      <tr><td><code>verboseLogging</code></td><td><code>false</code></td><td>Logs discoveries, additions, skipped duplicates, missing entries and ammunition decisions. Startup progress still appears every 10% even when false.</td></tr>
+      <tr><td><code>targetFactionKeys</code></td><td><code>["US", "USSR", "FIA"]</code></td><td>The faction keys that receive enabled catalog entries. Use only factions actually present in the running scenario; missing factions are skipped.</td></tr>
+    </tbody></table>
+
+    <h3>Item catalog &mdash; <code>STWWeapons.json</code></h3>
+    <p>On a new profile, the file is seeded from the packaged default catalog. Existing profile catalogs take precedence and are never replaced by a mod update. Each <code>items</code> entry has these source-visible fields:</p>
+    <table><thead><tr><th>Field</th><th>Meaning</th></tr></thead><tbody>
+      <tr><td><code>prefab</code></td><td>The fully qualified item prefab path.</td></tr>
+      <tr><td><code>enabled</code></td><td>Global on/off switch for that entry. False retains it in the catalog but does not inject it.</td></tr>
+      <tr><td><code>disabledFactionKeys</code></td><td>Array of faction keys that must not receive this otherwise enabled item, such as <code>["FIA"]</code>.</td></tr>
+      <tr><td><code>manualFallback</code></td><td>Allows runtime insertion when no source faction catalog entry can be found. Scanner-added entries use <code>true</code>; packaged/default entries use the original catalog where available.</td></tr>
+      <tr><td><code>itemType</code></td><td>Runtime category. Supported values used by the injector include <code>RIFLE</code>, <code>SNIPER_RIFLE</code>, <code>MACHINE_GUN</code>, <code>ROCKET_LAUNCHER</code>, <code>PISTOL</code>, <code>WEAPON_ATTACHMENT</code>, <code>LETHAL_THROWABLE</code>, <code>NON_LETHAL_THROWABLE</code>, <code>EXPLOSIVES</code> and <code>MORTARS</code>.</td></tr>
+      <tr><td><code>itemMode</code></td><td>Runtime mode: <code>WEAPON</code>, <code>WEAPON_VARIANTS</code>, <code>AMMUNITION</code>, <code>ATTACHMENT</code> or <code>CONSUMABLE</code>.</td></tr>
+      <tr><td><code>supplyCost</code></td><td>Cost used by a runtime fallback entry. The default value in a new assignment is <code>10</code>; source-catalog entries keep their authored cost.</td></tr>
+    </tbody></table>
+    <pre>{
+  "prefab": "{FC695E70D2773ACB}Prefabs/Weapons/Rifles/G28/Rifle_G28.et",
+  "enabled": true,
+  "manualFallback": false,
+  "itemType": "RIFLE",
+  "itemMode": "WEAPON",
+  "supplyCost": 10,
+  "disabledFactionKeys": ["FIA"]
+}</pre>
+  </section>
+
+  <section id="scanner">
+    <h2>Workbench scanner for non-standard catalogs</h2>
+    <p>Some mods do not expose equipment through standard faction item catalogs. In Workbench's Resource Browser, select one or more mod folders or prefab files, then run:</p>
+    <p><code>Plugins &gt; ScienceTechWorks &gt; STW Weapons: Scan selected folders</code></p>
+    <p>The scanner considers selected <code>.et</code> prefabs under paths containing <code>Prefabs/Weapons/</code>, <code>Prefabs/Ammunition/</code>, <code>Prefabs/Explosives/</code> or <code>Prefabs/Throwables/</code>. It adds only prefabs not already in <code>STWWeapons.json</code>, marks them as enabled manual-fallback entries, and infers a category/mode from the path. It leaves an invalid existing catalog untouched and reports the problem instead.</p>
+    <div class="callout"><strong>After scanning:</strong> restart the Game Master session to load the updated catalog. Review inferred category, mode and supply cost in <code>STWWeapons.json</code> when the source mod uses unusual folder naming.</div>
+  </section>
+
+  <section id="persistence">
+    <h2>Persistence</h2>
+    <p>STW Weapons does <strong>not</strong> provide scenario or map persistence. It does not create save files for injected arsenal state, player loadouts or world entities. Its persistent data is the two profile configuration/catalog JSON files above: the catalog is saved after injection so discovered entries remain available for later sessions.</p>
+    <p>To reset the mod's learned catalog for a server, stop the server, back up <code>$profile:STW/Weapons/STWWeapons.json</code>, then remove or rename that file and start again. A fresh catalog will be seeded from the packaged default catalog. This is a configuration reset, not a scenario/map persistence reset.</p>
+    <p>For startup performance, begin with the defaults of <code>12</code> items per batch and a <code>25</code> ms delay. Large catalogs or many target factions take longer because compatibility and injection work are performed for each target; lower batch sizes and a modest delay reduce the impact at the cost of a longer initialization window.</p>
+  </section>
+
+  <section>
+    <h2>A sensible first setup</h2>
+    <p>Start with automatic discovery on and the default US, USSR and FIA targets. Inspect the generated catalog after the first run, disable anything you do not want shared, and use <code>disabledFactionKeys</code> where a weapon should remain faction-specific. Add the Arsenal Refresh companion for multiplayer, then test an arsenal after a clean restart. Captain Sprocket's preferred approach is small changes, one restart, and a quick log check&mdash;far easier than debugging an entire armoury at once.</p>
+  </section>
+
+  <footer class="contact">
+    <img src="images/CaptainSprocketPatch.png" alt="Captain Sprocket patch">
+    <div>
+      <div class="eyebrow">Captain Sprocket community</div>
+      <h2 style="margin:6px 0 8px">Captain Sprocket</h2>
+      <p><strong>Arma Reforger server:</strong> STW Reforger<br><strong>Community:</strong> <a href="https://discord.gg/T2AZp6GGMJ">https://discord.gg/T2AZp6GGMJ</a></p>
+      <p class="small">Created by STW (ScienceTechWorks, sciencetechworks@gmail.com). Published manuals: <a href="https://sciencetechworks.github.io/Arma-Reforger-STW-Online-Manuals/">STW Online Manuals</a>.</p>
+    </div>
+  </footer>
+</main>
+</body>
+</html>

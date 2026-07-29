@@ -61,7 +61,20 @@
 
   <section>
     <h2>Server configuration</h2>
-    <p>On first server start, the mod creates its configuration files under <code>$profile:STW/HeavyWeapons/</code>. Stop the server before editing them, make a backup, then restart it after saving. Values outside safe limits are gently corrected by the mod, so the server does not have to learn physics the hard way.</p>
+    <p>Heavy Weapons keeps its settings in the <strong>server profile</strong>, not in the mod download itself. This means a mod update does not normally overwrite your choices&mdash;which is exactly what a server owner wants.</p>
+
+    <h3>Where are the configuration folders?</h3>
+    <p>Start the server once with STW Heavy Weapons loaded. It creates the folders and its default files automatically. Open the server's profile directory, then follow this path:</p>
+    <p><code>$profile:STW/HeavyWeapons/</code></p>
+    <p>In a typical Windows server installation, <code>$profile</code> means the profile folder selected by the server's <code>-profile</code> startup parameter. If no custom profile location is used, it is commonly in the server's working/profile area. Ask whoever starts the server where its profile folder is; the <code>STW</code> folder will be inside it.</p>
+    <table><thead><tr><th>Folder / file</th><th>Purpose</th></tr></thead><tbody>
+      <tr><td><code>$profile:STW/HeavyWeapons/STWHeavyWeaponsSystemConfig.json</code></td><td>Core system settings: limits, markers, persistence, crates and Game Master factions.</td></tr>
+      <tr><td><code>$profile:STW/HeavyWeapons/STWAutoPopulationConfig.json</code></td><td>Automatic creation of staffed RPK and mortar posts.</td></tr>
+      <tr><td><code>$profile:STW/HeavyWeapons/STWMortarTerrainConfig.json</code></td><td>Terrain-generated mortar network and faction quotas.</td></tr>
+      <tr><td><code>$profile:STW/HeavyWeapons/STWMortarFireConfig.json</code></td><td>Mortar mission, cooldown, accuracy, stress and safety behavior.</td></tr>
+      <tr><td><code>$profile:STW/Persistence/</code></td><td>Saved heavy-weapon post data, kept separately from the settings.</td></tr>
+    </tbody></table>
+    <div class="callout warning"><strong>Safe editing routine:</strong> stop the server, copy the relevant JSON file somewhere safe, edit it with a plain-text editor, save it, then start the server again. If a file is invalid, the mod writes safe defaults; a backup is still much nicer than rebuilding a carefully tuned setup.</div>
 
     <h3>1. System settings &mdash; <code>STWHeavyWeaponsSystemConfig.json</code></h3>
     <table><thead><tr><th>Setting</th><th>What it controls</th><th>Good starting point</th></tr></thead><tbody>
@@ -119,6 +132,27 @@
       <tr><td><code>additionalArtilleryPrefabPaths</code></td><td>Extra artillery prefabs to include when using the prefab allowlist scope.</td></tr>
     </tbody></table>
     <div class="callout warning"><strong>Configuration tip:</strong> change one family of settings at a time and test on a quiet server. More posts, guards and frequent checks all add activity; a battlefield should be dramatic, not a performance benchmark.</div>
+  </section>
+
+  <section>
+    <h2>Persistence: keeping the battlefield alive</h2>
+    <p>With persistence enabled, STW Heavy Weapons remembers its managed weapon posts when the server restarts. That includes the post's weapon type, faction, position and facing, plus any associated arsenal. Terrain-generated mortar posts are remembered too, so the map does not roll a completely new artillery network every reboot.</p>
+    <p>The save files live in <code>$profile:STW/Persistence/</code>. Their names include the scenario and map, for example <code>STW_HeavyWeapons_MyScenario_Arland.json</code>. This separation is useful: each scenario/map combination keeps its own battlefield history.</p>
+    <h3>How it works in practice</h3>
+    <ul>
+      <li>The mod saves automatically at the interval set by <code>persistenceIntervalMinutes</code>.</li>
+      <li>It also saves when the game session ends cleanly.</li>
+      <li>On the next start, saved posts return after the configured initial delay, in small batches. This avoids a large startup hitch on busy servers.</li>
+      <li>If a managed post is cleared during play, that cleared state is saved so it does not quietly reappear after the restart.</li>
+    </ul>
+    <h3>Useful persistence choices</h3>
+    <table><thead><tr><th>If you want...</th><th>Do this</th></tr></thead><tbody>
+      <tr><td>A persistent campaign</td><td>Set <code>persistenceEnabled</code> to <code>true</code> and keep a reasonable save interval, such as 30 minutes.</td></tr>
+      <tr><td>A fresh battlefield after every restart</td><td>Set <code>persistenceEnabled</code> to <code>false</code>. Terrain mortars can then be generated anew on the next session.</td></tr>
+      <tr><td>To reset one scenario/map's Heavy Weapons history</td><td>Stop the server, back up and then remove that scenario/map's corresponding <code>STW_HeavyWeapons_*.json</code> file from <code>$profile:STW/Persistence/</code>. Start the server again.</td></tr>
+      <tr><td>A smoother restart on a busy server</td><td>Keep the restore batch size modest and use a small delay between batches. The defaults are intended to be gentle.</td></tr>
+    </tbody></table>
+    <div class="callout"><strong>Before resetting:</strong> persistence files are campaign progress. Copy the file first. A backup lets Captain Sprocket undo a bold administrative decision before it becomes battlefield archaeology.</div>
   </section>
 
   <section>

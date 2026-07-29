@@ -18,6 +18,12 @@
   </header>
 
   <section>
+    <h2>STW suite connection</h2>
+    <p>STW/Bases is designed to stand on its own while offering a clean server-side API for companion mods. The dedicated <strong>STW Bases Crates Integration</strong> add-on is the direct STW-suite companion: with <strong>STW Crates</strong> also installed, it waits until STW/Bases and STW Crates are ready, then creates or reuses a faction crate near each generated base. By default it prefers placement beside an available arsenal, otherwise beside the base.</p>
+    <p>That integration has its own profile configuration and does not change STW/Bases' spawn-point, arsenal, marker or persistence settings. Install it only if you want crates at bases; STW/Bases itself needs neither it nor STW Crates to operate.</p>
+  </section>
+
+  <section>
     <h2>What STW/Bases adds</h2>
     <ul>
       <li>Automatic faction spawn-point placement at server startup.</li>
@@ -114,12 +120,6 @@
       <li>Start the server. STW/Bases creates a fresh layout and new files for that scenario/map only.</li>
     </ol>
     <div class="callout"><strong>Performance note:</strong> base generation happens at startup. Large counts, restrictive separation, steepness limits, and high attempt counts make placement searches longer. Persistence avoids repeating that search on every restart, so it is normally the friendlier choice for a busy Captain Sprocket server.</div>
-  </section>
-
-  <section>
-    <h2>STW suite connection</h2>
-    <p>STW/Bases is designed to stand on its own while offering a clean server-side API for companion mods. The dedicated <strong>STW Bases Crates Integration</strong> add-on is the direct STW-suite companion: with <strong>STW Crates</strong> also installed, it waits until STW/Bases and STW Crates are ready, then creates or reuses a faction crate near each generated base. By default it prefers placement beside an available arsenal, otherwise beside the base.</p>
-    <p>That integration has its own profile configuration and does not change STW/Bases' spawn-point, arsenal, marker or persistence settings. Install it only if you want crates at bases; STW/Bases itself needs neither it nor STW Crates to operate.</p>
   </section>
 
   <footer class="contact">

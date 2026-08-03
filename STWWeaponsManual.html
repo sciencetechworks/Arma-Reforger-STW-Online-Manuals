@@ -44,7 +44,7 @@
     <h2>What STW Weapons adds</h2>
     <p>At server startup, STW Weapons reads its catalog and injects enabled entries into each configured target faction's standard item arsenal. By default the targets are <code>US</code>, <code>USSR</code> and <code>FIA</code>. The injector can also discover eligible entries already present in loaded faction item catalogs and add any newly found entries to its own server catalog.</p>
     <ul>
-      <li>Automatic catalog discovery for supported rifles, sniper rifles, machine guns, launchers, pistols, attachments, throwables, explosives and mortars.</li>
+      <li>Automatic catalog discovery for supported rifles, submachine guns, sniper rifles, machine guns, launchers, pistols, attachments, throwables, explosives and mortars.</li>
       <li>Weapons, magazines/ammunition and attachments retain the classification and supply cost supplied by their original faction catalog whenever a source entry exists.</li>
       <li>Compatibility-aware ammunition handling: default compatible ammunition is kept, while optional variant matching can include additional compatible magazine/ammunition variants.</li>
       <li>Per-item enablement and per-faction exclusions in a persistent JSON catalog.</li>
@@ -95,7 +95,10 @@
       <tr><td><code>autoAssignDiscoveredItems</code></td><td><code>true</code></td><td>Sets the initial <code>enabled</code> value for newly discovered items. Set false to review each discovery before it is injected.</td></tr>
       <tr><td><code>includeCompatibleAmmunitionVariants</code></td><td><code>false</code></td><td>False keeps only default compatible ammunition. True also permits compatible variants matched through the weapon's magazine wells.</td></tr>
       <tr><td><code>itemsPerBatch</code></td><td><code>12</code></td><td>Items processed at a time. Accepted values are clamped to <code>1</code>&ndash;<code>100</code>. Smaller batches spread startup work out more.</td></tr>
-      <tr><td><code>batchDelayMilliseconds</code></td><td><code>25</code></td><td>Pause between processing batches. It is clamped to <code>0</code>&ndash;<code>1000</code>; a higher value makes injection gentler but longer.</td></tr>
+      <tr><td><code>batchDelayMilliseconds</code></td><td><code>25</code></td><td>Pause between processing batches. It is clamped to <code>0</code>&ndash;<code>60000</code>; a higher value makes injection gentler but longer.</td></tr>
+      <tr><td><code>startupDelayMilliseconds</code></td><td><code>0</code></td><td>Delay before startup injection begins. It is clamped to <code>0</code>&ndash;<code>60000</code>.</td></tr>
+      <tr><td><code>discoveryItemsPerBatch</code></td><td><code>12</code></td><td>Discovery entries processed at a time. Accepted values are clamped to <code>1</code>&ndash;<code>100</code>.</td></tr>
+      <tr><td><code>discoveryBatchDelayMilliseconds</code></td><td><code>25</code></td><td>Pause between discovery batches. It is clamped to <code>0</code>&ndash;<code>60000</code>.</td></tr>
       <tr><td><code>verboseLogging</code></td><td><code>false</code></td><td>Logs discoveries, additions, skipped duplicates, missing entries and ammunition decisions. Startup progress still appears every 10% even when false.</td></tr>
       <tr><td><code>targetFactionKeys</code></td><td><code>["US", "USSR", "FIA"]</code></td><td>The faction keys that receive enabled catalog entries. Use only factions actually present in the running scenario; missing factions are skipped.</td></tr>
     </tbody></table>

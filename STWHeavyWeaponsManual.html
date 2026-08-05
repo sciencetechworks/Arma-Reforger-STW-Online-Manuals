@@ -64,6 +64,19 @@
   </section>
 
   <section>
+    <h2>Post and checkpoint parameters</h2>
+    <p>Alongside the <strong>STW RPK</strong> and <strong>STW Mortar</strong> placeables, the entity browser now includes an <strong>STW US Checkpoint</strong>. It is a ready-made roadside post: place it on a suitable road, then select it to adjust the same post settings.</p>
+    <table><thead><tr><th>Game Master parameter</th><th>Default</th><th>What it does</th></tr></thead><tbody>
+      <tr><td><strong>Post Faction</strong></td><td>Automatic</td><td>Rebuilds the post with a loaded faction from <code>gameMasterFactions</code>. Automatic retains the checkpoint's authored faction or uses the configured automatic selection.</td></tr>
+      <tr><td><strong>Guards</strong></td><td>Automatic for a newly placed post</td><td>Sets 0&ndash;2 guards beside the weapon. After the post is built, the setting reflects the resolved guard count.</td></tr>
+      <tr><td><strong>Force Arsenal</strong></td><td>On</td><td>Creates a faction arsenal for the post. Turn it off when a post should be weapon-only.</td></tr>
+      <tr><td><strong>Force STW Crate</strong></td><td>Off</td><td>Creates a nearby STW Crate when STW Crates integration is enabled.</td></tr>
+      <tr><td><strong>Align to Nearest Road</strong> <em>(checkpoint only)</em></td><td>On</td><td>Aligns the checkpoint to the nearest road during its first setup. Disable it to preserve the direction chosen by the Game Master.</td></tr>
+    </tbody></table>
+    <div class="callout"><strong>Reconfiguration:</strong> changing a post parameter rebuilds its managed post. Give the placed entity a moment after editing for the server to apply the new faction, crew, arsenal or crate choice.</div>
+  </section>
+
+  <section>
     <h2>Firing mortars</h2>
     <p>Mortar posts can support artillery missions through Arma Reforger's normal command/artillery flow. The exact order-giving experience depends on the game mode and the server's chosen assignment strategy, but the guiding rule is simple: select or assign an available mortar crew, then designate the target through the usual artillery order.</p>
     <p>STW Heavy Weapons adds a little battlefield character. Mortars do not have endless energy or perfect aim: each completed salvo adds stress, stress fades over time, and firing delays and accuracy can vary. This keeps artillery powerful without turning it into a meteorological event.</p>
@@ -102,6 +115,10 @@
       <tr><td><code>markerZoomThreshold</code></td><td>Map zoom level used by zoom-based markers.</td><td><code>1.5</code>.</td></tr>
       <tr><td><code>useRandomOffsetForPublicMarkers</code>, <code>maximumPublicMarkerOffsetMeters</code></td><td>Can deliberately blur public marker positions.</td><td>Enable for fog-of-war flavor.</td></tr>
       <tr><td><code>enableSTWCrates</code></td><td>Allows integration with STW Crates.</td><td><code>true</code> when that STW mod is installed.</td></tr>
+      <tr><td><code>mortarCommandAssignmentEnabled</code></td><td>Enables assigning managed mortars to artillery-command groups.</td><td><code>true</code>.</td></tr>
+      <tr><td><code>mortarCommandAssignmentStrategy</code></td><td>Chooses assignment policy: <code>NONE</code>, <code>SIMPLE</code>, or <code>NEARBY</code>.</td><td><code>NEARBY</code>; uses the configured service radius and reconciliation interval.</td></tr>
+      <tr><td><code>mortarCommandServiceRadiusMeters</code>, <code>mortarCommandNearbyReconciliationSeconds</code></td><td>Sets the NEARBY strategy's search radius and update interval.</td><td><code>2000</code> m / <code>30</code> s.</td></tr>
+      <tr><td><code>debugLogging</code></td><td>Writes detailed Heavy Weapons diagnostics to the server log.</td><td><code>false</code> outside troubleshooting.</td></tr>
       <tr><td><code>gameMasterFactions</code></td><td>Factions that Game Master may use for posts.</td><td>Keep only factions present on your server.</td></tr>
     </tbody></table>
 

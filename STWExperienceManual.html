@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Player and server-administrator guide for STWExperience for Arma Reforger.">
+  <title>STWExperience Manual</title>
+  <link rel="stylesheet" href="stw-manuals.css">
+  <link rel="icon" type="image/svg+xml" href="images/stw-favicon.svg">
+</head>
+<body>
+<main>
+  <header>
+    <div class="eyebrow">ScienceTechWorks &bull; STW suite</div>
+    <a class="index-link" href="index.html">&larr; STW Online Manuals</a>
+    <h1>STWExperience</h1>
+    <p class="lead">A persistent, server-side experience and rank system that rewards time in the field and meaningful combat&mdash;while making friendly fire and civilian casualties hurt where it counts.</p>
+    <p class="small">STWExperience is an STW mod for <strong>Arma Reforger</strong>, the military sandbox by <strong>Bohemia Interactive</strong>. This guide is for players and server administrators.</p>
+  </header>
+
+  <section>
+    <h2>What it does</h2>
+    <p>STWExperience keeps an XP profile for each player identity on the server. Players earn XP for connected time and configured combat events, receive in-game notices, and progress through ranks chosen by the server owner.</p>
+    <div class="grid">
+      <div class="card"><h3>Persistent profiles</h3><p>XP, connected time and profile information are saved per player and scenario, then restored when that player returns.</p></div>
+      <div class="card"><h3>Time rewards</h3><p>Connected players earn XP at the rate selected by the server, paid out on a regular tick.</p></div>
+      <div class="card"><h3>Combat rewards</h3><p>Enemy soldier and selected vehicle kills can award XP; friendly and civilian losses can apply penalties.</p></div>
+      <div class="card"><h3>Configurable ranks</h3><p>Rank names and XP thresholds live in the server configuration, so progression fits the community rather than the other way around.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>For players</h2>
+    <p>No special menu or command is required. After spawning, STWExperience shows a notification confirming whether your profile was loaded persistently and displays your current XP and rank.</p>
+    <ul>
+      <li><strong>Stay connected:</strong> by default, the system awards 60 XP per connected hour.</li>
+      <li><strong>Fight the enemy:</strong> an enemy soldier elimination awards 25 XP by default.</li>
+      <li><strong>Protect friendlies and civilians:</strong> default penalties are 100 XP for a friendly soldier and 150 XP for a civilian.</li>
+      <li><strong>Watch for notices:</strong> combat notices can be delayed by the server, normally by 30&ndash;45 seconds, so they do not crowd the immediate fight.</li>
+    </ul>
+    <div class="callout"><strong>Profiles follow your identity, not your display name.</strong> Changing a player name does not create a new XP profile. XP is saved separately for each scenario, so a new scenario begins with its own progression history.</div>
+  </section>
+
+  <section>
+    <h2>Default rank ladder</h2>
+    <p>Administrators can replace this ladder, but a fresh configuration uses the following thresholds.</p>
+    <table><thead><tr><th>XP required</th><th>Rank</th></tr></thead><tbody>
+      <tr><td>0</td><td>Recruit</td></tr><tr><td>1,200</td><td>Soldier II</td></tr><tr><td>2,200</td><td>Soldier III</td></tr><tr><td>3,600</td><td>Corporal</td></tr><tr><td>5,500</td><td>Senior Corporal</td></tr><tr><td>7,800</td><td>Sergeant II</td></tr><tr><td>10,500</td><td>Sergeant First Class</td></tr><tr><td>13,800</td><td>Warrant Officer</td></tr><tr><td>17,600</td><td>Sergeant Major</td></tr><tr><td>22,000</td><td>Lieutenant</td></tr><tr><td>27,000</td><td>Captain</td></tr><tr><td>32,500</td><td>Major</td></tr><tr><td>38,600</td><td>Colonel</td></tr>
+    </tbody></table>
+  </section>
+
+  <section>
+    <h2>Server setup and configuration</h2>
+    <p>Load STWExperience on the server and start a session once. It creates a default configuration automatically in the server profile directory:</p>
+    <p><code>$profile:STW/Experience/STWExperienceConfig.json</code></p>
+    <p>On Windows, <code>$profile</code> is the directory selected by the server's <code>-profile</code> startup parameter. Stop the server before editing the JSON, keep a backup, then restart it to load your changes. If the configuration is invalid or incompatible, STWExperience ignores it and uses safe defaults.</p>
+    <table><thead><tr><th>Setting</th><th>Default</th><th>Purpose</th></tr></thead><tbody>
+      <tr><td><code>enabled</code></td><td><code>true</code></td><td>Master switch for XP awards. Connected time is still tracked for the profile.</td></tr>
+      <tr><td><code>timeTickMinutes</code></td><td><code>5</code></td><td>How often connected-time XP is calculated and saved. Valid range: 1&ndash;60 minutes.</td></tr>
+      <tr><td><code>connectedXpPerHour</code></td><td><code>60</code></td><td>XP awarded per hour connected. Set to <code>0</code> to disable time rewards.</td></tr>
+      <tr><td><code>combatXpEnabled</code></td><td><code>true</code></td><td>Enables soldier and configured vehicle-kill XP.</td></tr>
+      <tr><td><code>enemySoldierXp</code></td><td><code>25</code></td><td>Reward for eliminating an enemy soldier.</td></tr>
+      <tr><td><code>friendlySoldierXp</code></td><td><code>-100</code></td><td>Penalty for killing a friendly soldier.</td></tr>
+      <tr><td><code>civilianSoldierXp</code></td><td><code>-150</code></td><td>Penalty for killing a civilian-faction soldier.</td></tr>
+      <tr><td><code>civilianFactionKeys</code></td><td><code>[&quot;CIV&quot;]</code></td><td>Faction keys treated as civilians for soldier and vehicle penalties.</td></tr>
+      <tr><td><code>allowNegativeXp</code></td><td><code>false</code></td><td>When false, penalties cannot reduce a profile below zero XP.</td></tr>
+      <tr><td><code>notificationSeconds</code></td><td><code>4.0</code></td><td>How long each XP notification remains visible; the permitted range is 1&ndash;10 seconds.</td></tr>
+      <tr><td><code>combatNotificationDelayMinimumSeconds</code>, <code>combatNotificationDelayMaximumSeconds</code></td><td><code>30</code>, <code>45</code></td><td>Random delay range before a combat XP notice is shown.</td></tr>
+      <tr><td><code>ranks</code></td><td>Default ladder above</td><td>Ordered array of <code>xpRequired</code> and <code>name</code> entries.</td></tr>
+    </tbody></table>
+  </section>
+
+  <section>
+    <h2>Vehicle rewards</h2>
+    <p>Vehicle rewards are defined by the ordered <code>vehicleKillCategories</code> array. The first rule whose <code>prefabPathContains</code> text appears in the destroyed vehicle's prefab path is used. Put precise rules above broad ones.</p>
+    <table><thead><tr><th>Rule field</th><th>What it controls</th></tr></thead><tbody>
+      <tr><td><code>prefabPathContains</code></td><td>Case-sensitive piece of the vehicle prefab path to match.</td></tr>
+      <tr><td><code>displayName</code></td><td>Text shown in the XP notification.</td></tr>
+      <tr><td><code>enemyXp</code></td><td>XP for destroying a vehicle belonging to an enemy faction.</td></tr>
+      <tr><td><code>friendlyXp</code></td><td>XP adjustment for destroying a friendly vehicle.</td></tr>
+      <tr><td><code>civilianXp</code></td><td>XP adjustment for destroying a civilian-faction vehicle.</td></tr>
+      <tr><td><code>uncrewedXp</code></td><td>XP adjustment when the vehicle faction cannot be resolved. Defaults to the negative of <code>enemyXp</code>.</td></tr>
+    </tbody></table>
+    <p>The default categories cover helicopters; M1A1, M1A2, T-14 and T-90M tanks; Kurganets-25, Bradley and BMP vehicles; plus M113, LAV-25, BRDM-2 and BTR-70 vehicles. Their default enemy rewards range from 100 XP for an M113 to 1,000 XP for a helicopter; friendly and civilian losses carry much larger penalties.</p>
+    <div class="callout warning"><strong>Adding modded vehicles:</strong> set <code>debugVehiclePrefabLogging</code> to <code>true</code>, destroy a representative vehicle, and read the server log for its prefab path. Add a narrow rule using that path fragment, turn debug logging off, then restart the server. This avoids accidental matches and noisy logs.</div>
+  </section>
+
+  <section>
+    <h2>Persistence and resets</h2>
+    <p>When server profile storage is available, STWExperience writes player profiles here:</p>
+    <p><code>$profile:STW/Persistence/Experience/Players/</code></p>
+    <p>A global scenario record is stored alongside the player folder. Files include the scenario key, allowing the same player to have independent progress in different scenarios. Profiles save when a player disconnects and on each connected-time tick; dirty profiles also save as the session closes.</p>
+    <div class="callout warning"><strong>Resetting progress:</strong> stop the server first, back up the relevant player profile file, then remove that file from the folder above. The player receives a fresh profile for that scenario on their next connection. Do not delete the whole persistence folder unless you intend to reset every STWExperience profile.</div>
+  </section>
+
+  <section>
+    <h2>A sensible first configuration</h2>
+    <p>Start with the defaults: 60 XP per connected hour, modest rewards for enemy soldiers, and meaningful penalties for friendly fire. Run a few sessions before increasing vehicle rewards or reducing rank thresholds. Progression works best when a rank represents sustained participation rather than one fortunate helicopter engagement.</p>
+  </section>
+
+  <footer class="contact">
+    <img src="images/CaptainSprocketPatch.png" alt="Captain Sprocket patch">
+    <div>
+      <div class="eyebrow">Join the community</div>
+      <h2 style="margin:6px 0 8px">Captain Sprocket</h2>
+      <p><strong>Arma Reforger server:</strong> STW Reforger<br><strong>Community:</strong> <a href="https://discord.gg/T2AZp6GGMJ">https://discord.gg/T2AZp6GGMJ</a></p>
+      <p class="small">Created by STW (ScienceTechWorks). See you in the field.</p>
+    </div>
+  </footer>
+</main>
+</body>
+</html>

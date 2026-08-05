@@ -26,12 +26,13 @@
       <div class="card"><h3>Time rewards</h3><p>Connected players earn XP at the rate selected by the server, paid out on a regular tick.</p></div>
       <div class="card"><h3>Combat rewards</h3><p>Enemy soldier and selected vehicle kills can award XP; friendly and civilian losses can apply penalties.</p></div>
       <div class="card"><h3>Configurable ranks</h3><p>Rank names and XP thresholds live in the server configuration, so progression fits the community rather than the other way around.</p></div>
+      <div class="card"><h3>All-time leaderboard</h3><p>The F7 summary can show the server's top XP players and each player's own placement, with privacy controls for player names.</p></div>
     </div>
   </section>
 
   <section>
     <h2>For players</h2>
-    <p>Press <strong>F7</strong> to open the <strong>STW Experience Summary Dialog</strong>. F7 is the default keybind; it shows your current XP, rank and experience summary. After spawning, STWExperience also shows a notification confirming whether your profile was loaded persistently and displays your current XP and rank.</p>
+    <p>Press <strong>F7</strong> to open the <strong>STW Experience Summary Dialog</strong>. F7 is the default keybind; it shows your current XP, rank, experience summary and, when enabled by the server, the all-time leaderboard and your placement. After spawning, STWExperience also shows a notification confirming whether your profile was loaded persistently and displays your current XP and rank.</p>
     <ul>
       <li><strong>Stay connected:</strong> by default, the system awards 60 XP per connected hour.</li>
       <li><strong>Fight the enemy:</strong> an enemy soldier elimination awards 25 XP by default.</li>
@@ -66,6 +67,9 @@
       <tr><td><code>allowNegativeXp</code></td><td><code>false</code></td><td>When false, penalties cannot reduce a profile below zero XP.</td></tr>
       <tr><td><code>notificationSeconds</code></td><td><code>4.0</code></td><td>How long each XP notification remains visible; the permitted range is 1&ndash;10 seconds.</td></tr>
       <tr><td><code>combatNotificationDelayMinimumSeconds</code>, <code>combatNotificationDelayMaximumSeconds</code></td><td><code>30</code>, <code>45</code></td><td>Random delay range before a combat XP notice is shown.</td></tr>
+      <tr><td><code>leaderboardEnabled</code></td><td><code>true</code></td><td>Shows the all-time leaderboard in the F7 Experience Summary Dialog. When disabled, the dialog states that the leaderboard is disabled by the server.</td></tr>
+      <tr><td><code>leaderboardTopEntries</code></td><td><code>5</code></td><td>Maximum number of top leaderboard entries displayed. Values are limited to 1&ndash;10.</td></tr>
+      <tr><td><code>leaderboardShowPlayerNames</code></td><td><code>false</code></td><td>Shows player names in leaderboard entries when enabled. Leave it false to show standings without revealing other players' names.</td></tr>
       <tr><td><code>ranks</code></td><td>Default ladder above</td><td>Ordered array of <code>xpRequired</code> and <code>name</code> entries.</td></tr>
     </tbody></table>
   </section>

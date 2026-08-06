@@ -70,8 +70,14 @@
       <tr><td><code>leaderboardEnabled</code></td><td><code>true</code></td><td>Shows the all-time leaderboard in the F7 Experience Summary Dialog. When disabled, the dialog states that the leaderboard is disabled by the server.</td></tr>
       <tr><td><code>leaderboardTopEntries</code></td><td><code>5</code></td><td>Maximum number of top leaderboard entries displayed. Values are limited to 1&ndash;10.</td></tr>
       <tr><td><code>leaderboardShowPlayerNames</code></td><td><code>false</code></td><td>Shows player names in leaderboard entries when enabled. Leave it false to show standings without revealing other players' names.</td></tr>
+      <tr><td><code>discordReportingEnabled</code></td><td><code>false</code></td><td>Enables periodic, server-side Discord leaderboard reports. It remains inactive until a webhook URL is also set.</td></tr>
+      <tr><td><code>discordWebhookUrl</code></td><td>Empty</td><td>Discord webhook endpoint that receives the report. Keep this URL private; an empty value disables reporting even when <code>discordReportingEnabled</code> is true.</td></tr>
+      <tr><td><code>discordReportIntervalMinutes</code></td><td><code>60</code></td><td>How often the server sends the Discord report. Values are limited to 5&ndash;1,440 minutes.</td></tr>
+      <tr><td><code>discordShowPlayerNames</code></td><td><code>false</code></td><td>Shows player names in Discord leaderboard reports. Leave it false to publish rankings without names.</td></tr>
       <tr><td><code>ranks</code></td><td>Default ladder above</td><td>Ordered array of <code>xpRequired</code> and <code>name</code> entries.</td></tr>
     </tbody></table>
+    <div class="callout"><strong>Discord reporting:</strong> set <code>discordReportingEnabled</code> to <code>true</code>, add a valid Discord webhook URL, and restart the server. The server then posts a styled all-time leaderboard report at the configured interval. The reports use the same top-entry count as the in-game leaderboard.</div>
+    <div class="callout warning"><strong>Protect the webhook:</strong> treat <code>discordWebhookUrl</code> like a password. Do not put it in public screenshots, guides or repositories; anyone with the URL may be able to post to that Discord channel.</div>
   </section>
 
   <section>

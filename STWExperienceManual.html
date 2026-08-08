@@ -32,7 +32,7 @@
 
   <section>
     <h2>For players</h2>
-    <p>Press <strong>F7</strong> to open the <strong>STW Experience Summary Dialog</strong>. F7 is the default keybind; it shows your current XP, rank, experience summary and, when enabled by the server, the all-time leaderboard and your placement. After spawning, STWExperience also shows a notification confirming whether your profile was loaded persistently and displays your current XP and rank.</p>
+    <p>Press <strong>F7</strong> to open the <strong>STW Experience Summary Dialog</strong>. F7 is the default keybind; it shows your current XP, rank, next rank target, combat record, service time and, when enabled by the server, the all-time leaderboard and your placement. The combat record includes soldier, vehicle, friendly-vehicle and uncrewed-vehicle kills, plus deaths, suicides, player kills, total survival time, longest life and current-life time. After spawning, STWExperience also shows a notification confirming whether your profile was loaded persistently and displays your current XP and rank.</p>
     <ul>
       <li><strong>Stay connected:</strong> by default, the system awards 60 XP per connected hour.</li>
       <li><strong>Fight the enemy:</strong> an enemy soldier elimination awards 25 XP by default.</li>
@@ -74,10 +74,30 @@
       <tr><td><code>discordWebhookUrl</code></td><td>Empty</td><td>Discord webhook endpoint that receives the report. Keep this URL private; an empty value disables reporting even when <code>discordReportingEnabled</code> is true.</td></tr>
       <tr><td><code>discordReportIntervalMinutes</code></td><td><code>60</code></td><td>How often the server sends the Discord report. Values are limited to 5&ndash;1,440 minutes.</td></tr>
       <tr><td><code>discordShowPlayerNames</code></td><td><code>false</code></td><td>Shows player names in Discord leaderboard reports. Leave it false to publish rankings without names.</td></tr>
+      <tr><td><code>adminIdentities</code></td><td><code>[]</code></td><td>Array of stable backend identity IDs allowed to open and use Experience administration. An empty array disables administration for everyone.</td></tr>
+      <tr><td><code>adminMaximumXpAdjustment</code></td><td><code>100000</code></td><td>Largest single XP amount an authorised administrator may add or remove. Values are limited to 1&ndash;1,000,000.</td></tr>
       <tr><td><code>ranks</code></td><td>Default ladder above</td><td>Ordered array of <code>xpRequired</code> and <code>name</code> entries.</td></tr>
     </tbody></table>
     <div class="callout"><strong>Discord reporting:</strong> set <code>discordReportingEnabled</code> to <code>true</code>, add a valid Discord webhook URL, and restart the server. The server then posts a styled all-time leaderboard report at the configured interval. The reports use the same top-entry count as the in-game leaderboard.</div>
     <div class="callout warning"><strong>Protect the webhook:</strong> treat <code>discordWebhookUrl</code> like a password. Do not put it in public screenshots, guides or repositories; anyone with the URL may be able to post to that Discord channel.</div>
+  </section>
+
+  <section>
+    <h2>Experience administration</h2>
+    <p>Authorised administrators can press <strong>F8</strong> (the default <strong>Experience Administration</strong> keybind) to open the administration dialog. The server checks the administrator's backend identity for every request; having the keybind alone does not grant access.</p>
+    <ol class="steps">
+      <li>Stop the server and add the administrator's stable backend identity ID to <code>adminIdentities</code> in <code>STWExperienceConfig.json</code>.</li>
+      <li>Set an appropriate <code>adminMaximumXpAdjustment</code> for the server.</li>
+      <li>Restart the server, join as the authorised administrator, and press <strong>F8</strong>.</li>
+      <li>Select an online player, enter an XP amount, then use the available controls.</li>
+    </ol>
+    <table><thead><tr><th>Control</th><th>Effect</th></tr></thead><tbody>
+      <tr><td><strong>Add XP</strong> / <strong>Remove XP</strong></td><td>Applies the specified amount to the selected online player's profile, subject to <code>adminMaximumXpAdjustment</code>.</td></tr>
+      <tr><td><strong>Remove Leaderboard</strong></td><td>Excludes the selected player from the leaderboard without resetting their complete profile.</td></tr>
+      <tr><td><strong>Reset Player</strong></td><td>Replaces the selected online player's profile with a fresh one and removes their leaderboard entry.</td></tr>
+      <tr><td><strong>Reset All Profiles</strong></td><td>Resets every Experience profile and leaderboard entry for the scenario.</td></tr>
+    </tbody></table>
+    <div class="callout warning"><strong>Confirmation and scope:</strong> removing a leaderboard entry and both reset actions require a second press to confirm. The dialog manages online players with active Experience profiles; back up persistence data before any reset.</div>
   </section>
 
   <section>

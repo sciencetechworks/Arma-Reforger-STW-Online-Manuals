@@ -120,86 +120,167 @@
     <p>When using RHS, edit the <code>Factions</code> field in <code>$profile:STW/Bases/STWBasesConfig.json</code>. Replace the vanilla faction entries with the RHS-compatible entries below, then save the file and restart the server. As with every configuration change, stop the server and make a backup first.</p>
     <details>
       <summary>Show RHS <code>Factions</code> configuration</summary>
-      <pre><code>"Factions": [
+      <pre><code>    "Factions": [
         {
             "Enabled": true,
+            "factionKey": "RHS_USAF",
+            "Arsenal": {
+                "Enabled": true,
+                "MaximumDistance": 6.0,
+                "MinimumDistance": 3.0,
+                "Prefab": "{3970981B94D3F882}Prefabs/Systems/Arsenal/ArsenalBoxes/US/ArsenalBox_USMC.et",
+                "SpawnProbabilityPercent": 100
+            },
+            "Marker": {
+                "Enabled": true,
+                "FactionOnly": true,
+                "MarkerColor": 7,
+                "Text": "Base"
+            },
+            "SpawnPoint": {
+                "Count": 3,
+                "Enabled": true,
+                "MaximumPlacementAttempts": 300,
+                "MaximumSlopeDegrees": 12.0,
+                "MinimumHostileSeparation": 300.0,
+                "MinimumSeparation": 200.0,
+                "Prefab": "{0CAE96554C7FEB3D}PrefabsEditable/SpawnPoints/E_SpawnPoint_US_USMC.et",
+                "Strategy": "MILITARY_POI"
+            }
+        },
+        {
+            "Enabled": false,
+            "factionKey": "RHS_ION",
+            "Arsenal": {
+                "Enabled": true,
+                "MaximumDistance": 6.0,
+                "MinimumDistance": 3.0,
+                "Prefab": "{691477161637ECDB}Prefabs/Systems/Arsenal/ArsenalBoxes/ION/ArsenalBox_RHS_ION.et",
+                "SpawnProbabilityPercent": 100
+            },
+            "Marker": {
+                "Enabled": true,
+                "FactionOnly": true,
+                "MarkerColor": 4,
+                "Text": "Base"
+            },
+            "SpawnPoint": {
+                "Count": 3,
+                "Enabled": true,
+                "MaximumPlacementAttempts": 300,
+                "MaximumSlopeDegrees": 12.0,
+                "MinimumHostileSeparation": 300.0,
+                "MinimumSeparation": 200.0,
+                "Prefab": "{F6678644B017C54D}PrefabsEditable/SpawnPoints/E_SpawnPoint_ION.et",
+                "Strategy": "MILITARY_POI"
+            }
+        },
+        {
+            "Enabled": true,
+            "factionKey": "RHS_AFRF",
+            "Arsenal": {
+                "Enabled": true,
+                "MaximumDistance": 6.0,
+                "MinimumDistance": 3.0,
+                "Prefab": "{FB95D1B918E908A9}Prefabs/Systems/Arsenal/ArsenalBoxes/USSR/ArsenalBox_RHS.et",
+                "SpawnProbabilityPercent": 100
+            },
+            "Marker": {
+                "Enabled": true,
+                "FactionOnly": true,
+                "MarkerColor": 3,
+                "Text": "Base"
+            },
+            "SpawnPoint": {
+                "Count": 3,
+                "Enabled": true,
+                "MaximumPlacementAttempts": 300,
+                "MaximumSlopeDegrees": 12.0,
+                "MinimumHostileSeparation": 300.0,
+                "MinimumSeparation": 200.0,
+                "Prefab": "{E86B0E337506B044}PrefabsEditable/SpawnPoints/E_SpawnPoint_RF_MSV.et",
+                "Strategy": "MILITARY_POI"
+            }
+        },
+        {
+            "Enabled": false,
             "factionKey": "US",
-            "SpawnPoint": {
-                "Enabled": true,
-                "Count": 3,
-                "Strategy": "MILITARY_POI",
-                "Prefab": "{5A2220DD0C16958B}Prefabs/MP/Spawning/SpawnPoint_US.et",
-                "MinimumSeparation": 200.0,
-                "MinimumHostileSeparation": 300.0,
-                "MaximumSlopeDegrees": 12.0,
-                "MaximumPlacementAttempts": 300
-            },
             "Arsenal": {
                 "Enabled": true,
-                "SpawnProbabilityPercent": 100,
+                "MaximumDistance": 6.0,
+                "MinimumDistance": 3.0,
                 "Prefab": "{45C675ED3CFBBEC5}Prefabs/Props/Military/Compositions/US/ArsenalBox_US.et",
-                "MinimumDistance": 3.0,
-                "MaximumDistance": 6.0
+                "SpawnProbabilityPercent": 100
             },
             "Marker": {
                 "Enabled": true,
                 "FactionOnly": true,
-                "Text": "Base",
-                "MarkerColor": 7
+                "MarkerColor": 7,
+                "Text": "Base"
+            },
+            "SpawnPoint": {
+                "Count": 3,
+                "Enabled": true,
+                "MaximumPlacementAttempts": 300,
+                "MaximumSlopeDegrees": 12.0,
+                "MinimumHostileSeparation": 300.0,
+                "MinimumSeparation": 200.0,
+                "Prefab": "{5A2220DD0C16958B}Prefabs/MP/Spawning/SpawnPoint_US.et",
+                "Strategy": "MILITARY_POI"
             }
         },
         {
-            "Enabled": true,
+            "Enabled": false,
             "factionKey": "USSR",
-            "SpawnPoint": {
-                "Enabled": true,
-                "Count": 3,
-                "Strategy": "MILITARY_POI",
-                "Prefab": "{4FEA25583D0975F7}Prefabs/MP/Spawning/SpawnPoint_USSR.et",
-                "MinimumSeparation": 200.0,
-                "MinimumHostileSeparation": 300.0,
-                "MaximumSlopeDegrees": 12.0,
-                "MaximumPlacementAttempts": 300
-            },
             "Arsenal": {
                 "Enabled": true,
-                "SpawnProbabilityPercent": 100,
-                "Prefab": "{AD59EDEAA26CE792}Prefabs/Props/Military/Compositions/USSR/ArsenalBox_USSR.et",
+                "MaximumDistance": 6.0,
                 "MinimumDistance": 3.0,
-                "MaximumDistance": 6.0
+                "Prefab": "{AD59EDEAA26CE792}Prefabs/Props/Military/Compositions/USSR/ArsenalBox_USSR.et",
+                "SpawnProbabilityPercent": 100
             },
             "Marker": {
                 "Enabled": true,
                 "FactionOnly": true,
-                "Text": "Base",
-                "MarkerColor": 3
+                "MarkerColor": 3,
+                "Text": "Base"
+            },
+            "SpawnPoint": {
+                "Count": 3,
+                "Enabled": true,
+                "MaximumPlacementAttempts": 300,
+                "MaximumSlopeDegrees": 12.0,
+                "MinimumHostileSeparation": 300.0,
+                "MinimumSeparation": 200.0,
+                "Prefab": "{4FEA25583D0975F7}Prefabs/MP/Spawning/SpawnPoint_USSR.et",
+                "Strategy": "MILITARY_POI"
             }
         },
         {
-            "Enabled": true,
+            "Enabled": false,
             "factionKey": "FIA",
-            "SpawnPoint": {
-                "Enabled": true,
-                "Count": 3,
-                "Strategy": "MILITARY_POI",
-                "Prefab": "{2B1758F237E4820E}Prefabs/MP/Spawning/SpawnPoint_FIA.et",
-                "MinimumSeparation": 200.0,
-                "MinimumHostileSeparation": 300.0,
-                "MaximumSlopeDegrees": 12.0,
-                "MaximumPlacementAttempts": 300
-            },
             "Arsenal": {
                 "Enabled": true,
-                "SpawnProbabilityPercent": 100,
-                "Prefab": "{B53B98CEA2D72735}Prefabs/Props/Military/Compositions/FIA/ArsenalBox_FIA.et",
+                "MaximumDistance": 6.0,
                 "MinimumDistance": 3.0,
-                "MaximumDistance": 6.0
+                "Prefab": "{B53B98CEA2D72735}Prefabs/Props/Military/Compositions/FIA/ArsenalBox_FIA.et",
+                "SpawnProbabilityPercent": 100
             },
             "Marker": {
                 "Enabled": true,
                 "FactionOnly": true,
-                "Text": "Base",
-                "MarkerColor": 6
+                "MarkerColor": 6,
+                "Text": "Base"
+            },
+            "SpawnPoint": {
+                "Count": 3,
+                "Enabled": true,
+                "MaximumPlacementAttempts": 300,
+                "MaximumSlopeDegrees": 12.0,
+                "MinimumHostileSeparation": 300.0,
+                "MinimumSeparation": 200.0,
+                "Prefab": "{2B1758F237E4820E}Prefabs/MP/Spawning/SpawnPoint_FIA.et",
+                "Strategy": "MILITARY_POI"
             }
         }
     ]</code></pre>

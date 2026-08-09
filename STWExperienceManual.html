@@ -57,7 +57,8 @@
     <p>On Windows, <code>$profile</code> is the directory selected by the server's <code>-profile</code> startup parameter. Stop the server before editing the JSON, keep a backup, then restart it to load your changes. If the configuration is invalid or incompatible, STWExperience ignores it and uses safe defaults.</p>
     <table><thead><tr><th>Setting</th><th>Default</th><th>Purpose</th></tr></thead><tbody>
       <tr><td><code>enabled</code></td><td><code>true</code></td><td>Master switch for XP awards. Connected time is still tracked for the profile.</td></tr>
-      <tr><td><code>timeTickMinutes</code></td><td><code>5</code></td><td>How often connected-time XP is calculated and saved. Valid range: 1&ndash;60 minutes.</td></tr>
+      <tr><td><code>timeTickMinutes</code></td><td><code>5</code></td><td>How often connected-time XP is calculated and saved. Valid range: 1&ndash;60 minutes. This controls connected-time XP accrual and profile persistence, not the player-facing connected-time notification cadence.</td></tr>
+      <tr><td><code>xpNotificationTickMinutes</code></td><td><code>60</code></td><td>Cadence, in minutes, for player-facing <strong>Connected time</strong> XP notifications. Valid values: 1&ndash;1,440; <code>-1</code> disables only these notifications, while <code>0</code> is normalized to <code>1</code>. It does not affect connected-time XP accrual or profile persistence, which remain controlled by <code>timeTickMinutes</code> (default <code>5</code> minutes).</td></tr>
       <tr><td><code>connectedXpPerHour</code></td><td><code>60</code></td><td>XP awarded per hour connected. Set to <code>0</code> to disable time rewards.</td></tr>
       <tr><td><code>combatXpEnabled</code></td><td><code>true</code></td><td>Enables soldier and configured vehicle-kill XP.</td></tr>
       <tr><td><code>enemySoldierXp</code></td><td><code>25</code></td><td>Reward for eliminating an enemy soldier.</td></tr>
@@ -66,7 +67,7 @@
       <tr><td><code>civilianFactionKeys</code></td><td><code>[&quot;CIV&quot;]</code></td><td>Faction keys treated as civilians for soldier and vehicle penalties.</td></tr>
       <tr><td><code>allowNegativeXp</code></td><td><code>false</code></td><td>When false, penalties cannot reduce a profile below zero XP.</td></tr>
       <tr><td><code>notificationSeconds</code></td><td><code>4.0</code></td><td>How long each XP notification remains visible; the permitted range is 1&ndash;10 seconds.</td></tr>
-      <tr><td><code>combatNotificationDelayMinimumSeconds</code>, <code>combatNotificationDelayMaximumSeconds</code></td><td><code>30</code>, <code>45</code></td><td>Random delay range before a combat XP notice is shown.</td></tr>
+      <tr><td><code>combatNotificationDelayMinimumSeconds</code>, <code>combatNotificationDelayMaximumSeconds</code></td><td><code>30</code>, <code>45</code></td><td>Random 30&ndash;45-second delay range before a combat XP notice is shown. Combat notifications remain independently controlled by these settings.</td></tr>
       <tr><td><code>leaderboardEnabled</code></td><td><code>true</code></td><td>Shows the all-time leaderboard in the F7 Experience Summary Dialog. When disabled, the dialog states that the leaderboard is disabled by the server.</td></tr>
       <tr><td><code>leaderboardTopEntries</code></td><td><code>5</code></td><td>Maximum number of top leaderboard entries displayed. Values are limited to 1&ndash;10.</td></tr>
       <tr><td><code>leaderboardShowPlayerNames</code></td><td><code>false</code></td><td>Shows player names in leaderboard entries when enabled. Leave it false to show standings without revealing other players' names.</td></tr>

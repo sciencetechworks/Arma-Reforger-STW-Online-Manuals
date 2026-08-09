@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Player, Game Master and server-administrator guide for STWSnipers & Spotters for Arma Reforger.">
+  <title>STWSnipers &amp; Spotters Manual</title>
+  <link rel="stylesheet" href="stw-manuals.css">
+  <link rel="icon" type="image/svg+xml" href="images/stw-favicon.svg">
+</head>
+<body>
+<main>
+  <header>
+    <div class="eyebrow">ScienceTechWorks &bull; STW suite</div>
+    <a class="index-link" href="index.html">&larr; STW Online Manuals</a>
+    <h1>STWSnipers &amp; Spotters</h1>
+    <p class="lead">Adds properly equipped sniper/spotter teams to the battlefield: either placed and tailored by a Game Master, or generated automatically in distant overwatch positions where they belong.</p>
+    <p class="small">STWSnipers &amp; Spotters is an STW mod for <strong>Arma Reforger</strong>, the military sandbox by <strong>Bohemia Interactive</strong>. This guide is for players, Game Masters and server administrators.</p>
+  </header>
+
+  <section>
+    <h2>What arrives on the battlefield</h2>
+    <div class="grid">
+      <div class="card"><h3>Sniper teams</h3><p>Each team is a sniper and a spotter with purpose-built weapons, camouflage, ammunition, grenades and optional night vision.</p></div>
+      <div class="card"><h3>Automatic overwatch</h3><p>The server can place AI pairs at suitable elevated terrain positions, away from players, and keeps their operating area compact.</p></div>
+      <div class="card"><h3>Enemy intelligence</h3><p>Opposing players can receive a deliberately approximate report and map marker&mdash;useful warning, not a magic GPS pin.</p></div>
+      <div class="card"><h3>Game Master control</h3><p>Turn any editable soldier into a sniper or spotter and select the kit for that individual assignment.</p></div>
+      <div class="card"><h3>Field support</h3><p>Automatic teams are resupplied on a schedule and may receive a little medical recovery between engagements.</p></div>
+      <div class="card"><h3>Server-owned settings</h3><p>Three small JSON files control equipment, automatic pairs and support without editing the mod itself.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>For players: surviving the long view</h2>
+    <p>Most players meet this mod from the receiving end. When automatic pairs are enabled, the server creates one sniper/spotter team for eligible factions at a suitable cached overwatch site. They are kept away from player-controlled characters, stay within a small operating area, and are fitted through the same loadout system used by Game Master assignments.</p>
+    <h3>When intelligence arrives</h3>
+    <p>At intervals chosen by the server, players on the <strong>opposing factions</strong> receive a message such as an approximate enemy sniper/spotter report. The map also gets a temporary marker. Its position is intentionally offset from the team: treat it as a search area, not a fire mission coordinate. The team&rsquo;s own faction does not receive that report.</p>
+    <ol class="steps">
+      <li>Read the report and open the map; note the approximate area and likely lines of sight.</li>
+      <li>Approach using folds in the ground, trees, buildings and smoke. Do not stroll across the obvious ridge to investigate a sniper.</li>
+      <li>Use binoculars, a spotter, suppressive fire or a flank to find the pair. They operate near their overwatch position rather than roaming across the entire map.</li>
+      <li>Confirm both members are down. The system can replace a missing sniper or spotter later; if the entire pair is destroyed, its replacement appears in a different suitable area after the configured delay.</li>
+    </ol>
+    <div class="callout"><strong>A good counter-sniper habit:</strong> after the first crack, move first and look second. Breaking line of sight, changing elevation and avoiding skyline silhouettes do more for your life expectancy than arguing with the map marker.</div>
+    <h3>What players can and cannot control</h3>
+    <table><thead><tr><th>Situation</th><th>What to expect</th></tr></thead><tbody>
+      <tr><td>Automatic pair exists</td><td>It is server-owned AI. Players fight it normally; its kit, location and replacement timing are server decisions.</td></tr>
+      <tr><td>You receive a report</td><td>The marker is visible to opposing factions and expires after the server-set lifetime. It can also be removed by its owner when the game allows it.</td></tr>
+      <tr><td>A Game Master assigns a player-controlled soldier</td><td>The assignment changes that soldier&rsquo;s loadout. Scheduled support does not resupply player-managed units by default.</td></tr>
+      <tr><td>No reports or pairs appear</td><td>The server may have disabled automatic generation or intelligence reports, excluded a faction, or found no safe terrain candidates.</td></tr>
+    </tbody></table>
+  </section>
+
+  <section>
+    <h2>For Game Masters: make a pair by hand</h2>
+    <p>In Game Master, select or hover an editable soldier and open the general context actions. Choose <strong>STW Assign Sniper</strong> or <strong>STW Assign Spotter</strong>. The assignment dialog lets you choose camouflage, the role&rsquo;s weapon, muzzle, optic and night-vision option, then press <strong>ASSIGN</strong>. The unit receives the selected role kit, including ammunition and grenades set by the server.</p>
+    <ol class="steps">
+      <li>Place or select two suitable soldiers of the faction you want to use.</li>
+      <li>Assign one as <strong>STW Sniper</strong> and one as <strong>STW Spotter</strong>.</li>
+      <li>Use matching camouflage for a tidy team, or choose <code>RANDOM</code> for individual variety. Random camouflage excludes Winter from its random pool.</li>
+      <li>Place them with a believable observation lane and give them orders appropriate to the scenario. The manual assignment equips them; it does not magically invent a mission plan.</li>
+    </ol>
+    <p>To change the clothing and weapon-wrap season on every managed STW sniper and spotter, use <strong>STW Set All Snipers/Spotters Camouflage</strong> from the general context actions. This is a seasonal refresh, so it updates the camouflage without rebuilding every complete loadout.</p>
+    <table><thead><tr><th>Role</th><th>Typical job</th><th>Useful Game Master choice</th></tr></thead><tbody>
+      <tr><td><strong>Sniper</strong></td><td>Long-range observation and precision fire.</td><td>Select a rifle/optic combination suited to the intended engagement distance.</td></tr>
+      <tr><td><strong>Spotter</strong></td><td>Security, close protection and target observation.</td><td>The standard spotter weapon is the compact MP7A2; avoid treating the spotter as a second long-range rifle.</td></tr>
+    </tbody></table>
+    <div class="callout warning"><strong>Reassigning a unit:</strong> an assignment replaces the managed role loadout. Do it deliberately, especially for a soldier carrying scenario-specific equipment.</div>
+  </section>
+
+  <section>
+    <h2>Server setup</h2>
+    <p>Load the mod on the server and start a session once. It creates the configuration folders and default JSON files in the server profile directory:</p>
+    <p><code>$profile:STW/Snipers/</code></p>
+    <p>On Windows, <code>$profile</code> is the location selected by the server&rsquo;s <code>-profile</code> startup parameter. Stop the server before editing, keep a backup, then restart it. Each file is validated and rewritten with safe values; invalid values are clamped to their supported range.</p>
+    <table><thead><tr><th>File</th><th>Purpose</th></tr></thead><tbody>
+      <tr><td><code>$profile:STW/Snipers/STWSnipersConfig.json</code></td><td>Default loadout choices and supply counts for manual and automatic assignments.</td></tr>
+      <tr><td><code>$profile:STW/Snipers/AutoPairs/STWSniperPairAutoConfig.json</code></td><td>Automatic-pair generation, factions, safe spawn spacing, replacements and intelligence reports.</td></tr>
+      <tr><td><code>$profile:STW/Snipers/Support/STWSnipersSupportConfig.json</code></td><td>Scheduled resupply and optional healing for managed teams.</td></tr>
+    </tbody></table>
+    <div class="callout"><strong>Safe routine:</strong> stop server &rarr; copy the JSON file &rarr; edit with a plain-text editor &rarr; check commas and quotes &rarr; start server. Let the mod generate the files first; that gives you a valid, current template to edit.</div>
+  </section>
+
+  <section>
+    <h2>1. Loadouts &mdash; <code>STWSnipersConfig.json</code></h2>
+    <p>These are scenario-wide defaults. A Game Master can override the choice for an individual assignment in the dialog; automatic pairs use these defaults. <code>RANDOM</code> picks from the valid choices for that setting.</p>
+    <table><thead><tr><th>Setting</th><th>Default</th><th>Explanation</th></tr></thead><tbody>
+      <tr><td><code>version</code></td><td><code>1</code></td><td>Configuration format version. Leave it at the mod-generated value.</td></tr>
+      <tr><td><code>camouflage</code></td><td><code>&quot;RANDOM&quot;</code></td><td>Seasonal clothing and compatible weapon wrap. Valid: <code>RANDOM</code>, <code>Winter</code>, <code>Summer</code>, <code>Desert</code>, <code>Forest</code>, <code>Spring</code>, <code>Autumn</code>.</td></tr>
+      <tr><td><code>sniperRifle</code></td><td><code>&quot;RANDOM&quot;</code></td><td>Sniper primary weapon. Choices: <code>M700_FDE</code>, <code>M700</code>, <code>M107A1</code>, <code>OSV-96</code>, <code>OSV-96_RF</code>, <code>RSASS11</code>, <code>SA58</code>, <code>FAB_SKS</code>, or <code>RANDOM</code>.</td></tr>
+      <tr><td><code>spotterWeapon</code></td><td><code>&quot;RANDOM&quot;</code></td><td>Spotter primary weapon. The current catalog provides <code>MP7A2</code>; <code>RANDOM</code> therefore resolves to it.</td></tr>
+      <tr><td><code>sniperMuzzle</code></td><td><code>&quot;Suppressor&quot;</code></td><td>Sniper muzzle choice: <code>Suppressor</code> or <code>None</code>.</td></tr>
+      <tr><td><code>spotterMuzzle</code></td><td><code>&quot;Suppressor&quot;</code></td><td>Spotter muzzle choice: <code>Suppressor</code> or <code>None</code>.</td></tr>
+      <tr><td><code>sniperOptic</code></td><td><code>&quot;RANDOM&quot;</code></td><td>Sniper optic. Choices: <code>Vortex</code>, <code>NF_Scope</code>, <code>Optic_RF</code>, <code>EoTech_Vudu</code>, or <code>RANDOM</code>.</td></tr>
+      <tr><td><code>spotterOptic</code></td><td><code>&quot;RANDOM&quot;</code></td><td>Spotter optic: <code>Romeo5</code>, <code>None</code>, or <code>RANDOM</code>.</td></tr>
+      <tr><td><code>nightVision</code></td><td><code>&quot;RANDOM&quot;</code></td><td>Night-vision choice. Use <code>None</code> to guarantee no NVG, or a valid installed catalog name; available NVGs depend on the loaded content.</td></tr>
+      <tr><td><code>magazineMinimum</code></td><td><code>5</code></td><td>Minimum spare magazine count. Allowed range: 1&ndash;12.</td></tr>
+      <tr><td><code>magazineMaximum</code></td><td><code>7</code></td><td>Maximum spare magazine count. Allowed range: 1&ndash;12 and never below <code>magazineMinimum</code>.</td></tr>
+      <tr><td><code>fragmentationGrenades</code></td><td><code>3</code></td><td>Fragmentation grenades issued per managed unit. Allowed range: 0&ndash;8.</td></tr>
+      <tr><td><code>smokeGrenades</code></td><td><code>3</code></td><td>Smoke grenades issued per managed unit. Allowed range: 0&ndash;8.</td></tr>
+    </tbody></table>
+  </section>
+
+  <section>
+    <h2>2. Automatic pairs &mdash; <code>STWSniperPairAutoConfig.json</code></h2>
+    <p>The automatic system starts server-side with the game session. It scans terrain progressively, caches viable elevated candidates, creates the initial pairs only once, and uses scheduled callbacks for replacement and intelligence rather than a constant heavy scan. Turning the generator off during a session removes its system-owned pairs; manual assignments are separate.</p>
+    <table><thead><tr><th>Setting</th><th>Default</th><th>Explanation</th></tr></thead><tbody>
+      <tr><td><code>version</code></td><td><code>1</code></td><td>Configuration format version; leave it mod-managed.</td></tr>
+      <tr><td><code>automaticPairGeneratorEnabled</code></td><td><code>true</code></td><td>Master switch for automatic AI sniper/spotter pairs.</td></tr>
+      <tr><td><code>cacheTileSizeMeters</code></td><td><code>500.0</code></td><td>Terrain-cache tile size; 250&ndash;1,000 m.</td></tr>
+      <tr><td><code>cacheTilesPerBatch</code></td><td><code>1</code></td><td>Tiles processed per cache batch; 1&ndash;2. Keep low for gentler startup work.</td></tr>
+      <tr><td><code>cacheBatchIntervalSeconds</code></td><td><code>0.5</code></td><td>Delay between cache batches; 0.25&ndash;5 seconds.</td></tr>
+      <tr><td><code>minimumCandidateElevationMeters</code></td><td><code>8.0</code></td><td>Minimum elevation for an overwatch candidate; -20 to 500 m.</td></tr>
+      <tr><td><code>maximumCachedCandidates</code></td><td><code>160</code></td><td>Maximum terrain sites retained for pair placement; 20&ndash;500.</td></tr>
+      <tr><td><code>initialPairSearchRadiusMeters</code></td><td><code>350.0</code></td><td>Reserved initial local-search radius; the current terrain-cache implementation retains and validates this setting (50&ndash;1,000 m).</td></tr>
+      <tr><td><code>maximumActivePairsPerFaction</code></td><td><code>1</code></td><td>Reserved per-faction active-pair ceiling. The current initial pass creates at most one pair for a faction; valid range is 1&ndash;4.</td></tr>
+      <tr><td><code>maximumInitialPairsTotal</code></td><td><code>2</code></td><td>Overall number of pairs created in the initial pass; 1&ndash;8.</td></tr>
+      <tr><td><code>destroyedPairRespawnMinimumMinutes</code></td><td><code>30.0</code></td><td>Shortest replacement delay after a casualty; 1&ndash;240 minutes.</td></tr>
+      <tr><td><code>destroyedPairRespawnMaximumMinutes</code></td><td><code>60.0</code></td><td>Longest randomized replacement delay; up to 240 minutes and never below the minimum.</td></tr>
+      <tr><td><code>pairSpawnExclusionRadiusMeters</code></td><td><code>1200.0</code></td><td>No automatic pair is created near a player-controlled entity within this radius; 250&ndash;5,000 m.</td></tr>
+      <tr><td><code>pairOperatingAreaRadiusMeters</code></td><td><code>45.0</code></td><td>How far the pair is allowed to work from its assigned overwatch position; 10&ndash;150 m.</td></tr>
+      <tr><td><code>enabledFactionKeys</code></td><td><code>[]</code></td><td>Explicit faction allowlist. Empty means all loaded factions except excluded ones.</td></tr>
+      <tr><td><code>excludedFactionKeys</code></td><td><code>[&quot;CIV&quot;]</code></td><td>Faction keys never eligible for automatic pairs; comparison is case-insensitive.</td></tr>
+    </tbody></table>
+    <h3>Intelligence-report settings</h3>
+    <table><thead><tr><th>Setting</th><th>Default</th><th>Explanation</th></tr></thead><tbody>
+      <tr><td><code>intelligenceReportsEnabled</code></td><td><code>true</code></td><td>Enables reports and temporary map markers to opposing factions.</td></tr>
+      <tr><td><code>intelligenceReportMinimumHours</code></td><td><code>2.0</code></td><td>Shortest randomized interval between reports; 0.01&ndash;24 hours.</td></tr>
+      <tr><td><code>intelligenceReportMaximumHours</code></td><td><code>4.0</code></td><td>Longest report interval; up to 24 hours and never below the minimum.</td></tr>
+      <tr><td><code>intelligenceReportUncertaintyRadiusMeters</code></td><td><code>250.0</code></td><td>Maximum random offset from the real pair location. Higher values give a broader, less precise clue; 25&ndash;2,000 m.</td></tr>
+      <tr><td><code>intelligenceMarkerLifetimeMinutes</code></td><td><code>150.0</code></td><td>How long an intelligence marker remains on the map; 1&ndash;1,440 minutes.</td></tr>
+    </tbody></table>
+    <div class="callout warning"><strong>Balance note:</strong> raising pair counts, reducing player exclusion distance, and making reports very accurate all change the mood quickly. Start with the default two initial pairs and test on the real scenario before making the map a sniper convention.</div>
+  </section>
+
+  <section>
+    <h2>3. Support &mdash; <code>STWSnipersSupportConfig.json</code></h2>
+    <p>Support is server-side and scheduled one due event at a time. At each interval, living automatic-pair members are resupplied; each may also receive a chance-based health recovery. Manually assigned player-controlled units are excluded unless you deliberately opt them in.</p>
+    <table><thead><tr><th>Setting</th><th>Default</th><th>Explanation</th></tr></thead><tbody>
+      <tr><td><code>version</code></td><td><code>1</code></td><td>Configuration format version; leave it mod-managed.</td></tr>
+      <tr><td><code>resupplyIntervalDays</code></td><td><code>1</code></td><td>Days between due resupply events. Allowed range: 1&ndash;24. This is deliberately measured in real session days, not in-game minutes.</td></tr>
+      <tr><td><code>healingProbabilityPercent</code></td><td><code>20</code></td><td>Chance for each eligible, injured unit to be healed when support is due; 0&ndash;100.</td></tr>
+      <tr><td><code>healingAmountPercent</code></td><td><code>25</code></td><td>Health restored on a successful healing roll; 1&ndash;100% of full health.</td></tr>
+      <tr><td><code>allowPlayerManagedUnitResupply</code></td><td><code>false</code></td><td>When true, player-controlled soldiers manually assigned as managed snipers/spotters may receive scheduled resupply and healing too.</td></tr>
+    </tbody></table>
+  </section>
+
+  <section>
+    <h2>A sensible first configuration</h2>
+    <p>For a first live server, leave the automatic system enabled, keep the default two initial pairs, exclude civilians, and leave the 1,200 m player exclusion radius alone. Keep intelligence reports enabled with their default 250 m uncertainty: players get a tense lead without the answer being printed on the map. Use manual Game Master assignments for story missions or defended objectives, and increase pair counts only after watching real performance and player flow.</p>
+    <p>If the server is cooperative and you want enemy sniper teams to feel like rare roaming hazards, lengthen the report interval and replacement delay. If it is a Game Master-led operation, disable automatic generation and build your teams by hand; it gives you exact control over where the problem is hiding.</p>
+  </section>
+
+  <footer class="contact">
+    <img src="images/CaptainSprocketPatch.png" alt="Captain Sprocket patch">
+    <div>
+      <div class="eyebrow">Join the community</div>
+      <h2 style="margin:6px 0 8px">Captain Sprocket</h2>
+      <p><strong>Arma Reforger server:</strong> STW Reforger<br><strong>Community:</strong> <a href="https://discord.gg/T2AZp6GGMJ">https://discord.gg/T2AZp6GGMJ</a></p>
+      <p class="small">Created by STW (ScienceTechWorks). See you in the field&mdash;preferably after checking that ridgeline.</p>
+    </div>
+  </footer>
+</main>
+</body>
+</html>

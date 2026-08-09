@@ -52,9 +52,14 @@
 
   <section>
     <h2>Server setup and configuration</h2>
-    <p>Load STWExperience on the server and start a session once. It creates a default configuration automatically in the server profile directory:</p>
-    <p><code>$profile:STW/Experience/STWExperienceConfig.json</code></p>
-    <p>On Windows, <code>$profile</code> is the directory selected by the server's <code>-profile</code> startup parameter. Stop the server before editing the JSON, keep a backup, then restart it to load your changes. If the configuration is invalid or incompatible, STWExperience ignores it and uses safe defaults.</p>
+    <p>Load STWExperience on the server and start a session once. It creates three configuration files in the server profile directory:</p>
+    <table><thead><tr><th>File</th><th>Purpose</th></tr></thead><tbody>
+      <tr><td><code>$profile:STW/Experience/STWExperienceConfig.json</code></td><td>Core XP, notification, leaderboard, Discord reporting, and administration settings.</td></tr>
+      <tr><td><code>$profile:STW/Experience/STWExperienceVehicleKillCategories.json</code></td><td>Ordered vehicle-kill XP category rules.</td></tr>
+      <tr><td><code>$profile:STW/Experience/STWExperienceRanks.json</code></td><td>Rank thresholds and names.</td></tr>
+    </tbody></table>
+    <p>On Windows, <code>$profile</code> is the directory selected by the server's <code>-profile</code> startup parameter. Stop the server before editing the JSON, keep a backup, then restart it to load your changes. Each file is validated independently and is rewritten with safe defaults if it is invalid or incompatible.</p>
+    <h3>STWExperienceConfig.json</h3>
     <table><thead><tr><th>Setting</th><th>Default</th><th>Purpose</th></tr></thead><tbody>
       <tr><td><code>enabled</code></td><td><code>true</code></td><td>Master switch for XP awards. Connected time is still tracked for the profile.</td></tr>
       <tr><td><code>timeTickMinutes</code></td><td><code>5</code></td><td>How often connected-time XP is calculated and saved. Valid range: 1&ndash;60 minutes. This controls connected-time XP accrual and profile persistence, not the player-facing connected-time notification cadence.</td></tr>
@@ -65,6 +70,7 @@
       <tr><td><code>friendlySoldierXp</code></td><td><code>-100</code></td><td>Penalty for killing a friendly soldier.</td></tr>
       <tr><td><code>civilianSoldierXp</code></td><td><code>-150</code></td><td>Penalty for killing a civilian-faction soldier.</td></tr>
       <tr><td><code>civilianFactionKeys</code></td><td><code>[&quot;CIV&quot;]</code></td><td>Faction keys treated as civilians for soldier and vehicle penalties.</td></tr>
+      <tr><td><code>debugVehiclePrefabLogging</code></td><td><code>false</code></td><td>Writes destroyed-vehicle prefab paths to the server log to help create precise vehicle category rules. Keep disabled during normal play.</td></tr>
       <tr><td><code>allowNegativeXp</code></td><td><code>false</code></td><td>When false, penalties cannot reduce a profile below zero XP.</td></tr>
       <tr><td><code>notificationSeconds</code></td><td><code>4.0</code></td><td>How long each XP notification remains visible; the permitted range is 1&ndash;10 seconds.</td></tr>
       <tr><td><code>combatNotificationDelayMinimumSeconds</code>, <code>combatNotificationDelayMaximumSeconds</code></td><td><code>30</code>, <code>45</code></td><td>Random 30&ndash;45-second delay range before a combat XP notice is shown. Combat notifications remain independently controlled by these settings.</td></tr>
@@ -73,13 +79,32 @@
       <tr><td><code>leaderboardShowPlayerNames</code></td><td><code>false</code></td><td>Shows player names in leaderboard entries when enabled. Leave it false to show standings without revealing other players' names.</td></tr>
       <tr><td><code>discordReportingEnabled</code></td><td><code>false</code></td><td>Enables periodic, server-side Discord leaderboard reports. It remains inactive until a webhook URL is also set.</td></tr>
       <tr><td><code>discordWebhookUrl</code></td><td>Empty</td><td>Discord webhook endpoint that receives the report. Keep this URL private; an empty value disables reporting even when <code>discordReportingEnabled</code> is true.</td></tr>
-      <tr><td><code>discordReportIntervalMinutes</code></td><td><code>60</code></td><td>How often the server sends the Discord report. Values are limited to 5&ndash;1,440 minutes.</td></tr>
+      <tr><td><code>discordLeaderboardReportIntervalHours</code></td><td><code>6</code></td><td>How often the server sends the Discord leaderboard report. Values are limited to 1&ndash;168 hours.</td></tr>
       <tr><td><code>discordShowPlayerNames</code></td><td><code>false</code></td><td>Shows player names in Discord leaderboard reports. Leave it false to publish rankings without names.</td></tr>
       <tr><td><code>adminIdentities</code></td><td><code>[]</code></td><td>Array of stable backend identity IDs allowed to open and use Experience administration. An empty array disables administration for everyone.</td></tr>
       <tr><td><code>adminMaximumXpAdjustment</code></td><td><code>100000</code></td><td>Largest single XP amount an authorised administrator may add or remove. Values are limited to 1&ndash;1,000,000.</td></tr>
-      <tr><td><code>ranks</code></td><td>Default ladder above</td><td>Ordered array of <code>xpRequired</code> and <code>name</code> entries.</td></tr>
     </tbody></table>
-    <div class="callout"><strong>Discord reporting:</strong> set <code>discordReportingEnabled</code> to <code>true</code>, add a valid Discord webhook URL, and restart the server. The server then posts a styled all-time leaderboard report at the configured interval. The reports use the same top-entry count as the in-game leaderboard.</div>
+    <p class="small"><code>signature</code> and <code>version</code> are maintained by STWExperience to identify and migrate the file. Do not edit them manually.</p>
+    <h3>STWExperienceVehicleKillCategories.json</h3>
+    <p>This file contains the ordered <code>vehicleKillCategories</code> array. The first rule whose <code>prefabPathContains</code> text appears in the destroyed vehicle's prefab path is used, so put precise rules above broad ones.</p>
+    <table><thead><tr><th>Setting</th><th>Default</th><th>Purpose</th></tr></thead><tbody>
+      <tr><td><code>vehicleKillCategories</code></td><td>Built-in category list</td><td>Ordered array of vehicle-kill XP rules. The default list covers helicopters, tanks, APCs, and common wheeled military vehicles.</td></tr>
+    </tbody></table>
+    <table><thead><tr><th>Rule field</th><th>What it controls</th></tr></thead><tbody>
+      <tr><td><code>prefabPathContains</code></td><td>Case-sensitive fragment of the vehicle prefab path to match.</td></tr>
+      <tr><td><code>displayName</code></td><td>Text shown in the XP notification.</td></tr>
+      <tr><td><code>enemyXp</code></td><td>XP for destroying a vehicle belonging to an enemy faction.</td></tr>
+      <tr><td><code>friendlyXp</code></td><td>XP adjustment for destroying a friendly vehicle.</td></tr>
+      <tr><td><code>civilianXp</code></td><td>XP adjustment for destroying a civilian-faction vehicle.</td></tr>
+      <tr><td><code>uncrewedXp</code></td><td>XP adjustment when the vehicle faction cannot be resolved. Defaults to the negative of <code>enemyXp</code>.</td></tr>
+    </tbody></table>
+    <p class="small"><code>signature</code> and <code>version</code> are maintained automatically; do not edit them manually.</p>
+    <h3>STWExperienceRanks.json</h3>
+    <table><thead><tr><th>Setting</th><th>Default</th><th>Purpose</th></tr></thead><tbody>
+      <tr><td><code>ranks</code></td><td>Default ladder above</td><td>Ordered array of rank entries. Each entry contains <code>xpRequired</code> (the XP threshold) and <code>name</code> (the displayed rank name).</td></tr>
+    </tbody></table>
+    <p class="small"><code>signature</code> and <code>version</code> are maintained automatically; do not edit them manually. Older combined-file <code>vehicleKillCategories</code> and <code>ranks</code> entries are imported into these separate files; configure them here going forward.</p>
+    <div class="callout"><strong>Discord reporting:</strong> set <code>discordReportingEnabled</code> to <code>true</code>, add a valid Discord webhook URL, and restart the server. The server then posts a styled all-time leaderboard report at the configured hourly interval. The reports use the same top-entry count as the in-game leaderboard.</div>
     <div class="callout warning"><strong>Protect the webhook:</strong> treat <code>discordWebhookUrl</code> like a password. Do not put it in public screenshots, guides or repositories; anyone with the URL may be able to post to that Discord channel.</div>
   </section>
 

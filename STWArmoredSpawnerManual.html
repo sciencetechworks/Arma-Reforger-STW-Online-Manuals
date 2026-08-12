@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en">
-<head>
-<!-- Google tag (gtag.js) -->
+<head><!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-LT54NLXDD2"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -44,7 +43,9 @@
     <p>STW Armored Spawner starts automatically on the authoritative server for every loaded world; it does not add a Game Master placement tool, menu, or editable configuration entity. A Game Master’s role is therefore to work with the generated vehicles in the live world using normal Arma Reforger controls.</p>
     <p>The mod’s placement, patrol, marker, fuel, faction, and persistence choices are server configuration, not per-vehicle Game Master properties. For a curated scenario, set the server configuration before the session starts. The active world must expose usable road data for automatic placement; the server log reports the indexed-road result and any fallback.</p>
   </section>
-  <section id="server"><h2>Server setup</h2>
+  <section id="runtime"><h2>In-game automatic-generation control</h2><p>Game Masters can change automatic armored generation while the game is running. Open <strong>Scenario Properties</strong>, select the <strong>STW Armored</strong> tab, and use <strong>Automatic static armored vehicles</strong> and <strong>Automatic dynamic armored vehicles</strong> independently. The switches are session-only: disabling both stops automatic generation and removes the registered automatic assets; re-enabling either starts a fresh generation pass for the enabled population. The next game returns to the normal server configuration and persistence state.</p></section>
+  <section id="server">
+<h2>Server setup</h2>
     <ol><li>Install and enable STW Armored Spawner on the server and use the desired scenario/map.</li><li>Start the server once. The mod automatically creates <code>$profile:STW/Armored/</code>, generates its three JSON configuration files, validates them, and writes them back in readable form.</li><li>Stop the server cleanly, make a backup, edit the settings you need, then restart. Invalid or out-of-range values are corrected during startup and saved back to disk.</li></ol>
     <div class="note"><strong>Faction readiness:</strong> use the faction-key arrays in the main configuration when your scenario has different faction identifiers. The system tries the keys in order. A missing key does not prevent vehicle spawning; it only means no faction affiliation is applied.</div>
     <h3>Safe editing routine</h3><ol><li>Stop the server. Do not edit generated JSON while it is running.</li><li>Copy the file you are changing to a backup outside the active configuration folder.</li><li>Change only documented values and preserve valid JSON punctuation, quotes, and array brackets.</li><li>Restart and review the server log. The mod validates all three configuration files and rewrites the validated version.</li><li>If the result is not what you intended, stop the server and restore your backup before changing another setting.</li></ol>

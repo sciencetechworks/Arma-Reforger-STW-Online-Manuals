@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Player, Game Master and server guide for STW Transport Helipads.">
+<link rel="icon" type="image/svg+xml" href="images/stw-favicon.svg"><link rel="stylesheet" href="stw-manuals.css">
+<title>STW Transport Helipads — Online Manual</title>
+</head><body>
+<header><div class="wrap"><p class="kicker">Arma Reforger · Online Manual</p><h1>STW Transport Helipads</h1><p class="lead">Faction transport helipads that can accept player-authored autonomous flight routes, land at validated landing zones, and return home.</p><div class="badges"><span class="badge">Autonomous transport</span><span class="badge">Map-marker routes</span><span class="badge">Faction-only route markers</span><span class="badge">Automatic placement</span></div></div></header>
+<nav><div class="wrap"><a href="index.html">&larr; STW Online Manuals</a><a href="#players">Players</a><a href="#rappelling">Rappelling</a><a href="#simple">Simple Flight Paths</a><a href="#advanced">Advanced Flight Planning</a><a href="#gm">Game Masters</a><a href="#models">Helicopter models</a></div></nav>
+<main class="wrap">
+<section id="players"><h2>For players</h2><p>Use the vanilla <strong>public</strong> map-marker action while you are the leader of a player group. STW recognises transport instructions, checks landing zones, and converts accepted instructions into locked STW markers visible only to the owning faction.</p><ol class="steps"><li>Find a ready friendly Transport Helipad.</li><li>Open the map and place a marker at the intended destination.</li><li>For a simple immediate flight, set the marker text to <code>LZ</code>.</li><li>Wait for the acceptance radio message. The helicopter starts, flies to the LZ, waits, and returns home.</li></ol><div class="callout"><strong>Simple direct request:</strong><pre><code>LZ</code></pre>There is no <code>EXEC</code> marker for a standalone <code>LZ</code>. It auto-executes after its safety check.</div></section>
+
+<section id="rappelling"><h2>Fast-roping and rappelling limits</h2><p>The <strong>STW Extend/Retract Ropes System</strong> may deploy ropes only when the helicopter is between <strong>6 m and 30 m above ground level (AGL)</strong>. Below 6 m, STW reports <em>Too low for rappelling (min 6 m)</em>; above 30 m, it reports <em>Too high for rappelling (max 30 m)</em>.</p><div class="callout"><strong>Realism safeguard:</strong> these limits are intentional. A very low hover leaves insufficient room for a safe rope descent, while a very high hover creates an excessive, less controlled descent. Hold a stable hover within the 6&ndash;30 m AGL envelope before deploying the ropes.</div></section>
+
+<section id="language"><p class="kicker">The route language</p><p>Commands are case-insensitive. <code>lz</code>, <code>Lz</code>, and <code>LZ</code> are equivalent. Distances are metres; heights are metres above ground level (AGL); durations are minutes.</p>
+<h2 id="simple">Simple Flight Paths</h2><p>Choose one of these when you want the helicopter moving now. No <code>EXEC</code>, no planning ceremony—just choose the destination and let STW validate it.</p>
+<table><thead><tr><th>Command</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><code>LZ</code></td><td>Direct, immediate flight to one landing zone. It lands for the default 20 seconds, then returns home.</td></tr>
+<tr><td><code>LZ D0.5</code><br><code>LZ H20 D1</code><br><code>LZ D 1 H 50</code></td><td>Direct flight with optional modifiers in either order. <code>D</code> is landed wait time in minutes (0.01–30); <code>H</code> is final approach height in AGL metres (1–500).</td></tr>
+<tr><td><code>LZA</code>, then <code>LZB</code></td><td><strong>Take me from A to B.</strong> LZA is the pickup zone; LZB is the destination. Both use landing-zone icons and accept optional D/H modifiers. Once both valid markers exist, the direct two-stop route auto-executes without <code>EXEC</code>.</td></tr>
+<tr><td><code>H D1 H20</code></td><td><strong>Hover here.</strong> Fly directly from the pad to the marker, hover for 1 minute at 20 m AGL, then return home. Both <code>D</code> duration and height <code>H</code> are required; no <code>EXEC</code>.</td></tr>
+<tr><td><code>LZA</code>, then <code>HB D0.75 H30</code></td><td><strong>Pick us up, then hover at B.</strong> Land at A, hover at B for 45 seconds at 30 m AGL, then return home. HB requires both <code>D</code> and height <code>H</code>; no <code>EXEC</code>.</td></tr>
+</tbody></table>
+<div class="two"><div><h3>Drop me there</h3><pre><code>LZ H20 D0.5</code></pre><p>Approach at 20 m AGL, land for 30 seconds, then return home.</p></div><div><h3>Hover here</h3><pre><code>H D1 H20</code></pre><p>Fly to the marker, hover at 20 m AGL for one minute, then return home.</p></div><div><h3>Take me from A to B</h3><pre><code>LZA D1
+LZB D0.5</code></pre><p>Pick up at A for one minute, drop at B for 30 seconds, then return home.</p></div><div><h3>Pick us up, then hover</h3><pre><code>LZA
+HB D0.75 H30</code></pre><p>Pick up at A, hover at B for 45 seconds at 30 m AGL, then return home.</p></div></div>
+<h2 id="advanced">Advanced Flight Planning</h2><p>When the mission needs a little theatre—scenic approaches, staged insertions, observation hovers, or several stops—build a numbered flight plan and finish it with <code>EXEC</code>.</p>
+<table><thead><tr><th>Command</th><th>Meaning</th></tr></thead><tbody>
+<tr><td><code>LZ1</code> … <code>LZ5</code></td><td>Numbered sequential landing zones in a planned route. They must begin at LZ1 without gaps.</td></tr>
+<tr><td><code>FP1 LZ2 H100</code></td><td>A flight point before LZ2. Up to ten FPs may be assigned to each LZ. The optional <code>H</code> sets its height and, when it is the final FP, the LZ approach height.</td></tr>
+<tr><td><code>HO1 LZ1 D2 H40</code></td><td>A hover point immediately before LZ1. Both D and H are required; their order and spacing are flexible. New routes should use <code>HO</code> so <code>H</code> remains the height modifier; legacy <code>H1</code>&ndash;<code>H10</code> hover markers still work.</td></tr>
+<tr><td><code>HO1 FP3 LZ1 H20 D2</code></td><td>A hover point immediately before FP3 on the approach to LZ1. The explicit LZ keeps it unambiguous in a multi-stop route.</td></tr>
+<tr><td><code>HO1 HO2 D0.5 H40</code></td><td>Hover HO1 immediately before HO2. Hover chains may end at an LZ, a flight point, or a final hover-only point.</td></tr>
+<tr><td><code>HO2 D0.5 H20</code></td><td>Final point of a hover-only route: hover for 30 seconds at 20 m AGL, then return home without landing.</td></tr>
+<tr><td><code>FP1 H40</code></td><td>Final point of a flight-only route: fly through FP1 at 40 m AGL, then return home without landing.</td></tr>
+<tr><td><code>EXEC</code> / <code>EXECUTE</code></td><td>Commits a planned numbered route. Exactly one is required.</td></tr>
+</tbody></table>
+<h3>Planned-route order</h3><p>For every destination, STW follows a fixed order:</p><pre><code>FP1 → FP2 → … → HO1 (before LZ) → HO2 (before LZ) → … → LZ</code></pre><p>An FP-targeted hover is inserted immediately before its named flight point: <code>HO1 FP3 LZ1 H20 D2</code> occurs after FP2 and before FP3. Hover-only and flight-only routes use a single final numbered point instead of an LZ.</p>
+<h3>Your first advanced plan</h3><div class="two"><div><h3>One planned stop</h3><pre><code>FP1 LZ1 H100
+HO1 LZ1 D0.5 H40
+LZ1 D0.5
+EXEC</code></pre><p>Fly through FP1, hover at HO1, land at LZ1, then return home.</p></div></div>
+<h3>Hover-only route</h3><pre><code>HO1 HO2 D0.75 H40
+HO2 D0.5 H20
+EXEC</code></pre><p>Hover at HO1, then HO2, and return home without landing.</p>
+<h3>Flight-only route</h3><pre><code>HO1 FP1 D0.5 H20
+FP1 H40
+EXEC</code></pre><p>Hover at HO1, fly through FP1, and return home without landing.</p>
+<h3>Corrected multi-stop example</h3><p>This route demonstrates both types of hover. The two <code>HO1</code> markers are valid because they have different targets.</p><pre><code>FP1 LZ1 H50
+FP2 LZ1 H80
+HO1 FP3 LZ1 H20 D2
+FP3 LZ1 H60
+HO1 LZ1 H20 D0.75
+LZ1 D2
+EXEC</code></pre><p>The helicopter flies FP1 and FP2, hovers for two minutes before FP3, continues through FP3, hovers for 45 seconds before LZ1, lands there for two minutes, then returns home.</p></section>
+<div class="callout"><h3>Read it like a pilot’s briefing</h3><p>The route language is deliberately compact: each marker says <em>what it is</em>, <em>which landing zone it belongs to</em>, and then any height or time instruction. Read this flight as follows:</p><table><thead><tr><th>Marker text</th><th>Pilot’s briefing</th></tr></thead><tbody>
+<tr><td><code>FP1 LZ1 H50</code></td><td>“Flight Path One before Landing Zone One, flying height 50 m.”</td></tr>
+<tr><td><code>FP2 LZ1 H80</code></td><td>“Flight Path Two before Landing Zone One, flying height 80 m.”</td></tr>
+<tr><td><code>HO1 FP3 LZ1 H20 D2</code></td><td>“Hover One before Flight Path Three for Landing Zone One, flying height 20 m, duration two minutes.”</td></tr>
+<tr><td><code>FP3 LZ1 H60</code></td><td>“Flight Path Three before Landing Zone One, flying height 60 m.”</td></tr>
+<tr><td><code>HO1 LZ1 H20 D0.75</code></td><td>“Hover One before Landing Zone One, flying height 20 m, duration 0.75 minutes.”</td></tr>
+<tr><td><code>LZ1 D2</code></td><td>“Landing Zone One, duration two minutes.”</td></tr>
+<tr><td><code>EXEC</code></td><td>“Compile and execute the path.”</td></tr>
+</tbody></table><p>In other words: fly FP1 and FP2, settle into a two-minute hover before FP3, continue through FP3, pause for 45 seconds before LZ1, land for two minutes, and return home. It is a small flight plan written directly on the map.</p></div>
+
+<section id="validation"><h2>Landing-zone validation and marker lifecycle</h2><p>STW checks every LZ for water, steep or uneven terrain, trees, and substantial obstacles. It does this when it converts the marker, so a rejected LZ is removed immediately and reported by radio.</p><ul><li>Direct <code>LZ</code>, direct <code>H</code>, <code>LZA</code>/<code>LZB</code>, and <code>LZA</code>/<code>HB</code> routes auto-execute. Do not combine them with extra route markers or <code>EXEC</code>.</li><li>Direct <code>H</code> and <code>HB</code> markers do not land, so their map positions do not need LZ validation; choose clear airspace at the requested hover height.</li><li>Recognised route instructions are converted into locked STW markers shortly after placement. Plan their positions before placing them.</li><li>Committed syntax, ordering, or safety failures discard the whole numbered draft. Place a corrected fresh route and a new <code>EXEC</code>.</li><li>Converted LZ markers use the vanilla <code>pick-up</code> icon. Flight and hover points use the STW hover icon. Their colour follows the owning faction.</li></ul></section>
+
+<section id="gm"><h2>For Game Masters and scenario authors</h2><p>Place a Transport Helipad, then open <strong>STW Transport Helipad Properties</strong>. Choose the faction, helicopter model, and number of defending patrols. The helicopter is used for autonomous transport only; it is not a combat-helipad feature.</p><p>Every configured helipad creates a faction-coloured, faction-only map marker with the vanilla Helipad <strong>H</strong> icon at its pad position by default. It uses the <code>Heli_Pad</code> quad from <code>services-icons-bw.imageset</code>. The marker remains correct for players who join late or change faction. Set <code>showTransportHelipadMarkers=false</code> in the Transport Helipads configuration to hide this network from the map. The marker is removed with its helipad.</p><p>Automatic helipads can be enabled in Scenario Properties. The system searches shuffled map tiles and places eligible sites for the enabled factions up to the configured limit. Candidate selection is spread across the map rather than concentrating on airfields; runway locations are allowed and use the normal helipad pad prefab.</p><div class="callout"><strong>Scenario authoring:</strong> leave sufficient clear ground around a helipad and use the same LZ validation constraints when designing likely player destinations. The server remains authoritative for acceptance and flight movement.</div></section>
+
+<section id="models"><h2>Optional helicopter models</h2><p>Optional aircraft are soft dependencies. STW itself remains usable without them; a model appears in Scenario Properties only when its prefab is available. For multiplayer, the server and every client need the selected model’s source mod and its dependencies.</p><table><thead><tr><th>Faction</th><th>Optional models</th><th>Source mod</th></tr></thead><tbody>
+<tr><td>US</td><td>MH-60 Armed, MH-60 Supply</td><td><a href="https://reforger.armaplatform.com/workshop/60ED3CC6E7E40221-SikorskyMH60DAPProject">Sikorsky H60 Project</a></td></tr>
+<tr><td>US</td><td>MH-6M Transport</td><td><a href="https://reforger.armaplatform.com/workshop/6273146ADFE8241D-WCS_AH-6M">WCS_AH-6M</a></td></tr>
+<tr><td>US</td><td>CH-47 HC.5, CH-47A Transport</td><td><a href="https://reforger.armaplatform.com/workshop/61957C5C6FB7A773-H-47Chinook">H-47 Chinook</a></td></tr>
+<tr><td>US</td><td>UH-60 CG, FireHawk, Black, Green, Grey, Skyward</td><td><a href="https://reforger.armaplatform.com/workshop/688D66CBCE3CFA42-UH-60">UH-60</a></td></tr>
+<tr><td>USSR</td><td>Mi-8MT Black</td><td><a href="https://reforger.armaplatform.com/workshop/595F2BF2F44836FB-RHS-StatusQuo">RHS - Status Quo</a></td></tr>
+<tr><td>USSR</td><td>SW-4 Civilian</td><td><a href="https://reforger.armaplatform.com/workshop/65DF491292F18B74">SW-4 Puszczyk</a></td></tr>
+<tr><td>USSR</td><td>Mi-35P-M</td><td><a href="https://reforger.armaplatform.com/workshop/686403B40305815C">MI-35P-M</a></td></tr>
+<tr><td>USSR</td><td>Mi-24V Transport</td><td><a href="https://reforger.armaplatform.com/workshop/628933A0D3A0D700-WCS_Mi-24V">WCS_Mi-24V</a></td></tr>
+</tbody></table><p>Vanilla UH-1H and Mi-8MT Transport do not need an optional helicopter mod. Optional profiles use initial conservative settings and should be tested individually before publication.</p></section>
+
+<section id="notes"><h2>Operational notes</h2><ul><li>Before take-off, STW can refill all helicopter fuel nodes when the refuelling setting is enabled, including multi-tank aircraft.</li><li>Autonomous routes are server-controlled. The helicopter accelerates, turns progressively, keeps terrain clearance during flight, lands at each stop, and returns to its home pad.</li><li>If a transport helicopter is destroyed in flight, its route is cancelled and it performs a server-controlled crash descent that retains its horizontal momentum.</li><li>Keep routes reasonable: every requested LZ must be reachable with enough fuel for the return journey. Extended fuel-range planning is a future enhancement.</li></ul></section>
+
+<section id="community" class="contact"><img src="images/CaptainSprocketPatch.png" alt="Captain Sprocket patch"><div><h2>Captain Sprocket community</h2><p>Arma Reforger server: <strong>STW Reforger</strong></p><p>Community: <a href="https://discord.gg/T2AZp6GGMJ">Join the Discord server</a></p><p><a href="index.html">More STW manuals</a></p></div></section>
+</main><footer>STW Transport Helipads manual · Captain Sprocket / STW</footer></body></html>

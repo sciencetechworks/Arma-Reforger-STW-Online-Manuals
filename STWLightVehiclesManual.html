@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="STW Light Vehicles manual for Arma Reforger.">
+  <title>STW/Light Vehicles — Online Manual</title>
+  <link rel="stylesheet" href="stw-manuals.css">
+  <link rel="icon" type="image/svg+xml" href="images/stw-favicon.svg">
+</head>
+<body>
+<header><div class="wrap">
+  <p class="kicker">Arma Reforger · Online Manual</p>
+  <h1>STW/Light Vehicles</h1>
+  <p class="lead">A server-authoritative system for placing crewed light military vehicles through Game Master and for creating a session-only road population automatically.</p>
+  <div class="badges"><span class="badge">Game Master placement</span><span class="badge">AI guard, patrol and roam</span><span class="badge">Automatic road generation</span><span class="badge">Server configuration</span></div>
+</div></header>
+<nav><div class="wrap"><a href="index.html">&larr; STW Online Manuals</a><a href="#adds">What it adds</a><a href="#players">Players</a><a href="#gm">Game Masters</a><a href="#automatic">Automatic generation</a><a href="#dependencies">Soft dependencies</a><a href="#server">Server configuration</a><a href="#community">Community</a></div></nav>
+<main class="wrap">
+  <section id="adds"><h2>What STW/Light Vehicles adds</h2>
+    <p>STW/Light Vehicles creates armed light-vehicle compositions with the appropriate faction, AI crew and behaviour. The server validates every vehicle choice and owns the spawned composition; clients only select from the available Game Master options.</p>
+    <div class="grid"><div class="card"><h3>Active Guard</h3><p>The crew uses a defend waypoint around the position where the vehicle was placed.</p></div><div class="card"><h3>Patrol Roads</h3><p>The crew receives local road movement orders around its placement area.</p></div><div class="card"><h3>Free Roam</h3><p>The crew selects distant road-connected POI-like destinations and continues travelling between them.</p></div></div>
+    <p>The built-in catalogue supports vanilla US, USSR and FIA vehicles, plus compatible RHS USAF/RHS AFRF, Task Force and TIGR entries when their resources are available in the running scenario. Optional entries are checked at runtime, so unavailable content is skipped rather than becoming a dependency.</p>
+  </section>
+  <section id="players"><h2>For players</h2>
+    <p>No player-side configuration is required. Light vehicles appear as ordinary world vehicles with AI crews. Players can take a seat and use them normally.</p>
+    <div class="callout"><strong>Player protection:</strong> automatic cleanup does not delete an STW-managed vehicle or crew while a player controls one of its owned assets. When an automatic-generation switch is disabled, player-protected compositions are retained.</div>
+  </section>
+  <section id="gm"><h2>For Game Masters</h2>
+    <ol class="steps"><li>Open the Game Master entity browser and place <strong>STW Light Vehicle Spawner</strong> at the desired location.</li><li>In the configuration dialog, choose a faction, model and behaviour. <strong>RANDOM</strong> is available for a faction; <strong>EMPTY</strong> creates an uncrewed vehicle using an explicit model.</li><li>Confirm the dialog. The server spawns the vehicle composition at the marker location, then removes the temporary placement dummy.</li></ol>
+    <p>Available factions depend on the loaded scenario. The Game Master form offers US, USSR, FIA, RHS_USAF, RHS_AFRF and TF only when the corresponding faction exists in that scenario.</p>
+    <div class="callout sky"><strong>Tip:</strong> choose <strong>Active Guard</strong> for a local checkpoint or defended location, <strong>Patrol Roads</strong> for nearby activity, and <strong>Free Roam</strong> for a vehicle that should travel across the map.</div>
+  </section>
+  <section id="automatic"><h2>Automatic generation and Scenario Properties</h2>
+    <p>Automatic light vehicles are session-only. After the world is ready, the authoritative server indexes usable roads and places the configured number of vehicles near POI-like locations, respecting the configured separation distance.</p>
+    <p>Game Masters can control the system during a session through <strong>Scenario Properties → STW Light Vehicles</strong>:</p>
+    <table><thead><tr><th>Control</th><th>Effect</th></tr></thead><tbody><tr><td><strong>System Enabled</strong></td><td>Allows or prevents new manual and automatic spawns. Existing manual vehicles remain.</td></tr><tr><td><strong>Automatic Generation</strong></td><td>Enables automatic road generation. Turning it off removes exact automatic assets unless they are player-protected; turning it on starts a new session generation pass.</td></tr></tbody></table>
+    <p>These controls are session-only. The next session reads the normal server configuration again.</p>
+  </section>
+  <section id="dependencies"><h2>Soft dependencies</h2>
+    <p>STW/Light Vehicles works without these mods. When one is installed and its vehicle resources are available in the active scenario, the mod can include its compatible light-vehicle entries. Missing optional content is skipped safely.</p>
+    <table><thead><tr><th>Mod</th><th>Workshop ID</th><th>Optional contribution</th></tr></thead><tbody>
+      <tr><td><a href="https://reforger.armaplatform.com/workshop/595F2BF2F44836FB">RHS – Status Quo</a></td><td><code>595F2BF2F44836FB</code></td><td>RHS faction and vehicle compatibility, including the armed K-4386.</td></tr>
+      <tr><td><a href="https://reforger.armaplatform.com/workshop/1337C0DE5DABBEEF">RHS – Content Pack 01</a></td><td><code>1337C0DE5DABBEEF</code></td><td>Required RHS content pack for the RHS vehicle set.</td></tr>
+      <tr><td><a href="https://reforger.armaplatform.com/workshop/BADC0DEDABBEDA5E">RHS – Content Pack 02</a></td><td><code>BADC0DEDABBEDA5E</code></td><td>Required RHS content pack for the RHS vehicle set.</td></tr>
+      <tr><td><a href="https://reforger.armaplatform.com/workshop/69F415A5B15EC350">Hmmwv Variants</a></td><td><code>69F415A5B15EC350</code></td><td>Additional armed HMMWV, GMV and related US light-vehicle variants.</td></tr>
+      <tr><td><a href="https://reforger.armaplatform.com/workshop/5C721177A220B42F">Joint Light Tactical Vehicle</a></td><td><code>5C721177A220B42F</code></td><td>Armed JLTV variants.</td></tr>
+      <tr><td><a href="https://reforger.armaplatform.com/workshop/DEADC0DE00000003-TacticalFlava-TIGR">Tactical Flava - TIGR</a></td><td><code>DEADC0DE00000003</code></td><td>GAZ TIGR PKP, KORD and AGS-17 variants.</td></tr>
+      <tr><td><a href="https://reforger.armaplatform.com/workshop/DEADC0DE00000000-TacticalFlava-Core">Tactical Flava - Core</a></td><td><code>DEADC0DE00000000</code></td><td>Shared Tactical Flava content required by Tactical Flava - TIGR.</td></tr>
+    </tbody></table>
+    <div class="callout sky"><strong>Server note:</strong> install the optional mods on both the server and clients in the normal Arma Reforger mod set. The light-vehicle spawner checks each optional prefab at runtime before it is offered or spawned.</div>
+  </section>
+  <section id="server"><h2>Server configuration</h2>
+    <ol><li>Install and enable STW/Light Vehicles on the server.</li><li>Start the server once. The mod creates <code>$profile:STW/LightVehicles/STWLightVehiclesConfig.json</code> with its defaults.</li><li>Stop the server, back up the file, edit the required values, then restart. The mod validates values on load and writes the valid configuration back.</li></ol>
+    <h3>Configuration reference</h3>
+    <table><thead><tr><th>Setting</th><th>Default</th><th>Meaning</th></tr></thead><tbody><tr><td><code>targetAutomaticVehicles</code></td><td>12</td><td>Requested automatic vehicle count; valid range 0–64.</td></tr><tr><td><code>minimumAutomaticSeparationMeters</code></td><td>350 m</td><td>Minimum horizontal separation between accepted automatic locations; 100–3000 m.</td></tr><tr><td><code>automaticPatrolRadiusMeters</code></td><td>450 m</td><td>Local road-patrol radius; 150–800 m.</td></tr><tr><td><code>poiFallbackRoadProbability</code></td><td>0.25</td><td>Chance to use a suitable road fallback when POI-like placement is unavailable.</td></tr><tr><td><code>automaticStationaryGuardProbability</code></td><td>0.25</td><td>Chance for an automatic vehicle to use Active Guard.</td></tr><tr><td><code>automaticFreeRoamProbability</code></td><td>0.25</td><td>Chance for an automatic vehicle to use Free Roam; the remaining vehicles patrol roads.</td></tr><tr><td><code>freeRoamMinimumDistanceMeters</code>, <code>freeRoamMaximumDistanceMeters</code></td><td>600 m, 5000 m</td><td>Destination-distance range for Free Roam vehicles.</td></tr><tr><td><code>enabledFactionKeys</code></td><td>US, RHS_USAF, USSR, RHS_AFRF, FIA</td><td>Faction keys eligible for automatic generation.</td></tr><tr><td><code>excludedFactionKeys</code></td><td>CIV</td><td>Faction keys excluded from automatic generation.</td></tr></tbody></table>
+    <div class="callout warning"><strong>Safe editing:</strong> do not edit generated configuration while the server is running. Preserve valid JSON syntax, restart the server after changes, and check the log for validation messages.</div>
+  </section>
+  <section id="community" class="contact"><img src="images/CaptainSprocketPatch.png" alt="Captain Sprocket patch"><div><h2>Captain Sprocket community</h2><p>Arma Reforger server: <strong>STW Reforger</strong></p><p>Community: <a href="https://discord.gg/T2AZp6GGMJ">https://discord.gg/T2AZp6GGMJ</a></p><p>More STW manuals: <a href="index.html">STW Online Manuals</a></p></div></section>
+</main>
+<footer>STW/Light Vehicles manual · Captain Sprocket / STW</footer>
+</body></html>

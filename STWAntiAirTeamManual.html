@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head><!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LT54NLXDD2"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-LT54NLXDD2');</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="STW Anti-Air Team manual for Arma Reforger.">
+  <title>STW Anti-Air Team — Online Manual</title>
+  <link rel="stylesheet" href="stw-manuals.css">
+  <link rel="icon" type="image/svg+xml" href="images/stw-favicon.svg">
+</head>
+<body>
+<header><div class="wrap">
+  <p class="kicker">Arma Reforger · Online Manual</p><h1>STW Anti-Air Team</h1>
+  <p class="lead">Turn an existing soldier into an anti-air gunner or assistant gunner, or let the server deploy autonomous two-person air-defence teams across the scenario.</p>
+  <div class="badges"><span class="badge">Game Master assignments</span><span class="badge">Automatic AA pairs</span><span class="badge">Configurable support</span><span class="badge">Optional RHS integration</span></div>
+</div></header>
+<nav><div class="wrap"><a href="index.html">&larr; STW Online Manuals</a><a href="#overview">Overview</a><a href="#players">Players</a><a href="#gm">Game Masters</a><a href="#automatic">Automatic pairs</a><a href="#server">Server configuration</a><a href="#dependencies">Soft dependencies</a><a href="#community">Community</a></div></nav>
+<main class="wrap">
+  <section id="overview"><h2>What it adds</h2>
+    <p>STW Anti-Air Team equips a selected character as either an <strong>Anti-Air Gunner</strong> or an <strong>Assistant Gunner</strong>. The gunner receives the faction-appropriate AI launcher; the assistant carries the team’s virtual reload stock. Both keep their existing clothing, while the system replaces and supplies the role equipment, magazines, grenades, medical supplies, navigation and observation gear.</p>
+    <div class="grid"><div class="card"><h3>Anti-Air Gunner</h3><p>Receives the launcher and a configurable primary-weapon package. The system uses the US Stinger or USSR Igla family according to the soldier’s faction.</p></div><div class="card"><h3>Assistant Gunner</h3><p>Receives a configured number of virtual reloads. When close to the gunner, the assistant enables launcher replacement after the gunner has expended it.</p></div><div class="card"><h3>Automatic pairs</h3><p>The server can discover suitable terrain and elevated structural positions, deploy pairs, replace casualties, and later relocate surviving teams.</p></div></div>
+  </section>
+  <section id="players"><h2>For players</h2>
+    <p>No player menu is required. On a server running the mod, automatic teams are hostile or friendly according to their faction. They protect a small operating area and may relocate after their guard period.</p>
+    <ul><li>When the server enables intelligence reports, the opposing faction receives an approximate map report after deployment and at the configured interval. Reports are disabled by default.</li><li>Do not separate a managed pair if you expect its reload support to work: the assistant must be inside the configured transfer distance (50 m by default).</li><li>Automatic teams avoid spawning near players. The default protected radius is 1,500 m, so a team will not suddenly appear beside an active player area.</li></ul>
+  </section>
+  <section id="gm"><h2>For Game Masters</h2>
+    <p>Select an existing soldier and use the <strong>General</strong> context actions <strong>Assign Anti-Air Gunner</strong> or <strong>Assign Assistant Gunner</strong>. The request is sent to the authoritative server, which validates the character and applies the role loadout. Use the two actions on suitable soldiers of the same faction to create a manually managed team.</p>
+    <p>Open <strong>Scenario Properties</strong> and select the <strong>STW Anti-Air</strong> tab to change the default camouflage, weapons, optics, night vision, ammunition and balaclava choices for future assignments. These settings are saved by the server; they do not retroactively alter already assigned soldiers.</p>
+    <div class="note"><strong>Session switch:</strong> <strong>Automatic AntiAir/AssistantGunner Pair Generator</strong> in Scenario Properties controls only the automatic system. Turning it off removes system-created pairs; manually assigned gunners and assistants remain. Turning it back on starts the configured automatic system again.</div>
+  </section>
+  <section id="automatic"><h2>Automatic pair system</h2>
+    <p>Automatic deployment runs server-side. It scans the world incrementally, caches viable terrain positions, and can score usable elevated structures such as roofs. Structural positions are preferred 60% of the time by default when available. The system excludes unsuitable structures such as piers, bridges and walls, and can be tuned or diagnosed through its JSON files.</p>
+    <p>Defaults allow up to three pairs per faction and six initial pairs in total. A destroyed pair is eligible for replacement after a randomized 30–60 minute delay. Surviving teams guard their area for 1–3 hours, then may relocate 1.5–8 km to another player-clear candidate. The defaults are deliberately conservative; raise limits only after checking server performance and the map’s available space.</p>
+  </section>
+  <section id="server"><h2>Server setup and configuration</h2>
+    <ol><li>Install STW Anti-Air Team and its required dependencies on the server and clients, then start the desired scenario once.</li><li>The mod creates its JSON files under <code>$profile:STW/AntiAir/</code>. Stop the server before editing them.</li><li>Back up the file, make your changes using valid JSON, restart the server, and review the log for validation messages. Values outside safe ranges are clamped and the validated configuration is saved.</li></ol>
+    <table><thead><tr><th>File</th><th>Purpose and key defaults</th></tr></thead><tbody>
+      <tr><td><code>STWAntiAirTeamConfig.json</code></td><td>Manual-assignment loadouts: camouflage, primary weapons, optics, night vision, ammunition, grenades and launcher support. Defaults include 5–7 magazines, 3 fragmentation and 3 smoke grenades, a 60-second reload check, 50 m transfer range and 2 assistant missiles.</td></tr>
+      <tr><td><code>Support/STWAntiAirTeamSupportConfig.json</code></td><td>Managed-unit resupply and healing. Defaults: daily resupply, assistant AA-ammo replenishment every 2 hours, 20% healing probability, 25% healing amount. <code>allowPlayerManagedUnitResupply</code> is false by default.</td></tr>
+      <tr><td><code>AutoPairs/STWAntiAirPairAutoConfig.json</code></td><td>Automatic terrain discovery, faction selection, limits, respawn, relocation and optional intelligence reports. It enables automatic pairs by default; <code>enabledFactionKeys</code> can restrict the system and <code>excludedFactionKeys</code> defaults to <code>["CIV"]</code>.</td></tr>
+      <tr><td><code>StructuralOverwatch/STWAntiAirStructuralOverwatchConfig.json</code></td><td>Dedicated structural scanning, eligibility and diagnostics. Structural discovery, use and ambush relocation are enabled by default; diagnostics are off.</td></tr>
+    </tbody></table>
+    <div class="note warn"><strong>Safe operation:</strong> automatic scanning is deliberately batched to reduce frame impact. Avoid increasing scan batches, candidate limits, active-pair limits and diagnostics together. Change one category at a time and test on the target map.</div>
+  </section>
+  <section id="dependencies"><h2>Soft dependencies and optional mod support</h2>
+    <p>STW Anti-Air Team runs without the mods below. They are detected through available prefabs: when unavailable, the mod uses its vanilla-compatible loadout options or skips only the optional item. Install optional content normally on both server and clients; adding a choice in configuration does not download or load a mod.</p>
+    <table><thead><tr><th>Optional mod</th><th>Workshop ID</th><th>What it adds to STW Anti-Air Team</th></tr></thead><tbody>
+      <tr><td><a href="https://reforger.armaplatform.com/workshop/595F2BF2F44836FB"><strong>RHS - Status Quo</strong></a></td><td><code>595F2BF2F44836FB</code></td><td>RHS US/AFRF faction-aware equipment and optional observation, navigation and night-vision candidates.</td></tr>
+      <tr><td><a href="https://reforger.armaplatform.com/workshop/1337C0DE5DABBEEF"><strong>RHS - Content Pack 01</strong></a></td><td><code>1337C0DE5DABBEEF</code></td><td>Supporting RHS content used by the optional RHS loadout integration.</td></tr>
+      <tr><td><a href="https://reforger.armaplatform.com/workshop/BADC0DEDABBEDA5E"><strong>RHS - Content Pack 02</strong></a></td><td><code>BADC0DEDABBEDA5E</code></td><td>Supporting RHS content used by the optional RHS loadout integration.</td></tr>
+      <tr><td><a href="https://reforger.armaplatform.com/workshop/658C0A491D81806C"><strong>Nasty Glock 18C</strong></a></td><td><code>658C0A491D81806C</code></td><td>An optional Glock 18C sidearm and compatible attachment candidates. If absent, the system uses the vanilla M9 fallback.</td></tr>
+    </tbody></table>
+    <p><strong>Required core content:</strong> <a href="https://reforger.armaplatform.com/workshop/629B2BA37EFFD577">WCS_Armaments</a> (<code>629B2BA37EFFD577</code>) is a declared project dependency, not a soft dependency. Ensure it is present when installing STW Anti-Air Team.</p>
+  </section>
+  <section id="community"><h2>Captain Sprocket community</h2><div class="community"><img src="images/CaptainSprocketPatch.png" alt="Captain Sprocket patch"><div><p><strong>Captain Sprocket</strong></p><p>Arma Reforger server: <strong>STW Reforger</strong></p><p>Community: <a href="https://discord.gg/T2AZp6GGMJ">https://discord.gg/T2AZp6GGMJ</a></p><p>More STW manuals: <a href="https://sciencetechworks.github.io/Arma-Reforger-STW-Online-Manuals/">STW Online Manuals</a></p></div></div></section>
+</main><footer>STW Anti-Air Team manual · Captain Sprocket / STW</footer>
+</body></html>

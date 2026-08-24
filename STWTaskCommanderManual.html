@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LT54NLXDD2"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-LT54NLXDD2');</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Player and server-administrator guide for STWTaskCommander for Arma Reforger.">
+  <title>STWTaskCommander — Online Manual</title>
+  <link rel="stylesheet" href="stw-manuals.css">
+  <link rel="icon" type="image/svg+xml" href="images/stw-favicon.svg">
+</head>
+<body>
+<header><div class="wrap">
+  <p class="kicker">Arma Reforger · Online Manual</p><h1>STWTaskCommander</h1>
+  <p class="lead">A server-side task director that turns live enemy leaders and vehicles into faction-specific objectives for the players who need them.</p>
+  <div class="badges"><span class="badge">Automatic objectives</span><span class="badge">Faction-scoped tasks</span><span class="badge">Live-world targets</span><span class="badge">Server configuration</span></div>
+</div></header>
+<nav><div class="wrap"><a href="index.html">&larr; STW Online Manuals</a><a href="#overview">Overview</a><a href="#players">Players</a><a href="#objectives">Objectives</a><a href="#server">Server setup</a><a href="#configuration">Configuration</a><a href="#troubleshooting">Troubleshooting</a><a href="#community">Community</a></div></nav>
+<main class="wrap">
+  <section id="overview"><h2>What it does</h2>
+    <p>STWTaskCommander watches the active world on the authoritative server and creates native Arma Reforger tasks from suitable enemy targets. Tasks are visible only to the relevant player faction, use the game’s normal task interface, and are completed when their target is destroyed or eliminated.</p>
+    <div class="grid"><div class="card"><h3>Live intelligence</h3><p>Targets are selected from entities that currently exist in the scenario; Task Commander does not spawn targets or alter the world population.</p></div><div class="card"><h3>Faction awareness</h3><p>Enemy status is determined from the scenario’s faction relations. A task for one faction is not automatically shared with another.</p></div><div class="card"><h3>Task lifecycle</h3><p>Each task completes on its objective, fails when its time limit expires, and reserves its area for a configurable cooldown.</p></div></div>
+  </section>
+  <section id="players"><h2>For players</h2>
+    <p>No separate menu or keybind is needed. When your faction has an available task slot and the server discovers a suitable enemy target, the task appears in the normal Arma Reforger task system with its map position. Follow the task marker and complete the stated objective.</p>
+    <ul><li><strong>Destroy vehicle</strong> tasks complete when the selected vehicle is destroyed.</li><li><strong>Eliminate leader</strong> tasks complete when the selected enemy AI group leader is killed.</li><li>Tasks are owned and visible by your faction, so another faction’s objectives may be different from yours.</li><li>If a task expires before its objective is completed, it is marked failed. The server may later find a new target elsewhere.</li></ul>
+    <div class="callout"><strong>What to expect:</strong> Task Commander works with what the scenario has already placed or generated. A quiet map with no enemy AI leaders or eligible enemy vehicles may simply have no task to offer.</div>
+  </section>
+  <section id="objectives"><h2>How objectives are selected</h2>
+    <p>After the world has had two minutes to settle, the server scans dynamic entities. It gives priority to active enemy concentrations and selects from enemy AI group leaders and intact affiliated vehicles. Targets must belong to a faction that the player faction considers hostile.</p>
+    <table><thead><tr><th>Objective</th><th>Task text</th><th>Default duration</th></tr></thead><tbody>
+      <tr><td>Enemy AI group leader</td><td>Eliminate enemy leader</td><td>2 hours</td></tr>
+      <tr><td>Car or other standard vehicle</td><td>Destroy enemy car / vehicle</td><td>2 hours</td></tr>
+      <tr><td>APC</td><td>Destroy enemy APC</td><td>3 hours</td></tr>
+      <tr><td>Tank or helicopter</td><td>Destroy enemy tank / helicopter</td><td>4 hours</td></tr>
+    </tbody></table>
+    <p>The director favours leaders, helicopters, tanks and APCs over lower-value vehicle targets in comparable concentrations. It avoids destroyed vehicles, mounted leaders, factionless vehicles, and leaders immediately beside a vehicle. It also keeps selected objectives separated by at least 1 km, preventing a cluster of tasks at a single site.</p>
+    <p>While player factions have free task capacity, scans run every two minutes. Once all active player factions have reached their quotas, scanning backs off to every fifteen minutes.</p>
+  </section>
+  <section id="server"><h2>Server setup</h2>
+    <ol class="steps"><li>Install STWTaskCommander on the server and the clients joining the scenario.</li><li>Start the desired scenario. The server automatically creates its configuration folder and file.</li><li>Stop the server before editing the configuration, keep valid JSON syntax, then restart it.</li><li>Check the server log after startup if you change limits or enable diagnostics.</li></ol>
+    <p>The configuration file is stored at:</p><p><code>$profile:STW/TaskCommander/STWTaskCommanderConfig.json</code></p>
+    <div class="callout warning"><strong>Configuration safety:</strong> the file is validated each time the mod starts and saved back with safe values. Keep a backup before editing. A malformed configuration falls back to defaults rather than preventing the server from starting.</div>
+  </section>
+  <section id="configuration"><h2>Configuration reference</h2>
+    <table><thead><tr><th>Setting</th><th>Default</th><th>Purpose</th></tr></thead><tbody>
+      <tr><td><code>version</code></td><td><code>1</code></td><td>Format version maintained by the mod. Leave this value unchanged.</td></tr>
+      <tr><td><code>enabled</code></td><td><code>true</code></td><td>Master switch. Set to <code>false</code> to prevent Task Commander from starting.</td></tr>
+      <tr><td><code>debugRejectionLogging</code></td><td><code>false</code></td><td>Logs candidate rejection and selection details for diagnosis. Leave disabled during normal play.</td></tr>
+      <tr><td><code>maxConcurrentTasksPerFaction</code></td><td><code>5</code></td><td>Maximum non-terminal tasks for each active player faction. Valid range: 0&ndash;16.</td></tr>
+      <tr><td><code>locationCooldownSeconds</code></td><td><code>3600</code></td><td>How long a task location remains unavailable after being used. Valid range: 0&ndash;604,800 seconds.</td></tr>
+      <tr><td><code>minimumTaskSeparationMeters</code></td><td><code>1000.0</code></td><td>Minimum distance from a location still in cooldown. Valid range: 0&ndash;10,000 m.</td></tr>
+      <tr><td><code>standardDurationSeconds</code></td><td><code>7200</code></td><td>Time allowed for leader, car and other standard-vehicle tasks. Valid range: 60&ndash;604,800 seconds.</td></tr>
+      <tr><td><code>mediumDurationSeconds</code></td><td><code>10800</code></td><td>Time allowed for APC tasks. Valid range: 60&ndash;604,800 seconds.</td></tr>
+      <tr><td><code>highDurationSeconds</code></td><td><code>14400</code></td><td>Time allowed for tank and helicopter tasks. Valid range: 60&ndash;604,800 seconds.</td></tr>
+    </tbody></table>
+    <div class="callout"><strong>A sensible first configuration:</strong> start with the defaults. On a small or sparsely populated scenario, reduce <code>maxConcurrentTasksPerFaction</code> before reducing separation or cooldown values. This preserves varied objective locations and makes the task list easier to read.</div>
+  </section>
+  <section id="troubleshooting"><h2>Troubleshooting</h2>
+    <table><thead><tr><th>Symptom</th><th>What to check</th></tr></thead><tbody>
+      <tr><td>No tasks appear</td><td>Confirm <code>enabled</code> is true, allow the initial two-minute settling period, and ensure players belong to an active faction with enemy AI leaders or intact faction-affiliated vehicles in the world.</td></tr>
+      <tr><td>Only one faction sees a task</td><td>This is expected. Tasks use the scenario’s faction relations and are visible only to the selected audience faction.</td></tr>
+      <tr><td>Tasks are far apart or do not revisit an area</td><td>Check <code>minimumTaskSeparationMeters</code> and <code>locationCooldownSeconds</code>. Both intentionally prevent repetitive objectives in the same area.</td></tr>
+      <tr><td>Too much log output</td><td>Set <code>debugRejectionLogging</code> back to <code>false</code> and restart the server.</td></tr>
+      <tr><td>Settings do not take effect</td><td>Stop the server, verify the JSON file and values, then restart. The mod loads configuration during startup.</td></tr>
+    </tbody></table>
+  </section>
+  <section id="community"><h2>Captain Sprocket community</h2><div class="contact"><img src="images/CaptainSprocketPatch.png" alt="Captain Sprocket patch"><div><p><strong>Captain Sprocket</strong></p><p>Arma Reforger server: <strong>STW Reforger</strong></p><p>Community: <a href="https://discord.gg/T2AZp6GGMJ">https://discord.gg/T2AZp6GGMJ</a></p><p>More STW manuals: <a href="index.html">STW Online Manuals</a></p></div></div></section>
+</main><footer>STWTaskCommander manual · Captain Sprocket / STW</footer>
+</body></html>

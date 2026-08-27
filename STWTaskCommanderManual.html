@@ -36,7 +36,7 @@
       <tr><td>APC</td><td>Destroy enemy APC</td><td>3 hours</td></tr>
       <tr><td>Tank or helicopter</td><td>Destroy enemy tank / helicopter</td><td>4 hours</td></tr>
     </tbody></table>
-    <p>The director favours leaders, helicopters, tanks and APCs over lower-value vehicle targets in comparable concentrations. It avoids destroyed vehicles, mounted leaders, factionless vehicles, and leaders immediately beside a vehicle. It also keeps selected objectives separated by at least 1 km, preventing a cluster of tasks at a single site.</p>
+    <p>The director favours leaders, helicopters, tanks and APCs over lower-value vehicle targets in comparable concentrations. It avoids destroyed vehicles, mounted leaders, factionless vehicles, and leaders immediately beside a vehicle. A leader whose AI group contains only that one soldier is treated as a lone wolf: it is only rarely eligible for an eliminate-leader task, and a proper group leader is preferred whenever one is available. It also keeps selected objectives separated by at least 1 km, preventing a cluster of tasks at a single site.</p>
     <p>While player factions have free task capacity, scans run every two minutes. Once all active player factions have reached their quotas, scanning backs off to every fifteen minutes.</p>
   </section>
   <section id="server"><h2>Server setup</h2>
@@ -48,6 +48,7 @@
     <table><thead><tr><th>Setting</th><th>Default</th><th>Purpose</th></tr></thead><tbody>
       <tr><td><code>version</code></td><td><code>1</code></td><td>Format version maintained by the mod. Leave this value unchanged.</td></tr>
       <tr><td><code>enabled</code></td><td><code>true</code></td><td>Master switch. Set to <code>false</code> to prevent Task Commander from starting.</td></tr>
+      <tr><td><code>loneWolfLeaderTaskChancePercent</code></td><td><code>2</code></td><td>Chance that a one-soldier AI group leader is eligible for an eliminate-leader task during a scan. Valid range: 0&ndash;100. Lone wolves that pass this roll receive only one tenth of their normal selection score; set 0 to exclude them completely.</td></tr>
       <tr><td><code>debugRejectionLogging</code></td><td><code>false</code></td><td>Logs candidate rejection and selection details for diagnosis. Leave disabled during normal play.</td></tr>
       <tr><td><code>maxConcurrentTasksPerFaction</code></td><td><code>5</code></td><td>Maximum non-terminal tasks for each active player faction. Valid range: 0&ndash;16.</td></tr>
       <tr><td><code>locationCooldownSeconds</code></td><td><code>3600</code></td><td>How long a task location remains unavailable after being used. Valid range: 0&ndash;604,800 seconds.</td></tr>

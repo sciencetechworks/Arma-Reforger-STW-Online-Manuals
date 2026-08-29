@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LT54NLXDD2"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-LT54NLXDD2');</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Player, Game Master and server guide for STW/Air Drops for Arma Reforger.">
+  <link rel="icon" type="image/svg+xml" href="images/stw-favicon.svg">
+  <link rel="stylesheet" href="stw-manuals.css">
+  <title>STW/Air Drops — Online Manual</title>
+</head>
+<body>
+<header><div class="wrap">
+  <p class="kicker">Arma Reforger · Online Manual</p>
+  <h1>STW/Air Drops</h1>
+  <p class="lead">Faction-aware cargo delivery by map marker: mark a clear drop zone, choose an available item, then watch it arrive beneath a parachute.</p>
+  <div class="badges"><span class="badge">Faction delivery</span><span class="badge">Leader requests</span><span class="badge">Validated drop zones</span><span class="badge">Optional C-130 flyby</span></div>
+</div></header>
+<nav><div class="wrap"><a href="index.html">&larr; STW Online Manuals</a><a href="#players">Players</a><a href="#safety">Drop-zone rules</a><a href="#visuals">What you see</a><a href="#gm">Game Masters</a><a href="#config">Server configuration</a><a href="#availability">Delivery availability</a></div></nav>
+<main class="wrap">
+  <section id="players">
+    <h2>For players</h2>
+    <p>Only the <strong>leader of a player group</strong> can request an airdrop by default. The server resolves the leader's faction, filters the available items for that faction, and validates the marked area before any item can be selected.</p>
+    <ol class="steps">
+      <li>Become the leader of your group.</li>
+      <li>Open the map and place a marker at the intended delivery point.</li>
+      <li>Write one of the recognised marker texts: <code>AIRDROP</code>, <code>AIR_DROP</code>, or <code>AIR DROP</code>. They are case-insensitive.</li>
+      <li>After the request is accepted, close the map. The delivery dialog opens after the map has closed.</li>
+      <li>Confirm the available <strong>Item to deliver</strong>. The faction is preselected and cannot be changed by the client.</li>
+    </ol>
+    <div class="callout"><strong>Map-wheel shortcut:</strong> group leaders can use the <strong>Airdrop &rarr; Place AIRDROP</strong> command on the map wheel. It places the same request marker for you.</div>
+  </section>
+
+  <section id="safety">
+    <h2>Drop-zone rules</h2>
+    <p>STW/Air Drops uses the established Transport Helipads landing-zone acceptance rules. A request is rejected when the target area is unsafe for a delivery.</p>
+    <div class="two">
+      <div><h3>Choose clear, level ground</h3><p>Keep the target clear of substantial obstacles and avoid steep or sharply uneven terrain.</p></div>
+      <div><h3>Keep out of water and trees</h3><p>Water, trees, and major obstructions reject the request. Choose an open field, yard, or other landing-sized clear area.</p></div>
+    </div>
+    <p>The server checks the location when the marker is accepted and checks again immediately before starting the delivery. If the area is no longer valid, no payload is released.</p>
+  </section>
+
+  <section id="visuals">
+    <h2>What you see after acceptance</h2>
+    <p>Your typed request marker is immediately replaced with a locked STW airdrop icon in your faction colour. It is visible only to the owning faction and remains while you select an item and while the payload is descending.</p>
+    <ul>
+      <li>The icon is removed if the request is cancelled, expires, is rejected, or the payload reaches the ground.</li>
+      <li>The payload is visible during the descent, held in a controlled landing state to avoid bouncing, stuttering, or taking fall damage before touchdown.</li>
+      <li>When enabled, the C-130 visual flyby crosses the target area and releases the cargo during the pass. It is cinematic support, not a flyable aircraft or a requirement for delivery.</li>
+    </ul>
+    <div class="callout"><strong>Cooldown:</strong> after a successful request, the faction must wait for the configured cooldown before making another delivery. The server remains authoritative for this check.</div>
+  </section>
+
+  <section id="availability">
+    <h2>Delivery availability and optional vehicle content</h2>
+    <p>The item list is faction-filtered and resource-checked by the server. STW/Air Drops carries its own allow-list, so it does <strong>not</strong> require STW/Light Vehicles and does not start that mod's automatic vehicle spawner.</p>
+    <p>Vanilla choices are available for their factions. Optional RHS, HMMWV variants, TIGR, and JLTV entries appear only when their source prefabs are installed and usable by the server. Players can never submit an item the server has not approved.</p>
+    <div class="warning callout"><strong>Multiplayer requirement:</strong> every client and the server need the source add-on for any selected optional vehicle prefab. If it is absent, STW simply leaves it out of the delivery picker.</div>
+  </section>
+
+  <section id="gm">
+    <h2>For Game Masters and scenario authors</h2>
+    <p>Use a clear target area and a faction with at least one valid delivery item. The map-marker request flow is intended for live players; Game Master use follows the configured default faction when no ordinary player faction can be resolved.</p>
+    <p>For a cinematic event, leave the C-130 flyby enabled. For a minimal or silent logistics experience, disable it: the parachute delivery remains fully functional without the aircraft visual.</p>
+    <div class="callout"><strong>Scenario design tip:</strong> provide obvious open delivery fields rather than placing objectives inside dense forests, water margins, or closely packed compounds. The validation is deliberately strict so delivered vehicles do not arrive inside unsafe geometry.</div>
+  </section>
+
+  <section id="config">
+    <h2>Server configuration</h2>
+    <p>The server creates the configuration file on its first start:</p>
+    <pre><code>$profile:STW/ParachuteDrop/STWParachuteDropConfig.json</code></pre>
+    <p>Stop the server before editing it, then restart the scenario/server after saving changes.</p>
+    <table><thead><tr><th>Setting</th><th>Purpose</th><th>Default</th></tr></thead><tbody>
+      <tr><td><code>Enabled</code></td><td>Master switch for the airdrop service.</td><td><code>true</code></td></tr>
+      <tr><td><code>EnableMarkerRequests</code></td><td>Enables recognised map-marker requests and the map-wheel flow.</td><td><code>true</code></td></tr>
+      <tr><td><code>RequireGroupLeaderForMarkerRequests</code></td><td>Restricts delivery requests to group leaders.</td><td><code>true</code></td></tr>
+      <tr><td><code>RequestTimeoutSeconds</code></td><td>How long an unconfirmed delivery selection may remain pending.</td><td><code>60</code></td></tr>
+      <tr><td><code>CooldownSeconds</code></td><td>Faction wait time after a successful delivery request.</td><td><code>300</code></td></tr>
+      <tr><td><code>DefaultDropAltitudeAGL</code></td><td>Starting payload height in metres above ground level.</td><td><code>300</code></td></tr>
+      <tr><td><code>DescentSpeedMetersPerSecond</code></td><td>Controlled cargo descent rate.</td><td><code>6</code></td></tr>
+      <tr><td><code>EnableAircraftFlyby</code></td><td>Enables the optional C-130 visual and sound flyby.</td><td><code>true</code></td></tr>
+      <tr><td><code>AircraftFlybyAltitudeAGL</code><br><code>AircraftFlybyDistanceMeters</code><br><code>AircraftFlybySpeedMetersPerSecond</code></td><td>Controls the flyby's height, route length, and visual speed.</td><td><code>300</code><br><code>1600</code><br><code>110</code></td></tr>
+      <tr><td><code>DefaultGameMasterFaction</code></td><td>Fallback faction for Game Master-directed use.</td><td><code>US</code></td></tr>
+    </tbody></table>
+  </section>
+
+  <footer class="contact">
+    <img src="images/CaptainSprocketPatch.png" alt="Captain Sprocket patch">
+    <div><div class="eyebrow">Join the community</div><h2 style="margin:6px 0 8px">Captain Sprocket</h2><p><strong>Arma Reforger server:</strong> STW Reforger<br><strong>Community:</strong> <a href="https://discord.gg/T2AZp6GGMJ">https://discord.gg/T2AZp6GGMJ</a></p><p class="small">Created by STW (ScienceTechWorks) &mdash; sciencetechworks@gmail.com. Mark it, drop it, deliver it.</p></div>
+  </footer>
+</main>
+</body>
+</html>

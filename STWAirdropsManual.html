@@ -17,7 +17,7 @@
   <p class="lead">Faction-aware cargo delivery by map marker: mark a clear drop zone, choose an available item, then watch it arrive beneath a parachute.</p>
   <div class="badges"><span class="badge">Faction delivery</span><span class="badge">Leader requests</span><span class="badge">Validated drop zones</span><span class="badge">Optional C-130 flyby</span></div>
 </div></header>
-<nav><div class="wrap"><a href="index.html">&larr; STW Online Manuals</a><a href="#players">Players</a><a href="#safety">Drop-zone rules</a><a href="#visuals">What you see</a><a href="#gm">Game Masters</a><a href="#config">Server configuration</a><a href="#availability">Delivery availability</a></div></nav>
+<nav><div class="wrap"><a href="index.html">&larr; STW Online Manuals</a><a href="#players">Players</a><a href="#crates">Crate drops</a><a href="#safety">Drop-zone rules</a><a href="#visuals">What you see</a><a href="#gm">Game Masters</a><a href="#config">Server configuration</a><a href="#availability">Delivery availability</a></div></nav>
 <main class="wrap">
   <section id="players">
     <h2>For players</h2>
@@ -30,6 +30,21 @@
       <li>Confirm the available <strong>Item to deliver</strong>. The faction is preselected and cannot be changed by the client.</li>
     </ol>
     <div class="callout"><strong>Map-wheel shortcut:</strong> group leaders can use the <strong>Airdrop &rarr; Place AIRDROP</strong> command on the map wheel. It places the same request marker for you.</div>
+  </section>
+
+  <section id="crates">
+    <h2>Crate drops and custom crate types</h2>
+    <p>Request a crate drop with a marker named <code>CRATE_DROP</code>, <code>CRATE DROP</code>, or <code>CRATEDROP</code>; the text is case-insensitive. Group leaders can also use <strong>Airdrop &rarr; Place CRATE DROP</strong> on the map command wheel. After closing the map, choose the available crate type in the delivery dialog.</p>
+    <h3>Create a new crate drop</h3>
+    <ol class="steps">
+      <li>Create and configure an <strong>STW Crate</strong> in a Workbench session. Add the exact items and packed containers you want delivered.</li>
+      <li>Let STW Crates save the crate. The generated crate-content JSON must be from <strong>STW Crates v2</strong>, which preserves items inside backpacks and other containers.</li>
+      <li>Copy the JSON for <strong>exactly one crate</strong> into this server-profile folder:</li>
+    </ol>
+    <pre><code>$profile:STW/ParachuteDrop/CratesContent/</code></pre>
+    <p>Give the file a meaningful <code>.json</code> name, for example <code>STWEngineerCrateContentsUS.json</code>. Its filename becomes the crate type shown in the drop dialog. The system discovers valid JSON files in this folder automatically&mdash;no configuration edit or server restart is needed after the file is copied.</p>
+    <div class="callout"><strong>Easy workflow:</strong> make one STW Crate, let it persist, copy its v2 JSON contents into <code>CratesContent</code>, then request a <code>CRATE_DROP</code>. The delivered crate receives a new identity and the requesting player's faction, while retaining the configured contents.</div>
+    <div class="warning callout"><strong>Important:</strong> a full persistence snapshot used as a crate type must contain one crate only. STW Crates v1 files are obsolete and are ignored. The two built-in medical samples are installed automatically when missing.</div>
   </section>
 
   <section id="safety">

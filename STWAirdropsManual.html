@@ -44,6 +44,14 @@
     <pre><code>$profile:STW/ParachuteDrop/CratesContent/</code></pre>
     <p>Give the file a meaningful <code>.json</code> name, for example <code>STWEngineerCrateContentsUS.json</code>. Its filename becomes the crate type shown in the drop dialog. The system discovers valid JSON files in this folder automatically&mdash;no configuration edit or server restart is needed after the file is copied.</p>
     <p><strong>Example custom crates:</strong> download the <a href="Files/STWMedicalCrateContentsUS.json" download>US medical crate</a> or <a href="Files/STWMedicalCrateContentsUSSR.json" download>USSR medical crate</a>, copy the file into <code>CratesContent</code>, and it will appear in the crate-drop picker.</p>
+    <h3>Easy-to-edit one-item sample</h3>
+    <p>Download the <a href="Files/STWSampleCrateContentsUS.json" download>one-item US crate sample</a> for the smallest valid STW Crates v2 crate definition. It contains one US medical kit, making it a clean starting point for a new crate type.</p>
+    <ol class="steps">
+      <li>Download the sample, rename it (for example, <code>STWAmmoCrateContentsUS.json</code>), and place it in <code>$profile:STW/ParachuteDrop/CratesContent/</code>.</li>
+      <li>Replace the value of the item's <code>prefab</code> field with the full ResourceName of the item you want to deliver.</li>
+      <li>To add items, duplicate the complete object inside the <code>items</code> array, separate the objects with commas, and change each <code>prefab</code> value. Keep the outer file to exactly one crate.</li>
+    </ol>
+    <div class="callout"><strong>Editing tip:</strong> preserve the JSON punctuation and the <code>STW_PERSISTENT_CRATES</code>, version, and inventory-format fields. For containers such as backpacks, create and save the desired crate in STW Crates instead so its nested contents are captured correctly.</div>
     <div class="callout"><strong>Easy workflow:</strong> make one STW Crate, let it persist, copy its v2 JSON contents into <code>CratesContent</code>, then request a <code>CRATE_DROP</code>. The delivered crate receives a new identity and the requesting player's faction, while retaining the configured contents.</div>
     <div class="warning callout"><strong>Important:</strong> a full persistence snapshot used as a crate type must contain one crate only. STW Crates v1 files are obsolete and are ignored. The two built-in medical samples are installed automatically when missing.</div>
   </section>

@@ -43,6 +43,7 @@
     </ol>
     <pre><code>$profile:STW/ParachuteDrop/CratesContent/</code></pre>
     <p>Give the file a meaningful <code>.json</code> name, for example <code>STWEngineerCrateContentsUS.json</code>. Its filename becomes the crate type shown in the drop dialog. The system discovers valid JSON files in this folder automatically&mdash;no configuration edit or server restart is needed after the file is copied.</p>
+    <p><strong>Example custom crates:</strong> download the <a href="Files/STWMedicalCrateContentsUS.json" download>US medical crate</a> or <a href="Files/STWMedicalCrateContentsUSSR.json" download>USSR medical crate</a>, copy the file into <code>CratesContent</code>, and it will appear in the crate-drop picker.</p>
     <div class="callout"><strong>Easy workflow:</strong> make one STW Crate, let it persist, copy its v2 JSON contents into <code>CratesContent</code>, then request a <code>CRATE_DROP</code>. The delivered crate receives a new identity and the requesting player's faction, while retaining the configured contents.</div>
     <div class="warning callout"><strong>Important:</strong> a full persistence snapshot used as a crate type must contain one crate only. STW Crates v1 files are obsolete and are ignored. The two built-in medical samples are installed automatically when missing.</div>
   </section>

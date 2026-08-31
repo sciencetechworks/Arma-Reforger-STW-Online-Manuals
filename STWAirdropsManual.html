@@ -17,7 +17,7 @@
   <p class="lead">Faction-aware cargo delivery by map marker: mark a clear drop zone, choose an available item, then watch it arrive beneath a parachute.</p>
   <div class="badges"><span class="badge">Faction delivery</span><span class="badge">Leader requests</span><span class="badge">Validated drop zones</span><span class="badge">Optional C-130 flyby</span></div>
 </div></header>
-<nav><div class="wrap"><a href="index.html">&larr; STW Online Manuals</a><a href="#players">Players</a><a href="#crates">Crate drops</a><a href="#safety">Drop-zone rules</a><a href="#visuals">What you see</a><a href="#gm">Game Masters</a><a href="#config">Server configuration</a><a href="#availability">Delivery availability</a></div></nav>
+<nav><div class="wrap"><a href="index.html">&larr; STW Online Manuals</a><a href="#players">Players</a><a href="#scheduling">Scheduling</a><a href="#crates">Crate drops</a><a href="#safety">Drop-zone rules</a><a href="#visuals">What you see</a><a href="#gm">Game Masters</a><a href="#config">Server configuration</a><a href="#availability">Delivery availability</a></div></nav>
 <main class="wrap">
   <section id="players">
     <h2>For players</h2>
@@ -27,9 +27,21 @@
       <li>Open the map and place a marker at the intended delivery point.</li>
       <li>Write one of the recognised marker texts: <code>AIRDROP</code>, <code>AIR_DROP</code>, or <code>AIR DROP</code>. They are case-insensitive.</li>
       <li>After the request is accepted, close the map. The delivery dialog opens after the map has closed.</li>
-      <li>Confirm the available <strong>Item to deliver</strong>. The faction is preselected and cannot be changed by the client.</li>
+      <li>Select a <strong>Schedule</strong>: Immediate, Delayed, or Set Time of Day; then confirm the available <strong>Item to deliver</strong>. The faction is preselected and cannot be changed by the client.</li>
     </ol>
     <div class="callout"><strong>Map-wheel shortcut:</strong> group leaders can use the <strong>Airdrop &rarr; Place AIRDROP</strong> command on the map wheel. It places the same request marker for you.</div>
+  </section>
+
+  <section id="scheduling">
+    <h2>Scheduling a delivery</h2>
+    <p>The delivery dialog can schedule a selected vehicle or crate using the scenario's in-game clock. The available choices are:</p>
+    <ul>
+      <li><strong>Immediate:</strong> starts the delivery as soon as the server accepts it. A server can disable this option.</li>
+      <li><strong>Delayed:</strong> enter a delay in hours and minutes. It defaults to 1 hour, 0 minutes.</li>
+      <li><strong>Set Time of Day:</strong> shows the current in-game date and time, then lets you choose Month, Day, Year, Hours, and Minutes. Its fields default to one in-game hour ahead.</li>
+    </ul>
+    <p>Delayed and absolute-date requests must meet the server's minimum scheduling delay. A date/time in the past, or one earlier than that minimum, is rejected safely and does not create a delivery. Multiple future requests may be scheduled; normal player requests still obey the faction cooldown when they become due, while Game Master requests remain exempt from that cooldown.</p>
+    <div class="callout"><strong>Game time:</strong> scheduled dates follow scenario time, including its configured time acceleration, rather than the server computer's real-world clock.</div>
   </section>
 
   <section id="crates">
@@ -101,7 +113,9 @@
       <tr><td><code>Enabled</code></td><td>Master switch for the airdrop service.</td><td><code>true</code></td></tr>
       <tr><td><code>EnableMarkerRequests</code></td><td>Enables recognised map-marker requests and the map-wheel flow.</td><td><code>true</code></td></tr>
       <tr><td><code>RequireGroupLeaderForMarkerRequests</code></td><td>Restricts delivery requests to group leaders.</td><td><code>true</code></td></tr>
-      <tr><td><code>RequestTimeoutSeconds</code></td><td>How long an unconfirmed delivery selection may remain pending.</td><td><code>60</code></td></tr>
+      <tr><td><code>AllowImmediateDelivery</code></td><td>Allows Immediate scheduling. When false, the dialog offers only Delayed and Set Time of Day.</td><td><code>true</code></td></tr>
+      <tr><td><code>MinimumSchedulingDelayMinutes</code></td><td>Minimum lead time for Delayed and Set Time of Day deliveries.</td><td><code>10</code></td></tr>
+      <tr><td><code>RequestTimeoutSeconds</code></td><td>Legacy setting; accepted requests now remain pending until they are confirmed or cancelled.</td><td><code>60</code></td></tr>
       <tr><td><code>CooldownSeconds</code></td><td>Faction wait time after a successful delivery request.</td><td><code>300</code></td></tr>
       <tr><td><code>DefaultDropAltitudeAGL</code></td><td>Starting payload height in metres above ground level.</td><td><code>300</code></td></tr>
       <tr><td><code>DescentSpeedMetersPerSecond</code></td><td>Controlled cargo descent rate.</td><td><code>6</code></td></tr>

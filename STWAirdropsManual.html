@@ -17,7 +17,7 @@
   <p class="lead">Faction-aware cargo delivery by map marker: mark a clear drop zone, choose an available item, then watch it arrive beneath a parachute.</p>
   <div class="badges"><span class="badge">Faction delivery</span><span class="badge">Leader requests</span><span class="badge">Validated drop zones</span><span class="badge">Optional C-130 flyby</span></div>
 </div></header>
-<nav><div class="wrap"><a href="index.html">&larr; STW Online Manuals</a><a href="#players">Players</a><a href="#scheduling">Scheduling</a><a href="#crates">Crate drops</a><a href="#safety">Drop-zone rules</a><a href="#visuals">What you see</a><a href="#gm">Game Masters</a><a href="#config">Server configuration</a><a href="#availability">Delivery availability</a></div></nav>
+<nav><div class="wrap"><a href="index.html">&larr; STW Online Manuals</a><a href="#players">Players</a><a href="#scheduling">Scheduling</a><a href="#crates">Crate drops</a><a href="#random-catalogs">Random catalogs</a><a href="#safety">Drop-zone rules</a><a href="#visuals">What you see</a><a href="#gm">Game Masters</a><a href="#config">Server configuration</a><a href="#availability">Delivery availability</a></div></nav>
 <main class="wrap">
   <section id="players">
     <h2>For players</h2>
@@ -67,6 +67,13 @@
     <div class="callout"><strong>Editing tip:</strong> preserve the JSON punctuation and the <code>STW_PERSISTENT_CRATES</code>, version, and inventory-format fields. For containers such as backpacks, create and save the desired crate in STW Crates instead so its nested contents are captured correctly.</div>
     <div class="callout"><strong>Easy workflow:</strong> make one STW Crate, let it persist, copy its v2 JSON contents into <code>CratesContent</code>, then request a <code>CRATE_DROP</code>. The delivered crate receives a new identity and the requesting player's faction, while retaining the configured contents.</div>
     <div class="warning callout"><strong>Important:</strong> a full persistence snapshot used as a crate type must contain one crate only. STW Crates v1 files are obsolete and are ignored. The two built-in medical samples are installed automatically when missing.</div>
+  </section>
+  <section id="random-catalogs">
+    <h2>Random crate catalog download</h2>
+    <p>Random Combat Supplies and Random Apparel Crates are supplied by STW Crates and can be selected in the crate-drop dialog only when their public catalogs are installed on the server.</p>
+    <ol class="steps"><li>Download <a href="Files/Catalogs/STWRandomCratesWeapons.json" download><code>STWRandomCratesWeapons.json</code></a> and <a href="Files/Catalogs/STWRandomCratesApparel.json" download><code>STWRandomCratesApparel.json</code></a>.</li><li>Place both downloaded files in:</li></ol>
+    <pre><code>$profile:STW/Crates/Catalogs/</code></pre>
+    <p>Restart the scenario/server after copying the files. The weapons catalog is required for Random Combat Supplies Crates and the apparel catalog is required for Random Apparel Crates. The path uses <strong>Catalogs</strong>, with an <strong>s</strong>.</p>
   </section>
 
   <section id="safety">

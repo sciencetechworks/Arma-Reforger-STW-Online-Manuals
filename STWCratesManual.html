@@ -25,7 +25,7 @@
   <p class="lead">Persistent, Game Master-placeable storage crates for <em>Arma Reforger</em> by Bohemia Interactive.</p>
   <div class="badges"><span class="badge">Game Master placement</span><span class="badge">Faction map markers</span><span class="badge">Server-owned persistence</span></div>
 </div></header>
-<nav><div class="wrap"><a href="index.html">&larr; STW Online Manuals</a><a href="#suite">STW suite</a><a href="#adds">What it adds</a><a href="#players">Players</a><a href="#gm">Game Masters</a><a href="#server">Server configuration</a><a href="#persistence">Persistence</a><a href="#authors">Scenario authors</a><a href="#community">Community</a></div></nav>
+<nav><div class="wrap"><a href="index.html">&larr; STW Online Manuals</a><a href="#suite">STW suite</a><a href="#adds">What it adds</a><a href="#random-crates">Random crates</a><a href="#players">Players</a><a href="#gm">Game Masters</a><a href="#server">Server configuration</a><a href="#persistence">Persistence</a><a href="#authors">Scenario authors</a><a href="#community">Community</a></div></nav>
 <main class="wrap">
   <section id="suite"><h2>STW suite connection</h2>
     <p>STW Crates is part of the work published by STW (ScienceTechWorks, sciencetechworks@gmail.com). It is a standalone crate system: its project declares only the base Arma Reforger content dependency, and the crate itself works without another STW mod.</p>
@@ -34,6 +34,12 @@
   <section id="adds"><h2>What STW Crates adds</h2>
     <p>The mod adds the <strong>STW Crate</strong>: a blue wooden storage crate that can be placed from the Game Master Entity Browser. Players interact with it using <strong>Open Crate</strong> at close range. Its storage has a hard limit on top-level items, configurable from 1 to 250; the default is 100.</p>
     <div class="grid"><div class="card"><h3>Persistent storage</h3><p>When enabled, crates, their placement, capacity, marker choice, and inventory are saved by the server and recovered after restart.</p></div><div class="card"><h3>Controlled map markers</h3><p>A crate can show a static map marker to one scenario faction, every available scenario faction, or no faction. Markers use the crate’s original placement location.</p></div><div class="card"><h3>Safe GM management</h3><p>Capacity and marker faction changes apply immediately. Deleting a crate through Game Master records its deletion so it does not return on the next recovery.</p></div></div>
+  </section>
+  <section id="random-crates"><h2>Random crate catalogs</h2>
+    <p>Random Combat Supplies and Random Apparel Crates are optional STW Crates features. They need their matching public catalog files before the corresponding crate type can appear or be filled.</p>
+    <ol><li>Download <a href="Files/Catalogs/STWRandomCratesWeapons.json" download><code>STWRandomCratesWeapons.json</code></a> and <a href="Files/Catalogs/STWRandomCratesApparel.json" download><code>STWRandomCratesApparel.json</code></a>.</li><li>Copy both files to the server profile folder:</li></ol>
+    <p><code>$profile:STW/Crates/Catalogs/</code></p>
+    <p>Restart the scenario or server after copying them. The weapons catalog enables Random Combat Supplies Crates; the apparel catalog enables Random Apparel Crates. Missing catalogs simply leave those optional crate types unavailable. The folder name is <strong>Catalogs</strong> (plural).</p>
   </section>
   <section id="players"><h2>For players</h2>
     <ol><li>Approach an STW Crate and use the <strong>Open Crate</strong> action.</li><li>Move equipment into or out of its inventory as the scenario permits.</li><li>If the Game Master assigned a marker faction that includes your faction, open the map and zoom in far enough to see the crate marker. With the default threshold, markers appear at or above the configured map zoom; they may be intentionally absent.</li></ol>

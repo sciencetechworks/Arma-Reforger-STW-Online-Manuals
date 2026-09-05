@@ -24,7 +24,7 @@
     <div class="grid"><div class="card"><h3>Live intelligence</h3><p>Targets are selected from entities that currently exist in the scenario; Task Commander does not spawn targets or alter the world population.</p></div><div class="card"><h3>Faction awareness</h3><p>Enemy status is determined from the scenario’s faction relations. A task for one faction is not automatically shared with another.</p></div><div class="card"><h3>Task lifecycle</h3><p>Each task completes on its objective, fails when its time limit expires, and reserves its area for a configurable cooldown.</p></div></div>
   </section>
   <section id="players"><h2>For players</h2>
-    <p>No separate menu or keybind is needed. When your faction has an available task slot and the server discovers a suitable enemy target, the task appears in the normal Arma Reforger task system with its map position. Follow the task marker and complete the stated objective.</p>
+    <p>No separate menu or keybind is needed. When your faction has an available task slot and the server discovers a suitable enemy target, the task appears in the normal Arma Reforger task system with its map position. By default, markers for moving leaders and vehicles refresh as their target moves. Follow the task marker and complete the stated objective.</p>
     <ul><li><strong>Destroy vehicle</strong> tasks complete when the selected vehicle is destroyed.</li><li><strong>Eliminate leader</strong> tasks complete when the selected enemy AI group leader is killed.</li><li>Tasks are owned and visible by your faction, so another faction’s objectives may be different from yours.</li><li>If a task expires before its objective is completed, it is marked failed. The server may later find a new target elsewhere.</li></ul>
     <div class="callout"><strong>What to expect:</strong> Task Commander works with what the scenario has already placed or generated. A quiet map with no enemy AI leaders or eligible enemy vehicles may simply have no task to offer.</div>
   </section>
@@ -48,6 +48,8 @@
     <table><thead><tr><th>Setting</th><th>Default</th><th>Purpose</th></tr></thead><tbody>
       <tr><td><code>version</code></td><td><code>1</code></td><td>Format version maintained by the mod. Leave this value unchanged.</td></tr>
       <tr><td><code>enabled</code></td><td><code>true</code></td><td>Master switch. Set to <code>false</code> to prevent Task Commander from starting.</td></tr>
+      <tr><td><code>enableDynamicTaskPositionTracking</code></td><td><code>true</code></td><td>Updates the map marker for active leader and vehicle objectives as their target moves. Set to <code>false</code> to keep each task at its original marker position. Intel tasks are unaffected.</td></tr>
+      <tr><td><code>dynamicTaskPositionUpdateMinutes</code></td><td><code>1.0</code></td><td>How often moving leader and vehicle task markers refresh, in minutes. Valid range: 0.1&ndash;60. The update can occur up to five seconds after this interval because it shares the task lifecycle check.</td></tr>
       <tr><td><code>loneWolfLeaderTaskChancePercent</code></td><td><code>2</code></td><td>Chance that a one-soldier AI group leader is eligible for an eliminate-leader task during a scan. Valid range: 0&ndash;100. Lone wolves that pass this roll receive only one tenth of their normal selection score; set 0 to exclude them completely.</td></tr>
       <tr><td><code>debugRejectionLogging</code></td><td><code>false</code></td><td>Logs candidate rejection and selection details for diagnosis. Leave disabled during normal play.</td></tr>
       <tr><td><code>maxConcurrentTasksPerFaction</code></td><td><code>5</code></td><td>Maximum non-terminal tasks for each active player faction. Valid range: 0&ndash;16.</td></tr>
@@ -64,6 +66,7 @@
       <tr><td>No tasks appear</td><td>Confirm <code>enabled</code> is true, allow the initial two-minute settling period, and ensure players belong to an active faction with enemy AI leaders or intact faction-affiliated vehicles in the world.</td></tr>
       <tr><td>Only one faction sees a task</td><td>This is expected. Tasks use the scenario’s faction relations and are visible only to the selected audience faction.</td></tr>
       <tr><td>Tasks are far apart or do not revisit an area</td><td>Check <code>minimumTaskSeparationMeters</code> and <code>locationCooldownSeconds</code>. Both intentionally prevent repetitive objectives in the same area.</td></tr>
+      <tr><td>A moving target marker stays at its original location</td><td>Confirm <code>enableDynamicTaskPositionTracking</code> is <code>true</code>, then check <code>dynamicTaskPositionUpdateMinutes</code> and restart the server after changing the configuration.</td></tr>
       <tr><td>Too much log output</td><td>Set <code>debugRejectionLogging</code> back to <code>false</code> and restart the server.</td></tr>
       <tr><td>Settings do not take effect</td><td>Stop the server, verify the JSON file and values, then restart. The mod loads configuration during startup.</td></tr>
     </tbody></table>

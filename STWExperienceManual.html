@@ -39,7 +39,7 @@
       <li><strong>Stay connected:</strong> by default, the system awards 60 XP per connected hour.</li>
       <li><strong>Fight the enemy:</strong> an enemy soldier elimination awards 25 XP by default.</li>
       <li><strong>Protect friendlies and civilians:</strong> default penalties are 100 XP for a friendly soldier and 150 XP for a civilian.</li>
-      <li><strong>Watch for notices:</strong> combat notices can be delayed by the server, normally by 30&ndash;45 seconds, so they do not crowd the immediate fight.</li>
+      <li><strong>Watch for notices:</strong> by default, a combat XP notice is queued after every 10 enemy combat kills. Enemy soldiers and enemy vehicle destructions share this total; friendly, civilian and uncrewed vehicle losses do not count. The server can delay each milestone notice, normally by 30&ndash;45 seconds, so it does not crowd the immediate fight.</li>
     </ul>
     <div class="callout"><strong>Experience summary:</strong> press <strong>F7</strong> (the default keybind) whenever you want to open the STW Experience Summary Dialog. Profiles follow your identity, not your display name: changing a player name does not create a new XP profile. XP is saved separately for each scenario, so a new scenario begins with its own progression history.</div>
   </section>
@@ -71,11 +71,14 @@
       <tr><td><code>enemySoldierXp</code></td><td><code>25</code></td><td>Reward for eliminating an enemy soldier.</td></tr>
       <tr><td><code>friendlySoldierXp</code></td><td><code>-100</code></td><td>Penalty for killing a friendly soldier.</td></tr>
       <tr><td><code>civilianSoldierXp</code></td><td><code>-150</code></td><td>Penalty for killing a civilian-faction soldier.</td></tr>
+      <tr><td><code>enemyCombatKillNotificationInterval</code></td><td><code>10</code></td><td>Number of combined enemy soldier eliminations and enemy vehicle destructions between combat XP notices. Friendly, civilian and uncrewed vehicle losses do not advance this counter. Values are limited to 1&ndash;1,000.</td></tr>
+      <tr><td><code>notificationsEnabled</code></td><td><code>true</code></td><td>Master switch for STW Experience on-screen notices, including combat XP, connected-time XP, profile-load and administration notices.</td></tr>
+      <tr><td><code>chatMessagesEnabled</code></td><td><code>true</code></td><td>Master switch for STW Experience chat messages for the same notices. It can be used independently of <code>notificationsEnabled</code>.</td></tr>
       <tr><td><code>civilianFactionKeys</code></td><td><code>[&quot;CIV&quot;]</code></td><td>Faction keys treated as civilians for soldier and vehicle penalties.</td></tr>
       <tr><td><code>debugVehiclePrefabLogging</code></td><td><code>false</code></td><td>Writes destroyed-vehicle prefab paths to the server log to help create precise vehicle category rules. Keep disabled during normal play.</td></tr>
       <tr><td><code>allowNegativeXp</code></td><td><code>false</code></td><td>When false, penalties cannot reduce a profile below zero XP.</td></tr>
       <tr><td><code>notificationSeconds</code></td><td><code>4.0</code></td><td>How long each XP notification remains visible; the permitted range is 1&ndash;10 seconds.</td></tr>
-      <tr><td><code>combatNotificationDelayMinimumSeconds</code>, <code>combatNotificationDelayMaximumSeconds</code></td><td><code>30</code>, <code>45</code></td><td>Random 30&ndash;45-second delay range before a combat XP notice is shown. Combat notifications remain independently controlled by these settings.</td></tr>
+      <tr><td><code>combatNotificationDelayMinimumSeconds</code>, <code>combatNotificationDelayMaximumSeconds</code></td><td><code>30</code>, <code>45</code></td><td>Random 30&ndash;45-second delay range before each combat XP milestone notice is shown.</td></tr>
       <tr><td><code>leaderboardEnabled</code></td><td><code>true</code></td><td>Shows the all-time leaderboard in the F7 Experience Summary Dialog. When disabled, the dialog states that the leaderboard is disabled by the server.</td></tr>
       <tr><td><code>leaderboardTopEntries</code></td><td><code>5</code></td><td>Maximum number of top leaderboard entries displayed. Values are limited to 1&ndash;10.</td></tr>
       <tr><td><code>leaderboardShowPlayerNames</code></td><td><code>false</code></td><td>Shows player names in leaderboard entries when enabled. Leave it false to show standings without revealing other players' names.</td></tr>

@@ -17,7 +17,7 @@
   <p class="lead">Faction-aware cargo delivery by map marker: mark a clear drop zone, choose an available item, then watch it arrive beneath a parachute.</p>
   <div class="badges"><span class="badge">Faction delivery</span><span class="badge">Leader requests</span><span class="badge">Validated drop zones</span><span class="badge">Optional C-130 flyby</span></div>
 </div></header>
-<nav><div class="wrap"><a href="index.html">&larr; STW Online Manuals</a><a href="#players">Players</a><a href="#scheduling">Scheduling</a><a href="#crates">Crate drops</a><a href="#random-catalogs">Random catalogs</a><a href="#safety">Drop-zone rules</a><a href="#visuals">What you see</a><a href="#gm">Game Masters</a><a href="#config">Server configuration</a><a href="#availability">Delivery availability</a></div></nav>
+<nav><div class="wrap"><a href="index.html">&larr; STW Online Manuals</a><a href="#players">Players</a><a href="#scheduling">Scheduling</a><a href="#crates">Crate drops</a><a href="#random-catalogs">Random catalogs</a><a href="#automatic">Automatic drops</a><a href="#safety">Drop-zone rules</a><a href="#visuals">What you see</a><a href="#gm">Game Masters</a><a href="#config">Server configuration</a><a href="#availability">Delivery availability</a></div></nav>
 <main class="wrap">
   <section id="players">
     <h2>For players</h2>
@@ -76,6 +76,22 @@
     <p>Restart the scenario/server after copying the files. The weapons catalog is required for Random Combat Supplies Crates and the apparel catalog is required for Random Apparel Crates. The path uses <strong>Catalogs</strong>, with an <strong>s</strong>.</p>
   </section>
 
+  <section id="automatic">
+    <h2>Automatic airdrop deployments</h2>
+    <p>The authoritative server can periodically deploy one random STW crate to a random safe location anywhere on the map. This is independent of player markers, player cooldowns, and Game Master placement requests.</p>
+    <p>Every cycle waits a newly randomized <strong>real server-time</strong> interval. The default range is <strong>60 to 90 minutes</strong>. Scenario time acceleration does not shorten it, and a server/scenario restart starts a fresh interval rather than preserving a countdown.</p>
+    <p>Each deployment chooses an available random crate type with equal weight, then selects an eligible faction and available size at random. Random Combat Supplies and Random Apparel crates remain available when their public STW Crates catalogs are installed; they are faction-neutral.</p>
+    <p>The server samples up to 64 map locations and applies the same landing-zone validation used for ordinary airdrops. If no safe location is found, it skips that cycle and schedules the next one; it never drops a crate at an unsafe fallback location.</p>
+    <h3>Scenario Properties</h3>
+    <p>Game Masters can make session-only changes through <strong>Scenario Properties &rarr; STW Air Drops</strong>:</p>
+    <table><thead><tr><th>Control</th><th>Effect</th></tr></thead><tbody>
+      <tr><td><strong>Automatic Airdrop Deployments</strong></td><td>Enables or disables future automatic deployments for the current session.</td></tr>
+      <tr><td><strong>Minimum Period</strong></td><td>Shortest real server-time delay before the next automatic deployment.</td></tr>
+      <tr><td><strong>Maximum Period</strong></td><td>Longest real server-time delay before the next automatic deployment.</td></tr>
+    </tbody></table>
+    <div class="callout"><strong>Session-only:</strong> Scenario Properties overrides do not rewrite the server profile. The next server/scenario session returns to the JSON configuration defaults.</div>
+  </section>
+
   <section id="safety">
     <h2>Drop-zone rules</h2>
     <p>STW/Air Drops uses the established Transport Helipads landing-zone acceptance rules. A request is rejected when the target area is unsafe for a delivery.</p>
@@ -122,6 +138,10 @@
       <tr><td><code>RequireGroupLeaderForMarkerRequests</code></td><td>Restricts delivery requests to group leaders.</td><td><code>true</code></td></tr>
       <tr><td><code>AllowImmediateDelivery</code></td><td>Allows Immediate scheduling. When false, the dialog offers only Delayed and Set Time of Day.</td><td><code>true</code></td></tr>
       <tr><td><code>MinimumSchedulingDelayMinutes</code></td><td>Minimum lead time for Delayed and Set Time of Day deliveries.</td><td><code>10</code></td></tr>
+      <tr><td><code>AutomaticAirdropDeployments</code></td><td>Enables periodic, server-authoritative automatic crate deployments.</td><td><code>true</code></td></tr>
+      <tr><td><code>AutomaticAirdropMinimumPeriodMinutes</code><br><code>AutomaticAirdropMaximumPeriodMinutes</code></td><td>Random real server-time interval between automatic deployment attempts.</td><td><code>60</code><br><code>90</code></td></tr>
+      <tr><td><code>AutomaticAirdropEnabledFactionKeys</code></td><td>Optional faction allow-list for faction-specific automatic crates. An empty list permits all active factions.</td><td><code>[]</code></td></tr>
+      <tr><td><code>AutomaticAirdropExcludedFactionKeys</code></td><td>Faction deny-list for automatic crates. Exclusions override the allow-list.</td><td><code>[]</code></td></tr>
       <tr><td><code>RequestTimeoutSeconds</code></td><td>Legacy setting; accepted requests now remain pending until they are confirmed or cancelled.</td><td><code>60</code></td></tr>
       <tr><td><code>CooldownSeconds</code></td><td>Faction wait time after a successful delivery request.</td><td><code>300</code></td></tr>
       <tr><td><code>DefaultDropAltitudeAGL</code></td><td>Starting payload height in metres above ground level.</td><td><code>300</code></td></tr>

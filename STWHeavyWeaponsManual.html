@@ -99,7 +99,7 @@
     <p><code>$profile:STW/HeavyWeapons/</code></p>
     <p>In a typical Windows server installation, <code>$profile</code> means the profile folder selected by the server's <code>-profile</code> startup parameter. If no custom profile location is used, it is commonly in the server's working/profile area. Ask whoever starts the server where its profile folder is; the <code>STW</code> folder will be inside it.</p>
     <table><thead><tr><th>Folder / file</th><th>Purpose</th></tr></thead><tbody>
-      <tr><td><code>$profile:STW/HeavyWeapons/STWHeavyWeaponsSystemConfig.json</code></td><td>Core system settings: limits, markers, persistence, crates and Game Master factions.</td></tr>
+      <tr><td><code>$profile:STW/HeavyWeapons/STWHeavyWeaponsSystemConfig.json</code></td><td>Core system settings: limits, markers, persistence, crates, Game Master factions and artillery player messages.</td></tr>
       <tr><td><code>$profile:STW/HeavyWeapons/STWAutoPopulationConfig.json</code></td><td>Automatic creation of staffed RPK and mortar posts.</td></tr>
       <tr><td><code>$profile:STW/HeavyWeapons/STWMortarTerrainConfig.json</code></td><td>Terrain-generated mortar network and faction quotas.</td></tr>
       <tr><td><code>$profile:STW/HeavyWeapons/STWHeavyWeaponsRespawnConfig.json</code></td><td>Session-only terrain-Mortar replacement timing and player-safety rules.</td></tr>
@@ -121,6 +121,8 @@
       <tr><td><code>markerZoomThreshold</code></td><td>Map zoom level used by zoom-based markers.</td><td><code>1.5</code>.</td></tr>
       <tr><td><code>useRandomOffsetForPublicMarkers</code>, <code>maximumPublicMarkerOffsetMeters</code></td><td>Can deliberately blur public marker positions.</td><td>Enable for fog-of-war flavor.</td></tr>
       <tr><td><code>enableSTWCrates</code></td><td>Allows integration with STW Crates.</td><td><code>true</code> when that STW mod is installed.</td></tr>
+      <tr><td><code>enableChatMessages</code></td><td>Shows artillery status updates in the player's radio chat.</td><td><code>true</code>.</td></tr>
+      <tr><td><code>enableNotificationMessages</code></td><td>Shows artillery status updates as on-screen hint notifications.</td><td><code>false</code>; enable only when you want these alerts.</td></tr>
       <tr><td><code>mortarCommandAssignmentEnabled</code></td><td>Enables assigning managed mortars to artillery-command groups.</td><td><code>true</code>.</td></tr>
       <tr><td><code>mortarCommandAssignmentStrategy</code></td><td>Chooses assignment policy: <code>NONE</code>, <code>SIMPLE</code>, or <code>NEARBY</code>.</td><td><code>NEARBY</code>; uses the configured service radius and reconciliation interval.</td></tr>
       <tr><td><code>mortarCommandServiceRadiusMeters</code>, <code>mortarCommandNearbyReconciliationSeconds</code></td><td>Sets the NEARBY strategy's search radius and update interval.</td><td><code>2000</code> m / <code>30</code> s.</td></tr>

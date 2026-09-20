@@ -80,6 +80,7 @@
     <h2>Firing mortars</h2>
     <p>Mortar posts can support artillery missions through Arma Reforger's normal command/artillery flow. The exact order-giving experience depends on the game mode and the server's chosen assignment strategy, but the guiding rule is simple: select or assign an available mortar crew, then designate the target through the usual artillery order.</p>
     <p>STW Heavy Weapons adds a little battlefield character. Mortars do not have endless energy or perfect aim: each completed salvo adds stress, stress fades over time, and firing delays and accuracy can vary. This keeps artillery powerful without turning it into a meteorological event.</p>
+    <p><strong>Player Combat Support orders are reliable by default.</strong> HE, smoke and flare requests are accepted even when a mortar is temporarily cooling down or already marked busy by fire control. The order remains queued, then its waypoint is issued after a randomized <strong>15&ndash;30 second</strong> delay. AI mortar behavior keeps its normal stress, safety, cooldown and autonomous-fire rules.</p>
     <div class="callout">
       <strong>For players:</strong> stay aware of the target area and your squad's position. Server owners can protect friendly players near an AI target, but common sense remains the most reliable safety system ever shipped.
     </div>
@@ -103,10 +104,19 @@
       <tr><td><code>$profile:STW/HeavyWeapons/STWAutoPopulationConfig.json</code></td><td>Automatic creation of staffed RPK and mortar posts.</td></tr>
       <tr><td><code>$profile:STW/HeavyWeapons/STWMortarTerrainConfig.json</code></td><td>Terrain-generated mortar network and faction quotas.</td></tr>
       <tr><td><code>$profile:STW/HeavyWeapons/STWHeavyWeaponsRespawnConfig.json</code></td><td>Session-only terrain-Mortar replacement timing and player-safety rules.</td></tr>
-      <tr><td><code>$profile:STW/HeavyWeapons/STWMortarFireConfig.json</code></td><td>Mortar mission, cooldown, accuracy, stress and safety behavior.</td></tr>
+      <tr><td><code>$profile:STW/HeavyWeapons/STWMortarFireConfig.json</code></td><td>Mortar mission, cooldown, accuracy, stress, safety, and reliable player-order behavior.</td></tr>
       <tr><td><code>$profile:STW/Persistence/</code></td><td>Saved heavy-weapon post data, kept separately from the settings.</td></tr>
     </tbody></table>
     <div class="callout warning"><strong>Safe editing routine:</strong> stop the server, copy the relevant JSON file somewhere safe, edit it with a plain-text editor, save it, then start the server again. If a file is invalid, the mod writes safe defaults; a backup is still much nicer than rebuilding a carefully tuned setup.</div>
+
+    <h3>Mortar player-order reliability</h3>
+    <p>These settings are in <code>STWMortarFireConfig.json</code>. They apply only to player-issued Combat Support mortar orders; AI fire-control policy is unchanged.</p>
+    <table><thead><tr><th>Setting</th><th>What it controls</th><th>Default</th></tr></thead><tbody>
+      <tr><td><code>alwaysExecutePlayerOrders</code></td><td>Retains HE, smoke and flare player orders instead of rejecting them for temporary cooldown or active-mission availability checks.</td><td><code>true</code></td></tr>
+      <tr><td><code>playerOrderMinimumDelaySeconds</code></td><td>Minimum delay before the queued player's waypoint is issued.</td><td><code>15</code></td></tr>
+      <tr><td><code>playerOrderMaximumDelaySeconds</code></td><td>Maximum delay; each order receives a random delay within the configured range.</td><td><code>30</code></td></tr>
+    </tbody></table>
+    <p>Set <code>alwaysExecutePlayerOrders</code> to <code>false</code> to restore the previous rejection behavior. Delay values are validated and clamped by the server.</p>
 
     <h3>1. System settings &mdash; <code>STWHeavyWeaponsSystemConfig.json</code></h3>
     <table><thead><tr><th>Setting</th><th>What it controls</th><th>Good starting point</th></tr></thead><tbody>

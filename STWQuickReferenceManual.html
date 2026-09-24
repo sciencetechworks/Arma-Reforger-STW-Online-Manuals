@@ -3,11 +3,236 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-LT54NLXDD2"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-LT54NLXDD2');</script>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Friendly quick reference guide for the main STW systems, first-run generation and server configuration."><link rel="icon" type="image/svg+xml" href="images/stw-favicon.svg"><link rel="stylesheet" href="stw-manuals.css"><title>STW Quick Reference Guide — Online Manual</title></head><body>
 <header><div class="wrap"><p class="kicker">STW Online Manuals · Start here</p><h1>STW Quick Reference Guide</h1><p class="lead">A short, friendly guide to the systems that make an STW scenario feel alive—and to what administrators should expect the first time they run one.</p><div class="badges"><span class="badge">24/7 server friendly</span><span class="badge">First-run generation</span><span class="badge">Low-end defaults</span><span class="badge">Administrator reference</span></div></div></header>
-<nav><div class="wrap"><a href="index.html">&larr; STW Online Manuals</a><a href="#systems">Main systems</a><a href="#first-run">First run</a><a href="#configuration">Configuration</a><a href="#performance">Performance tuning</a><a href="#troubleshooting">Troubleshooting</a></div></nav>
+<nav><div class="wrap"><a href="index.html">&larr; STW Online Manuals</a><a href="#systems">Main systems</a><a href="#first-run">First run</a><a href="#configuration">Configuration</a><a href="#performance">Performance tuning</a><a href="#useful-links">Useful links &amp; JSONs</a><a href="#troubleshooting">Troubleshooting</a></div></nav>
 <main class="wrap">
 <section id="systems"><h2>The four main STW systems</h2><p>STW is a suite of systems that work together to add activity, danger and atmosphere to a scenario. You can use the individual manuals for detailed settings; this page is the quick orientation for players, Game Masters and server administrators.</p><div class="grid"><div class="card"><h3>STW Combat Knowledge</h3><p><strong>The Strategical AI.</strong> AI observations can become believable combat-support decisions and responses across the battlefield.</p><a href="STWCombatKnowledgeManual.html">Read the manual</a></div><div class="card"><h3>STW Close Quarters Battle</h3><p><strong>CQB encounters.</strong> Brings close-quarters combat activity to suitable towns and villages.</p><a href="STWCloseQuartersBattleManual.html">Read the manual</a></div><div class="card"><h3>STW Stronghold</h3><p><strong>Fortified positions.</strong> Creates faction garrisons, patrols and defensive strongholds that give important locations a presence.</p><a href="STWStrongholdManual.html">Read the manual</a></div><div class="card"><h3>STW Civilians/Zombies</h3><p><strong>The ambient.</strong> Civilian and zombie activity helps the world feel populated and gives players something happening between major operations.</p><a href="STWCiviliansSpawnerManual.html">Civilians manual</a> <a href="STWZombiesSpawnerManual.html">Zombies manual</a></div></div></section>
 <section id="first-run"><h2>What to expect the first time</h2><div class="warning"><strong>First generation can take a long time.</strong> STW is designed for 24/7 systems and builds a strategical database for the scenario. On huge maps, generating those database files can take more than an hour—but this is normally needed only the first time for that scenario.</div><p>Let the server finish. Once the strategical database files exist, the system can restart quite quickly on later launches. The first run is the heavy one because STW is preparing the information it needs instead of repeatedly rebuilding it every time the server starts.</p><p>While those files are not present, the system may respond very slowly. That can look like a problem during the first run, but it is usually the expected cost of preparing the scenario. Avoid repeatedly restarting the server during generation, because each interrupted run can delay the point at which the files are ready.</p><div class="callout"><strong>Practical advice:</strong> generate the files during a maintenance window, keep the server running until the process has completed, and then use the normal 24/7 restart schedule.</div></section>
 <section id="configuration"><h2>Configuration for administrators</h2><p>The mods arrive preconfigured with settings intended to be friendly to low-end systems and with no RHS presence assumed. This gives a sensible starting point for a broad range of servers; it does not mean every map, mod collection or player count will need identical settings.</p><p>Make configuration changes in the corresponding files under <code>$profile/STW</code>. Each system has its own folder and configuration file. Stop the server before editing, make one deliberate change at a time, and restart it so the new values are loaded cleanly.</p><div class="two"><div><h3>Good starting point</h3><ul><li>Use the shipped defaults first.</li><li>Confirm the scenario works without RHS before adding more faction or asset dependencies.</li><li>Give first-run database generation enough uninterrupted time.</li></ul></div><div><h3>When tuning</h3><ul><li>Increase activity gradually on low-end hardware.</li><li>Use the specific system manual to identify its configuration file.</li><li>Keep a copy of working files before making larger changes.</li></ul></div></div><div class="sky"><strong>Remember:</strong> configuration belongs in <code>$profile/STW</code>, not in the addon files. Profile settings are the administrator’s safe place to tune the installed systems for a particular server and scenario.</div></section>
 <section id="performance"><h2>Performance tuning</h2><p>For a smoother server, activate <code>-aiPartialSim</code> on the server. This lets the server use partial AI simulation and is especially useful when a scenario has many active AI groups. Apply the launch option to the authoritative server rather than relying on individual clients.</p><p>It is also advised to use a cleanup system such as <a href="STWGarbageSystemManual.html">STW Garbage System</a>. Removing eligible wrecks, bodies, inventory items and other accumulated clutter helps keep long-running 24/7 sessions healthy. Tune cleanup carefully for your scenario so deliberately placed or distant encounters are not removed unexpectedly.</p><div class="warning"><strong>Vanilla persistence:</strong> set vanilla persistence to a high number, or disable it completely. A short persistence lifetime can repeatedly save and restore large amounts of world state, adding unnecessary work and potentially working against the cleanup strategy chosen by the administrator.</div><p>Make these choices alongside the STW settings under <code>$profile/STW</code>, then test them on the actual map and mod list used by the server. Large maps, high player counts and heavily populated scenarios may need more conservative spawn and cleanup settings even when the shipped defaults run well on a smaller test.</p></section>
+<section id="useful-links"><h2>Useful Mod Links and JSONs</h2><h3>STW Mods JSONs</h3><p>Copy the complete list below into the appropriate mod list or configuration file.</p><div class="warning"><strong>“Too Many Instructions” error:</strong> If this error appears, removing STW Task Commander, STW Boats Spawner, or other less important mods can help the system start.</div><details><summary>Show STW Mods JSONs</summary><pre><code>[
+{
+  "modId": "6A3950D64F1072DA",
+  "name": "STW Air Drops",
+  "required": false
+},
+{
+  "modId": "69EAA987F3AD55D1",
+  "name": "STW Heavy Weapons",
+  "required": false
+},
+{
+  "modId": "69F145357FF8207B",
+  "name": "STW Armored Spawner",
+  "required": false
+},
+{
+  "modId": "69E531416F617BDB",
+  "name": "STW Crates",
+  "required": false
+},
+{
+  "modId": "69DCCEB968B92571",
+  "name": "STWBasesGenerator",
+  "required": false
+},
+{
+  "modId": "6A0A3E8B6A9C0719",
+  "name": "STW Experience",
+  "required": false
+},
+{
+  "modId": "69E72E8A33B7C43A",
+  "name": "STW Bases-Crates Integration",
+  "required": false
+},
+{
+  "modId": "69E12A944C6AE5AA",
+  "name": "STW Garbage System",
+  "required": false
+},
+{
+  "modId": "69DF24C9E5BEE30C",
+  "name": "STW Tanks Spawner",
+  "required": false
+},
+{
+  "modId": "69E8B2129CC185F7",
+  "name": "STW Parachute SpawnPoint",
+  "required": false
+},
+{
+  "modId": "6A492D2543718567",
+  "name": "STW Combat Knowledge",
+  "required": false
+},
+{
+  "modId": "6A268552E2B571AF",
+  "name": "STW Light Vehicle Spawner",
+  "required": false
+},
+{
+  "modId": "6A1D7AF1060F02F4",
+  "name": "STW Transport Helipads",
+  "required": false
+},
+{
+  "modId": "69FE5939649668A2",
+  "name": "STW Mine Fields",
+  "required": false
+},
+{
+  "modId": "6A0C1B4265742EBC",
+  "name": "STW Snipers &amp; Spotters",
+  "required": false
+},
+{
+  "modId": "6A2C8C45F744CB17",
+  "name": "STW Combat Helipads Light",
+  "required": false
+},
+{
+  "modId": "6A4685D07BA826A5",
+  "name": "STWCombatSupportAPI",
+  "required": false
+},
+{
+  "modId": "6A58D4467C928606",
+  "name": "STW Road Network",
+  "required": false
+},
+{
+  "modId": "69FB76C0D035957E",
+  "name": "STW Stronghold",
+  "required": false
+},
+{
+  "modId": "A9D7F20C4E8B61F3",
+  "name": "STW Close Quarters Battle",
+  "required": false
+},
+{
+  "modId": "6A66A8B970871EE2",
+  "name": "STW Building Knowledge",
+  "required": false
+},
+{
+  "modId": "6A6B2BE0558DA3DF",
+  "name": "STW Zombies Spawner",
+  "required": false
+},
+{
+  "modId": "6A608395674B259E",
+  "name": "STW Zone Exclusion",
+  "required": false
+},
+{
+  "modId": "69E0A48B209F861A",
+  "name": "STW Civilians Spawner",
+  "required": false
+},
+{
+  "modId": "69DEAA8B1AA2931E",
+  "name": "STW Boats Spawner",
+  "required": false
+},
+{
+  "modId": "6A2EC47163C7DE19",
+  "name": "STW Task Commander",
+  "required": false
+}
+]</code></pre></details><h3>Parachutes for STW Parachute Spawn Point</h3><details><summary>Show parachute JSONs</summary><pre><code>[
+{
+  "modId": "65930CB4CD0237B2",
+  "name": "Parachute Framework",
+  "required": false
+},
+{
+  "modId": "6867754CA817D856",
+  "name": "MFF Parachute",
+  "required": false
+},
+{
+  "modId": "69735D889EA31A8B",
+  "name": "Parachute SOA V2",
+  "required": false
+},
+{
+  "modId": "68996556700D5CA1",
+  "name": "Prontos Parachutes",
+  "required": false
+}
+]</code></pre></details><h3>IFVs and Tanks</h3><details><summary>Show IFVs and Tanks JSONs</summary><pre><code>[
+{
+  "modId": "5D1880C4AD410C14",
+  "name": "M1 Abrams",
+  "required": false
+},
+{
+  "modId": "5E524E4FEECCA92B",
+  "name": "BMP-1 IFV",
+  "required": false
+},
+{
+  "modId": "5B383D4CB27E0D54",
+  "name": "BMP-3 IFV",
+  "required": false
+},
+{
+  "modId": "65171C2883CB81B4",
+  "name": "BTR 152",
+  "required": false
+},
+{
+  "modId": "5E5C154FEE1094BB",
+  "name": "M113 APC",
+  "required": false
+},
+{
+  "modId": "63120AE07E6C0966",
+  "name": "M2 Bradley Fighting Vehicle",
+  "required": false
+},
+{
+  "modId": "685952488F7E3CBA",
+  "name": "CIE Leopard 2A6",
+  "required": false
+}
+]</code></pre></details><h3>Helicopters</h3><details><summary>Show Helicopters JSONs</summary><pre><code>[
+{
+  "modId": "628933A0D3A0D700",
+  "name": "WCS_Mi-24V",
+  "required": false
+},
+{
+  "modId": "609E138FE9005877",
+  "name": "Mi-28",
+  "required": false
+},
+{
+  "modId": "64CB35D07BAEE60F",
+  "name": "WCS_KA-52",
+  "required": false
+},
+{
+  "modId": "64CB39E57377C861",
+  "name": "WCS_AH-1S",
+  "required": false
+},
+{
+  "modId": "6303360DA719E832",
+  "name": "WCS_AH-64D",
+  "required": false
+},
+{
+  "modId": "6273146ADFE8241D",
+  "name": "WCS_AH-6M",
+  "required": false
+},
+{
+  "modId": "6704485615D2D3C3",
+  "name": "H-47 Chinook - Fastroping",
+  "required": false
+}
+]</code></pre></details><h3>Mod Lists</h3><details><summary>STW Mods JSONs</summary><p># STW Air Drops<br>https://reforger.armaplatform.com/workshop/6A3950D64F1072DA</p><p># STW Heavy Weapons<br>https://reforger.armaplatform.com/workshop/69EAA987F3AD55D1</p><p># STW Armored Spawner<br>https://reforger.armaplatform.com/workshop/69F145357FF8207B</p><p># STW Crates<br>https://reforger.armaplatform.com/workshop/69E531416F617BDB</p><p># STWBasesGenerator<br>https://reforger.armaplatform.com/workshop/69DCCEB968B92571</p><p># STW Experience<br>https://reforger.armaplatform.com/workshop/6A0A3E8B6A9C0719</p><p># STW Bases-Crates Integration<br>https://reforger.armaplatform.com/workshop/69E72E8A33B7C43A</p><p># STW Garbage System<br>https://reforger.armaplatform.com/workshop/69E12A944C6AE5AA</p><p># STW Tanks Spawner<br>https://reforger.armaplatform.com/workshop/69DF24C9E5BEE30C</p><p># STW Parachute SpawnPoint<br>https://reforger.armaplatform.com/workshop/69E8B2129CC185F7</p><p># STW Combat Knowledge<br>https://reforger.armaplatform.com/workshop/6A492D2543718567</p><p># STW Light Vehicle Spawner<br>https://reforger.armaplatform.com/workshop/6A268552E2B571AF</p><p># STW Transport Helipads<br>https://reforger.armaplatform.com/workshop/6A1D7AF1060F02F4</p><p># STW Mine Fields<br>https://reforger.armaplatform.com/workshop/69FE5939649668A2</p><p># STW Snipers &amp;amp; Spotters<br>https://reforger.armaplatform.com/workshop/6A0C1B4265742EBC</p><p># STW Combat Helipads Light<br>https://reforger.armaplatform.com/workshop/6A2C8C45F744CB17</p><p># STWCombatSupportAPI<br>https://reforger.armaplatform.com/workshop/6A4685D07BA826A5</p><p># STW Road Network<br>https://reforger.armaplatform.com/workshop/6A58D4467C928606</p><p># STW Stronghold<br>https://reforger.armaplatform.com/workshop/69FB76C0D035957E</p><p># STW Close Quarters Battle<br>https://reforger.armaplatform.com/workshop/A9D7F20C4E8B61F3</p><p># STW Building Knowledge<br>https://reforger.armaplatform.com/workshop/6A66A8B970871EE2</p><p># STW Zombies Spawner<br>https://reforger.armaplatform.com/workshop/6A6B2BE0558DA3DF</p><p># STW Zone Exclusion<br>https://reforger.armaplatform.com/workshop/6A608395674B259E</p><p># STW Civilians Spawner<br>https://reforger.armaplatform.com/workshop/69E0A48B209F861A</p><p># STW Boats Spawner<br>https://reforger.armaplatform.com/workshop/69DEAA8B1AA2931E</p><p># STW Task Commander<br>https://reforger.armaplatform.com/workshop/6A2EC47163C7DE19</p></details><details><summary>Parachutes for STW Parachute Spawn Point</summary><p># Parachute Framework<br>https://reforger.armaplatform.com/workshop/65930CB4CD0237B2</p><p># MFF Parachute<br>https://reforger.armaplatform.com/workshop/6867754CA817D856</p><p># Parachute SOA V2<br>https://reforger.armaplatform.com/workshop/69735D889EA31A8B</p><p># Prontos Parachutes<br>https://reforger.armaplatform.com/workshop/68996556700D5CA1</p></details><details><summary>IFVs and Tanks</summary><p># M1 Abrams<br>https://reforger.armaplatform.com/workshop/5D1880C4AD410C14</p><p># BMP-1 IFV<br>https://reforger.armaplatform.com/workshop/5E524E4FEECCA92B</p><p># BMP-3 IFV<br>https://reforger.armaplatform.com/workshop/5B383D4CB27E0D54</p><p># BTR 152<br>https://reforger.armaplatform.com/workshop/65171C2883CB81B4</p><p># M113 APC<br>https://reforger.armaplatform.com/workshop/5E5C154FEE1094BB</p><p># M2 Bradley Fighting Vehicle<br>https://reforger.armaplatform.com/workshop/63120AE07E6C0966</p><p># CIE Leopard 2A6<br>https://reforger.armaplatform.com/workshop/685952488F7E3CBA</p></details><details><summary>Helicopters</summary><p># WCS_Mi-24V<br>https://reforger.armaplatform.com/workshop/628933A0D3A0D700</p><p># Mi-28<br>https://reforger.armaplatform.com/workshop/609E138FE9005877</p><p># WCS_KA-52<br>https://reforger.armaplatform.com/workshop/64CB35D07BAEE60F</p><p># WCS_AH-1S<br>https://reforger.armaplatform.com/workshop/64CB39E57377C861</p><p># WCS_AH-64D<br>https://reforger.armaplatform.com/workshop/6303360DA719E832</p><p># WCS_AH-6M<br>https://reforger.armaplatform.com/workshop/6273146ADFE8241D</p><p># H-47 Chinook - Fastroping<br>https://reforger.armaplatform.com/workshop/6704485615D2D3C3</p></details></section>
 <section id="troubleshooting"><h2>If the system seems slow</h2><ol><li>Check whether this is the first run for the scenario and whether the strategical database files have been generated yet.</li><li>If it is the first run, allow the server to continue running. Huge maps can take over an hour.</li><li>After generation, restart the server and compare startup and response time.</li><li>If the problem remains, review the relevant file under <code>$profile/STW</code>, reduce activity using that system’s manual, and check the server log for errors.</li></ol><p>For detailed behaviour and settings, open the manual for <a href="STWCombatKnowledgeManual.html">STW Combat Knowledge</a>, <a href="STWCloseQuartersBattleManual.html">STW CQB</a>, <a href="STWStrongholdManual.html">STW Stronghold</a>, <a href="STWCiviliansSpawnerManual.html">STW Civilians</a> or <a href="STWZombiesSpawnerManual.html">STW Zombies</a>.</p></section>
 <section class="contact"><img src="images/CaptainSprocketPatch.png" alt="Captain Sprocket patch"><div><h2>More STW help</h2><p>Use this page as the starting point, then open the relevant system manual when you are ready to tune behaviour.</p><p><a href="index.html">Return to all STW manuals</a></p></div></section></main><footer>STW Quick Reference Guide · Captain Sprocket / STW</footer></body></html>

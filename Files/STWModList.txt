@@ -1,0 +1,123 @@
+## RHS ##
+# RHS - Content Pack 01
+https://reforger.armaplatform.com/workshop/1337C0DE5DABBEEF
+# RHS - Content Pack 02
+https://reforger.armaplatform.com/workshop/BADC0DEDABBEDA5E
+# RHS - Status Quo
+https://reforger.armaplatform.com/workshop/595F2BF2F44836FB
+## ##
+## VEHICLES AND HELICOPTERS ##
+# M1 Abrams
+https://reforger.armaplatform.com/workshop/5D1880C4AD410C14
+# BMP-1 IFV
+https://reforger.armaplatform.com/workshop/5E524E4FEECCA92B
+# BMP-3 IFV
+https://reforger.armaplatform.com/workshop/5B383D4CB27E0D54
+# BTR 152
+https://reforger.armaplatform.com/workshop/65171C2883CB81B4
+# M113 APC
+https://reforger.armaplatform.com/workshop/5E5C154FEE1094BB
+# M2 Bradley Fighting Vehicle
+https://reforger.armaplatform.com/workshop/63120AE07E6C0966
+# Mi-28
+https://reforger.armaplatform.com/workshop/609E138FE9005877
+# WCS_KA-52
+https://reforger.armaplatform.com/workshop/64CB35D07BAEE60F
+# WCS_Mi-24V
+https://reforger.armaplatform.com/workshop/628933A0D3A0D700
+# WCS_AH-1S
+https://reforger.armaplatform.com/workshop/64CB39E57377C861
+# WCS_AH-64D
+https://reforger.armaplatform.com/workshop/6303360DA719E832
+# WCS_AH-6M
+https://reforger.armaplatform.com/workshop/6273146ADFE8241D
+# H-47 Chinook - Fastroping
+https://reforger.armaplatform.com/workshop/6704485615D2D3C3
+# WCS_Stryker
+https://reforger.armaplatform.com/workshop/5B02128D896F7DE8
+# Hmmwv Variants
+https://reforger.armaplatform.com/workshop/69F415A5B15EC350
+# CIE Leopard 2A6
+https://reforger.armaplatform.com/workshop/685952488F7E3CBA
+# REAPER_RHIB
+https://reforger.armaplatform.com/workshop/6934F9C61CE24DE5
+## ##
+
+## WEAPONS ##
+# M4 Block II and URG-I
+https://reforger.armaplatform.com/workshop/5AB890B71D748750
+# MM HK417
+https://reforger.armaplatform.com/workshop/6868487826E1BFF1
+# Compact Support Kits
+https://reforger.armaplatform.com/workshop/68A47CC16D892FEE
+# YobananaboY Sniper Pack
+--https://reforger.armaplatform.com/workshop/66BADB4ADCEBEECDNO
+# Nasty Glock 18C
+https://reforger.armaplatform.com/workshop/658C0A491D81806C
+# Nasty MP7
+https://reforger.armaplatform.com/workshop/68D173AD19F59BE5
+# Nasty OSV-96
+https://reforger.armaplatform.com/workshop/661EC1140DA89179
+# Nasty RSASS
+https://reforger.armaplatform.com/workshop/66955C2C318BF008
+# Nasty SA-58
+https://reforger.armaplatform.com/workshop/69180BA53A4B72A1
+# Nasty SKS
+https://reforger.armaplatform.com/workshop/66F53818138515ED
+# Nasty_Barrett_M107A1
+https://reforger.armaplatform.com/workshop/657219B33C8DCD87
+# Nasty420 M700
+https://reforger.armaplatform.com/workshop/673F47A1192A73DD
+# WOOKIE_GHILLIE_CHAOS
+https://reforger.armaplatform.com/workshop/6995491FA5EF4A9B
+# Nasty_Wookie_Weapon_Ghillies
+https://reforger.armaplatform.com/workshop/69ACE7CF59140926
+## ##
+## PARACHUTES ##
+# Parachute Framework
+https://reforger.armaplatform.com/workshop/65930CB4CD0237B2
+# MFF Parachute
+https://reforger.armaplatform.com/workshop/6867754CA817D856
+# Parachute SOA V2
+https://reforger.armaplatform.com/workshop/69735D889EA31A8B
+# Prontos Parachutes
+https://reforger.armaplatform.com/workshop/68996556700D5CA1
+## ##
+
+## ##
+## STW ##
+# STWBasesGenerator
+https://reforger.armaplatform.com/workshop/69DCCEB968B92571
+# STW Garbage System
+https://reforger.armaplatform.com/workshop/69E12A944C6AE5AA
+# STW Crates
+https://reforger.armaplatform.com/workshop/69E531416F617BDB
+# STW Bases-Crates Integration
+https://reforger.armaplatform.com/workshop/69E72E8A33B7C43A
+# STW Parachute SpawnPoint
+https://reforger.armaplatform.com/workshop/69E8B2129CC185F7
+# STW Snipers & Spotters
+https://reforger.armaplatform.com/workshop/6A0C1B4265742EBC
+# STW Anti-Air Team
+https://reforger.armaplatform.com/workshop/6A28B1B15F7A455F
+# STW Experience
+https://reforger.armaplatform.com/workshop/6A0A3E8B6A9C0719
+# STW Mine Fields
+https://reforger.armaplatform.com/workshop/69FE5939649668A2
+# STW Task Commander
+https://reforger.armaplatform.com/workshop/6A2EC47163C7DE19
+# STW Boats Spawner
+https://reforger.armaplatform.com/workshop/69DEAA8B1AA2931E
+# STW Comeback
+https://reforger.armaplatform.com/workshop/6A77550D676332F3
+# STW Helo Spawner
+https://reforger.armaplatform.com/workshop/69F8C85C5CB19522
+# STW Civilians Spawner
+https://reforger.armaplatform.com/workshop/69E0A48B209F861A
+# STW Combat Knowledge
+https://reforger.armaplatform.com/workshop/6A492D2543718567
+# STW Air Drops
+https://reforger.armaplatform.com/workshop/6A3950D64F1072DA
+# STW Divide And Conquer
+https://reforger.armaplatform.com/workshop/6A72BA275CB566CD
+## ##

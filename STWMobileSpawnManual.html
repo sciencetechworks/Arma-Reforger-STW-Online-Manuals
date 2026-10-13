@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Friendly player, Game Master and server-owner guide for STW Mobile Spawn in Arma Reforger.">
+  <title>STW Mobile Spawn Manual</title>
+  <link rel="stylesheet" href="stw-manuals.css">
+  <link rel="icon" type="image/svg+xml" href="images/stw-favicon.svg">
+</head>
+<body>
+<main>
+  <header>
+    <div class="eyebrow">ScienceTechWorks &bull; STW suite</div>
+    <a class="index-link" href="index.html">&larr; STW Online Manuals</a>
+    <h1>STW Mobile Spawn</h1>
+    <p class="lead">Turn a Game Master-placed vehicle into a friendly, moving spawn point. When the vehicle stops, it becomes a useful rally point; when it moves, the spawn quietly gets out of the way.</p>
+    <p class="small">A player, Game Master and server-owner guide by STW (ScienceTechWorks).</p>
+  </header>
+
+  <section>
+    <h2>What it adds</h2>
+    <p>STW Mobile Spawn links one mobile spawn to one vehicle. The server owns the link, watches the vehicle, and creates the player spawn point and map marker only when the vehicle has come to rest.</p>
+    <ul>
+      <li><strong>Game Master assignment:</strong> select a vehicle and choose <strong>Assign as Mobile Spawn</strong>.</li>
+      <li><strong>Stationary-only spawning:</strong> the spawn point and marker disappear while the vehicle is moving.</li>
+      <li><strong>Faction-aware access:</strong> only the vehicle's friendly faction can see and use the spawn.</li>
+      <li><strong>Vehicle-following marker:</strong> when the vehicle stops, the spawn returns at its current location.</li>
+      <li><strong>Persistence:</strong> assigned vehicles can be restored after a server restart, with their last saved stopped position and faction.</li>
+    </ul>
+    <div class="callout"><strong>Think of it as a mobile rally point.</strong> Park the vehicle, let the system settle for a moment, and your faction gets a spawn. Drive away and the spawn is removed until the vehicle stops again.</div>
+  </section>
+
+  <section>
+    <h2>For Game Masters: create a mobile spawn</h2>
+    <ol class="steps">
+      <li>Place a supported vehicle in the world and make sure it is a vehicle with a usable vehicle controller.</li>
+      <li>Select the vehicle and open the Game Master context menu.</li>
+      <li>Choose <strong>Assign as Mobile Spawn</strong>.</li>
+      <li>If you want to place the editable representation directly, search the Entity Browser for <strong>STW Mobile Spawn</strong> and place the mobile-spawn proxy close to the vehicle.</li>
+      <li>Stop the vehicle and wait for the stop debounce to finish. The faction spawn point and map marker will appear at the vehicle's origin.</li>
+    </ol>
+    <p>The proxy is the Game Master-facing object. It follows the vehicle and can be selected for properties and removal; the player-facing spawn point is managed by the server.</p>
+    <div class="callout warning"><strong>One vehicle, one spawn.</strong> Assigning an already-assigned vehicle does nothing. Removing the assignment, deleting the proxy, or destroying the vehicle removes the associated spawn point and marker.</div>
+  </section>
+
+  <section>
+    <h2>For players: using a mobile spawn</h2>
+    <p>When a friendly assigned vehicle is stopped, its marker appears on your map and its spawn point becomes available. Spawn normally through the game's spawn interface.</p>
+    <p>If the marker is missing, the vehicle may still be moving, waiting for its stop timer, assigned to another faction, or no longer valid. A vehicle that is moving is never a usable spawn, even if an old client view briefly shows a marker.</p>
+    <h3>Faction visibility</h3>
+    <p>Mobile spawns are private to their friendly faction. The faction is normally inherited from the vehicle or its driver. If no faction can be resolved, the server uses <code>US</code> as the default.</p>
+  </section>
+
+  <section>
+    <h2>How the vehicle state works</h2>
+    <table><thead><tr><th>Vehicle state</th><th>What you see</th><th>What players can do</th></tr></thead><tbody>
+      <tr><td>Moving</td><td>Mobile spawn point and marker are removed or hidden.</td><td>No one can use this vehicle as a spawn.</td></tr>
+      <tr><td>Stopped briefly</td><td>The server waits for the configured stop debounce.</td><td>Keep waiting; the spawn is not ready yet.</td></tr>
+      <tr><td>Stopped</td><td>A faction spawn point and tinted map marker appear at the vehicle.</td><td>Friendly players can spawn there.</td></tr>
+      <tr><td>Destroyed, replaced or unassigned</td><td>The proxy, spawn point and marker are cleaned up.</td><td>The old spawn cannot be used.</td></tr>
+    </tbody></table>
+    <p>The default movement threshold is <code>0.05 m/s</code>, with a <code>2</code>-second debounce. This avoids flickering while a vehicle settles or rocks slightly.</p>
+  </section>
+
+  <section>
+    <h2>Server configuration</h2>
+    <p>On first start, the server creates:</p>
+    <p><code>$profile:/STW/MobileSpawn/STWMobileSpawnConfig.json</code></p>
+    <p>Stop the server before editing the file, keep a backup, and restart after making changes. The most useful settings are:</p>
+    <table><thead><tr><th>Setting</th><th>What it controls</th><th>Default</th></tr></thead><tbody>
+      <tr><td><code>Enabled</code></td><td>Master switch for the service.</td><td><code>true</code></td></tr>
+      <tr><td><code>PersistenceEnabled</code></td><td>Saves assigned vehicles and restores them after restart.</td><td><code>true</code></td></tr>
+      <tr><td><code>EnableRuntimeSpawnPoint</code></td><td>Creates the native player spawn point when a vehicle is stopped.</td><td><code>true</code></td></tr>
+      <tr><td><code>MovementSpeedThreshold</code></td><td>Maximum speed still considered stopped, in metres per second.</td><td><code>0.05</code></td></tr>
+      <tr><td><code>StopDebounceSeconds</code></td><td>How long the vehicle must remain below the threshold before becoming active.</td><td><code>2.0</code></td></tr>
+      <tr><td><code>WatchIntervalMilliseconds</code></td><td>How often assigned vehicles are checked.</td><td><code>1000</code></td></tr>
+      <tr><td><code>DefaultFactionKey</code></td><td>Fallback faction when the vehicle has no faction.</td><td><code>US</code></td></tr>
+    </tbody></table>
+    <div class="callout sky"><strong>Persistence details:</strong> records are stored in <code>$profile:/STW/Persistence/STWMobileSpawn.json</code>. The vehicle prefab, world transform and resolved faction are saved. Inventory, damage, fuel, crew and attached entities are not saved.</div>
+  </section>
+
+  <section>
+    <h2>Quick troubleshooting</h2>
+    <ul>
+      <li><strong>No spawn appears:</strong> park the vehicle fully and wait at least the configured debounce time.</li>
+      <li><strong>The marker is invisible:</strong> check that you belong to the vehicle's faction and that the vehicle is not moving.</li>
+      <li><strong>Assignment is unavailable:</strong> confirm that the selected entity is a vehicle and has a vehicle controller.</li>
+      <li><strong>The old spawn remains after deletion:</strong> restart with the latest add-on and check the server log for <code>[STW][MOBILESPAWN]</code> cleanup messages.</li>
+      <li><strong>A restored vehicle is not present:</strong> verify <code>PersistenceEnabled</code> and the persistence file path, then check whether the saved prefab is still installed.</li>
+    </ul>
+  </section>
+
+  <footer class="contact">
+    <img src="images/CaptainSprocketPatch.png" alt="Captain Sprocket patch">
+    <div>
+      <div class="eyebrow">Join the community</div>
+      <h2 style="margin:6px 0 8px">Captain Sprocket</h2>
+      <p><strong>Arma Reforger server:</strong> STW Reforger<br><strong>Community:</strong> <a href="https://discord.gg/T2AZp6GGMJ">Join the Discord server</a></p>
+      <p class="small">Created by STW (ScienceTechWorks) &mdash; sciencetechworks@gmail.com. Park it, spawn in, and keep the convoy moving.</p>
+    </div>
+  </footer>
+</main>
+</body>
+</html>

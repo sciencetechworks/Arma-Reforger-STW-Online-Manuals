@@ -120,4 +120,8 @@ https://reforger.armaplatform.com/workshop/6A492D2543718567
 https://reforger.armaplatform.com/workshop/6A3950D64F1072DA
 # STW Divide And Conquer
 https://reforger.armaplatform.com/workshop/6A72BA275CB566CD
+# STW DAC Heavy Weapon Bridge
+https://reforger.armaplatform.com/workshop/6A9CD9275484947D
+# STW Stronghold HWeapons Bridge
+https://reforger.armaplatform.com/workshop/6A9CD46B56D1970D
 ## ##

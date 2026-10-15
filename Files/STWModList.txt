@@ -100,6 +100,10 @@ https://reforger.armaplatform.com/workshop/69E8B2129CC185F7
 https://reforger.armaplatform.com/workshop/6A0C1B4265742EBC
 # STW Anti-Air Team
 https://reforger.armaplatform.com/workshop/6A28B1B15F7A455F
+# STW Stronghold
+https://reforger.armaplatform.com/workshop/69FB76C0D035957E
+# STW Close Quarters Battle
+https://reforger.armaplatform.com/workshop/A9D7F20C4E8B61F3
 # STW Special Forces
 https://reforger.armaplatform.com/workshop/6A9CFA6C373DA172
 # STW Experience

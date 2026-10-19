@@ -130,4 +130,6 @@ https://reforger.armaplatform.com/workshop/6A72BA275CB566CD
 https://reforger.armaplatform.com/workshop/6A9CD9275484947D
 # STW Stronghold HWeapons Bridge
 https://reforger.armaplatform.com/workshop/6A9CD46B56D1970D
+# STW DAC Surveillance Bridge
+https://reforger.armaplatform.com/workshop/6AA6BEFA62A662F3
 ## ##

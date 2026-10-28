@@ -343,3 +343,5 @@ https://reforger.armaplatform.com/workshop/6AA6BEFA62A662F3
 https://reforger.armaplatform.com/workshop/6AAF61856E00A1A7
 # STWBasesDACIntegration
 https://reforger.armaplatform.com/workshop/6AB8AB6C6E42CEAB
+# STW Trucks
+https://reforger.armaplatform.com/workshop/6AB8FD2851501146

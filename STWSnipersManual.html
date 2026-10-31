@@ -59,7 +59,7 @@
     <ol class="steps">
       <li>Place or select two suitable soldiers of the faction you want to use.</li>
       <li>Assign one as <strong>STW Sniper</strong> and one as <strong>STW Spotter</strong>.</li>
-      <li>Use matching camouflage for a tidy team, or choose <code>RANDOM</code> for individual variety. Random camouflage excludes Winter from its random pool.</li>
+      <li>Use matching camouflage for a tidy team, or choose <code>RANDOM</code> for individual variety. The server administrator can restrict the random pool in the JSON configuration.</li>
       <li>Place them with a believable observation lane and give them orders appropriate to the scenario. The manual assignment equips them; it does not magically invent a mission plan.</li>
     </ol>
     <p>To change the clothing and weapon-wrap season on every managed STW sniper and spotter, use <strong>STW Set All Snipers/Spotters Camouflage</strong> from the general context actions. This is a seasonal refresh, so it updates the camouflage without rebuilding every complete loadout.</p>
@@ -92,9 +92,10 @@
     <h2>1. Loadouts &mdash; <code>STWSnipersConfig.json</code></h2>
     <p>These are scenario-wide defaults. A Game Master can override the choice for an individual assignment in the dialog; automatic pairs use these defaults. <code>RANDOM</code> picks from the valid choices for that setting.</p>
     <table><thead><tr><th>Setting</th><th>Default</th><th>Explanation</th></tr></thead><tbody>
-      <tr><td><code>version</code></td><td><code>2</code></td><td>Configuration format version. Leave it at the mod-generated value.</td></tr>
+      <tr><td><code>version</code></td><td><code>3</code></td><td>Configuration format version. Leave it at the mod-generated value.</td></tr>
       <tr><td><code>enableChatMessages</code></td><td><code>true</code></td><td>Enables opposing-faction sniper/spotter intelligence reports in radio chat. This system has no on-screen notification message.</td></tr>
       <tr><td><code>camouflage</code></td><td><code>&quot;RANDOM&quot;</code></td><td>Seasonal clothing and compatible weapon wrap. Valid: <code>RANDOM</code>, <code>Winter</code>, <code>Summer</code>, <code>Desert</code>, <code>Forest</code>, <code>Spring</code>, <code>Autumn</code>.</td></tr>
+      <tr><td><code>camouflageAllowlist</code></td><td><code>[&quot;Winter&quot;, &quot;Summer&quot;, &quot;Desert&quot;, &quot;Forest&quot;, &quot;Spring&quot;, &quot;Autumn&quot;]</code></td><td>Restricts the seasonal camouflage pool used by <code>RANDOM</code> for both ghillie clothing and weapon wrappers. Example: <code>[&quot;Forest&quot;, &quot;Autumn&quot;]</code>.</td></tr>
       <tr><td><code>sniperRifle</code></td><td><code>&quot;RANDOM&quot;</code></td><td>Sniper primary weapon. Choices: <code>M700_FDE</code>, <code>M700</code>, <code>M107A1</code>, <code>OSV-96</code>, <code>OSV-96_RF</code>, <code>RSASS11</code>, <code>SA58</code>, <code>FAB_SKS</code>, or <code>RANDOM</code>.</td></tr>
       <tr><td><code>spotterWeapon</code></td><td><code>&quot;RANDOM&quot;</code></td><td>Spotter primary weapon. The current catalog provides <code>MP7A2</code>; <code>RANDOM</code> therefore resolves to it.</td></tr>
       <tr><td><code>sniperMuzzle</code></td><td><code>&quot;Suppressor&quot;</code></td><td>Sniper muzzle choice: <code>Suppressor</code> or <code>None</code>.</td></tr>

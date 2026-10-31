@@ -345,3 +345,356 @@ https://reforger.armaplatform.com/workshop/6AAF61856E00A1A7
 https://reforger.armaplatform.com/workshop/6AB8AB6C6E42CEAB
 # STW Trucks
 https://reforger.armaplatform.com/workshop/6AB8FD2851501146
+## RHS ##
+# RHS - Content Pack 01
+https://reforger.armaplatform.com/workshop/1337C0DE5DABBEEF
+# RHS - Content Pack 02
+https://reforger.armaplatform.com/workshop/BADC0DEDABBEDA5E
+# RHS - Status Quo
+https://reforger.armaplatform.com/workshop/595F2BF2F44836FB
+## ##
+## GRS ##
+# GRS - Bundle
+https://reforger.armaplatform.com/workshop/6518EA4DDEA42E15
+# GRS NVGS
+https://reforger.armaplatform.com/workshop/6A2A460F6FE4B59A
+# GRS - Modular Vests & Rigs
+https://reforger.armaplatform.com/workshop/651834C8D77BF86B
+# GRS NVGs- RHS Compat
+https://reforger.armaplatform.com/workshop/6A350AC163BE0E04
+## ##
+## VEHICLES AND HELICOPTERS ##
+# M1 Abrams
+https://reforger.armaplatform.com/workshop/5D1880C4AD410C14
+# BMP-1 IFV
+https://reforger.armaplatform.com/workshop/5E524E4FEECCA92B
+# BMP-3 IFV
+https://reforger.armaplatform.com/workshop/5B383D4CB27E0D54
+# BTR 152
+https://reforger.armaplatform.com/workshop/65171C2883CB81B4
+# M113 APC
+https://reforger.armaplatform.com/workshop/5E5C154FEE1094BB
+# M2 Bradley Fighting Vehicle
+https://reforger.armaplatform.com/workshop/63120AE07E6C0966
+# Mi-28
+https://reforger.armaplatform.com/workshop/609E138FE9005877
+# WCS_KA-52
+https://reforger.armaplatform.com/workshop/64CB35D07BAEE60F
+# WCS_Mi-24V
+https://reforger.armaplatform.com/workshop/628933A0D3A0D700
+# WCS_AH-1S
+https://reforger.armaplatform.com/workshop/64CB39E57377C861
+# WCS_AH-64D
+https://reforger.armaplatform.com/workshop/6303360DA719E832
+# WCS_AH-6M
+https://reforger.armaplatform.com/workshop/6273146ADFE8241D
+# H-47 Chinook - Fastroping
+https://reforger.armaplatform.com/workshop/6704485615D2D3C3
+# WCS_Stryker
+https://reforger.armaplatform.com/workshop/5B02128D896F7DE8
+# Hmmwv Variants
+https://reforger.armaplatform.com/workshop/69F415A5B15EC350
+# CIE Leopard 2A6
+https://reforger.armaplatform.com/workshop/685952488F7E3CBA
+# ACM VT-22 NightRunner
+https://reforger.armaplatform.com/workshop/6A0C332EB3F7CBF4
+# ACM HH-60W Jolly Green II
+https://reforger.armaplatform.com/workshop/6A6D7BC482790A79
+#ACM UH-135
+https://reforger.armaplatform.com/workshop/69E32A47B172683E
+# REAPER_RHIB
+https://reforger.armaplatform.com/workshop/6934F9C61CE24DE5
+## ##
+## MISC ##
+# Attachment Framework
+https://reforger.armaplatform.com/workshop/645F08FA9E7CDEDE
+# ARGH_Spike-Strip
+--https://reforger.armaplatform.com/workshop/694E44203A4060BBNO
+# ContextMenuColumns
+--https://reforger.armaplatform.com/workshop/63C4238159C200F7NO
+# TRGBUniversalVehicleGPS
+--https://reforger.armaplatform.com/workshop/7D32A8F049C6BE15NO
+# Realistic Rotor Wash
+--https://reforger.armaplatform.com/workshop/6AAB77ACAAAE062ENO
+# Fire system
+--https://reforger.armaplatform.com/workshop/68C21C3B57E58DFBNO
+# Game Master Enhanced
+https://reforger.armaplatform.com/workshop/5964E0B3BB7410CE
+# Breachable Doors
+https://reforger.armaplatform.com/workshop/646B350F36C6D3E4
+# No Supply System
+https://reforger.armaplatform.com/workshop/5EE472B0F295A124
+# Fiercests Waypoints
+https://reforger.armaplatform.com/workshop/65713041DA0A9B3F
+# Deploy Menu Loadout Editor
+--https://reforger.armaplatform.com/workshop/69B892F1624CEEDANO
+# JXPLoadoutEditor
+--https://reforger.armaplatform.com/workshop/8F41C2D6A93B1135NO
+# Kova x Armory
+https://reforger.armaplatform.com/workshop/6A7B0906EEB68624
+# GM Markers
+https://reforger.armaplatform.com/workshop/68D40B4560B0AF78
+# Cupcakes Stance Indicator
+https://reforger.armaplatform.com/workshop/6A17052EE15B48D9
+# Unrestricted Save Loadout
+https://reforger.armaplatform.com/workshop/67393922C71B26CC
+# Wirecutters 2
+https://reforger.armaplatform.com/workshop/62F364B35E9B51B0
+# Taser 7
+https://reforger.armaplatform.com/workshop/68604279A6674309
+# Bacon Loadout Editor
+https://reforger.armaplatform.com/workshop/606B100247F5C709
+# Attachment Framework
+--https://reforger.armaplatform.com/workshop/645F08FA9E7CDEDENO
+# AKI_Core
+--https://reforger.armaplatform.com/workshop/62CCD69DD17E4F2FNO
+# WCS_Earplugs
+https://reforger.armaplatform.com/workshop/612F512CD4CB21D5
+# No Weapon Drop Unconscious
+--https://reforger.armaplatform.com/workshop/60612C225328522ENO
+# COALITION Squad Interface
+https://reforger.armaplatform.com/workshop/5B0D1E4380971EBD
+# SpaceCore
+--https://reforger.armaplatform.com/workshop/5E389BB9F58B79A6NO
+# Units Map Markers ver 2.0
+https://reforger.armaplatform.com/workshop/5EF682D62FB99DC8
+# Hold Your Breath
+https://reforger.armaplatform.com/workshop/672EE3CC8A605F28
+# WHAT- Auto Earplugs
+--https://reforger.armaplatform.com/workshop/6858992BB34FC1B0NO
+# Rayzi Utils
+--https://reforger.armaplatform.com/workshop/6632F94B46173164NO
+# Attachment Framework-Core
+--https://reforger.armaplatform.com/workshop/687CD82F6E41D627NO
+# Keep Map Markers on Disconnect
+--https://reforger.armaplatform.com/workshop/62E0B4EB51FCE050NO
+# Bacon Suppressors
+https://reforger.armaplatform.com/workshop/5AB301290317994A
+# WCS_VehicleLock
+--https://reforger.armaplatform.com/workshop/61BA4EB5C886D396NO
+# Realism Overhaul - Vehicles
+https://reforger.armaplatform.com/workshop/631C0CCC3F4506CBNO
+# Change Your Face
+--https://reforger.armaplatform.com/workshop/65CEF81038D4AF3CNO
+# RIS Laser Attachments
+https://reforger.armaplatform.com/workshop/5ABD0CB57F7E9EB1
+# Smoke Mortar Fix
+https://reforger.armaplatform.com/workshop/64F646B29F299B8A
+# WCS_Weapon_Scripts
+--https://reforger.armaplatform.com/workshop/68F006D910E7546FNO
+# WCS_Scopes
+--https://reforger.armaplatform.com/workshop/62A668F513428630NO
+# Brutal Voices
+https://reforger.armaplatform.com/workshop/6174A376E06661BF
+# More Brutal Voices
+https://reforger.armaplatform.com/workshop/66FAF6113997388F
+# Date Sync
+https://reforger.armaplatform.com/workshop/66E37EA95CE3245F
+# WCS_LoadoutEditor
+https://reforger.armaplatform.com/workshop/61D57616CAFBB23D
+# WCS_Armaments
+https://reforger.armaplatform.com/workshop/629B2BA37EFFD577
+# WCS_Attachments
+https://reforger.armaplatform.com/workshop/61C74A8B647617DA
+# WCS_Sounds
+https://reforger.armaplatform.com/workshop/631C3C1AEE9C90BC
+# TFU Disable GM Budgets
+https://reforger.armaplatform.com/workshop/657E2435156A097F
+# Kova x ATAK MQ9 Plugin
+https://reforger.armaplatform.com/workshop/6A4A15F7E59E95F4
+# Kova x ATAK 3D Map
+https://reforger.armaplatform.com/workshop/6A4A257AE5F281BE
+# OTAC Gear x KOVA ATAK
+https://reforger.armaplatform.com/workshop/37DEFC0A4CEAB784
+# Owon Rank Unlock
+https://reforger.armaplatform.com/workshop/6F17A5CBF64BF4A6
+## ##
+
+## ACE ##
+# ACE Backblast
+https://reforger.armaplatform.com/workshop/60E573C9B04CC408
+# ACE Captives
+--https://reforger.armaplatform.com/workshop/646D52AF8BB3FF15NO
+# ACE Carrying
+https://reforger.armaplatform.com/workshop/5DBD560C5148E1DA
+# ACE Compass
+--https://reforger.armaplatform.com/workshop/60C53A9372ED3964NO
+# ACE Core
+https://reforger.armaplatform.com/workshop/60C4CE4888FF4621
+# ACE Explosives
+--https://reforger.armaplatform.com/workshop/61B7763A8AEB53B7NO
+# ACE Finger
+https://reforger.armaplatform.com/workshop/606C369BAC3F6CC3
+# ACE Magazine Repack
+https://reforger.armaplatform.com/workshop/611CB1D409001EB0
+# ACE Radio
+--https://reforger.armaplatform.com/workshop/64475DC102F2BDA4NO
+# ACE Surrender
+--https://reforger.armaplatform.com/workshop/663CE51EDA031586NO
+## ##
+## WEAPONS ##
+# M4 Block II and URG-I
+https://reforger.armaplatform.com/workshop/5AB890B71D748750
+# MM HK417
+https://reforger.armaplatform.com/workshop/6868487826E1BFF1
+# Compact Support Kits
+https://reforger.armaplatform.com/workshop/68A47CC16D892FEE
+# YobananaboY Sniper Pack
+--https://reforger.armaplatform.com/workshop/66BADB4ADCEBEECDNO
+# Nasty Glock 18C
+https://reforger.armaplatform.com/workshop/658C0A491D81806C
+# Nasty MP7
+https://reforger.armaplatform.com/workshop/68D173AD19F59BE5
+# Nasty OSV-96
+https://reforger.armaplatform.com/workshop/661EC1140DA89179
+# Nasty RSASS
+https://reforger.armaplatform.com/workshop/66955C2C318BF008
+# Nasty SA-58
+https://reforger.armaplatform.com/workshop/69180BA53A4B72A1
+# Nasty SKS
+https://reforger.armaplatform.com/workshop/66F53818138515ED
+# Nasty_Barrett_M107A1
+https://reforger.armaplatform.com/workshop/657219B33C8DCD87
+# Nasty420 M700
+https://reforger.armaplatform.com/workshop/673F47A1192A73DD
+# WOOKIE_GHILLIE_CHAOS
+https://reforger.armaplatform.com/workshop/6995491FA5EF4A9B
+# Nasty_Wookie_Weapon_Ghillies
+https://reforger.armaplatform.com/workshop/69ACE7CF59140926
+# Military Crossbow
+https://reforger.armaplatform.com/workshop/3CBDFAB9713149BE
+# Knifes
+--https://reforger.armaplatform.com/workshop/1984198419840002NO
+# Flashbangs
+https://reforger.armaplatform.com/workshop/69E2E8DDDCC77115
+## ##
+
+## PARACHUTES ##
+# Parachute Framework
+https://reforger.armaplatform.com/workshop/65930CB4CD0237B2
+# MFF Parachute
+https://reforger.armaplatform.com/workshop/6867754CA817D856
+# Parachute SOA V2
+https://reforger.armaplatform.com/workshop/69735D889EA31A8B
+# Prontos Parachutes
+https://reforger.armaplatform.com/workshop/68996556700D5CA1
+## ##
+## MAPS ##
+# Rail Enfusion Redux
+--https://reforger.armaplatform.com/workshop/5DE612963E4B005ANO
+# Railway Generator
+--https://reforger.armaplatform.com/workshop/5F0D245931200FD1NO
+# Outside Terrain Core
+--https://reforger.armaplatform.com/workshop/61F0D506562D9BC9NO
+# Minus Building Pack
+--https://reforger.armaplatform.com/workshop/672166DE5926F11FNO
+# Chernarus Minus
+https://reforger.armaplatform.com/workshop/665D1AA55B5D8076
+# Nizla Island
+--https://reforger.armaplatform.com/workshop/65670680EE0D7802NO
+# Brit Props
+--https://reforger.armaplatform.com/workshop/5F3831B634575167NO
+# Faircroft Islands
+--https://reforger.armaplatform.com/workshop/614B62005CBB8057NO
+# Ruha 
+https://reforger.armaplatform.com/workshop/653CB36244ADBE0F
+
+## ##
+## STW ##
+# STW Weapons
+--https://reforger.armaplatform.com/workshop/69F4DEE214A889C4NO
+# STW Weapons Arsenal Refresh
+--https://reforger.armaplatform.com/workshop/69F5566BFE90EF98NO
+# STW Clothes
+--https://reforger.armaplatform.com/workshop/69F6607803EA6E92NO
+# STW Clothes Arsenal Refresh
+--https://reforger.armaplatform.com/workshop/69F662416CF0D216NO
+# STW Comeback
+--https://reforger.armaplatform.com/workshop/6A77550D676332F3NO
+# STWVeniVidiViciFullEdition
+--https://reforger.armaplatform.com/workshop/6AACA9224267AB49NO
+# STW Veni Vidi Vici
+--https://reforger.armaplatform.com/workshop/6AAC83ACA86CD4D7NO
+# STW Veni Vidi Vici Reinforcements
+--https://reforger.armaplatform.com/workshop/6AAC871F34AF82F8NO
+# STWVeniVidiViciExtrasOne
+--https://reforger.armaplatform.com/workshop/6AAC87EF7A7AEAE1NO
+# STWVeniVidiViciExtrasTwo
+--https://reforger.armaplatform.com/workshop/6AAC8AC468ECBB5FNO
+# STWVeniVidiViciSystems
+--https://reforger.armaplatform.com/workshop/6AAC8A07426AEBB2NO
+# STWVeniVidiViciHelicopters
+--https://reforger.armaplatform.com/workshop/6AAC8BB51295CD0BNO
+# STWVeniVidiViciBases
+--https://reforger.armaplatform.com/workshop/6AAC9DC43D6FD091NO
+## ##
+## STW ##
+# STW Experience
+https://reforger.armaplatform.com/workshop/6A0A3E8B6A9C0719
+# STW Weapons
+https://reforger.armaplatform.com/workshop/69F4DEE214A889C4
+# STW Weapons Arsenal Refresh
+https://reforger.armaplatform.com/workshop/69F5566BFE90EF98
+# STW Clothes
+--https://reforger.armaplatform.com/workshop/69F6607803EA6E92NO
+# STW Clothes Arsenal Refresh
+--https://reforger.armaplatform.com/workshop/69F662416CF0D216NO
+# STW Comeback
+https://reforger.armaplatform.com/workshop/6A77550D676332F3
+
+# STW Mobile Spawn
+https://reforger.armaplatform.com/workshop/6A99532A794BA9B4
+# STWBasesGenerator
+https://reforger.armaplatform.com/workshop/69DCCEB968B92571
+# STW Garbage System
+https://reforger.armaplatform.com/workshop/69E12A944C6AE5AA
+# STW Crates
+https://reforger.armaplatform.com/workshop/69E531416F617BDB
+# STW Bases-Crates Integration
+https://reforger.armaplatform.com/workshop/69E72E8A33B7C43A
+# STW Parachute SpawnPoint
+https://reforger.armaplatform.com/workshop/69E8B2129CC185F7
+# STW Snipers & Spotters
+https://reforger.armaplatform.com/workshop/6A0C1B4265742EBC
+# STW Anti-Air Team
+https://reforger.armaplatform.com/workshop/6A28B1B15F7A455F
+# STW Mine Fields
+https://reforger.armaplatform.com/workshop/69FE5939649668A2
+# STW Task Commander
+https://reforger.armaplatform.com/workshop/6A2EC47163C7DE19
+# STW Boats Spawner
+https://reforger.armaplatform.com/workshop/69DEAA8B1AA2931E
+# STW Helo Spawner
+https://reforger.armaplatform.com/workshop/69F8C85C5CB19522
+# STW Civilians Spawner
+--https://reforger.armaplatform.com/workshop/69E0A48B209F861ANO
+# STW Combat Knowledge
+https://reforger.armaplatform.com/workshop/6A492D2543718567
+# STW Air Drops
+https://reforger.armaplatform.com/workshop/6A3950D64F1072DA
+# STW Divide And Conquer
+https://reforger.armaplatform.com/workshop/6A72BA275CB566CD
+# STW DAC Heavy Weapon Bridge
+https://reforger.armaplatform.com/workshop/6A9CD9275484947D
+# STW Stronghold HWeapons Bridge
+https://reforger.armaplatform.com/workshop/6A9CD46B56D1970D
+# STW Stronghold
+https://reforger.armaplatform.com/workshop/69FB76C0D035957E
+# STW Close Quarters Battle
+https://reforger.armaplatform.com/workshop/A9D7F20C4E8B61F3
+# STW Special Forces
+https://reforger.armaplatform.com/workshop/6A9CFA6C373DA172
+# STW DAC Surveillance Bridge
+https://reforger.armaplatform.com/workshop/6AA6BEFA62A662F3
+# STW Convoy
+https://reforger.armaplatform.com/workshop/6AAF61856E00A1A7
+# STWBasesDACIntegration
+https://reforger.armaplatform.com/workshop/6AB8AB6C6E42CEAB
+# STW Trucks
+https://reforger.armaplatform.com/workshop/6AB8FD2851501146
+# STWCommandWheelMiddleButton
+https://reforger.armaplatform.com/workshop/6ABB77DB6CCB1589
+# STWFPVDroneDACAdapter
+https://reforger.armaplatform.com/workshop/6ABF176B7F5978C7
+# STWFPVDroneEnvironmentAdapter
+https://reforger.armaplatform.com/workshop/6ABF181A7291300B

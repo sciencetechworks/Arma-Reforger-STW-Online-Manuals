@@ -698,3 +698,7 @@ https://reforger.armaplatform.com/workshop/6ABB77DB6CCB1589
 https://reforger.armaplatform.com/workshop/6ABF176B7F5978C7
 # STWFPVDroneEnvironmentAdapter
 https://reforger.armaplatform.com/workshop/6ABF181A7291300B
+# STW Combat Zone
+https://reforger.armaplatform.com/workshop/6AC5241E64023F18
+# STWCombatZoneCKnowledgeAdapter
+https://reforger.armaplatform.com/workshop/6AC524796995D6B8

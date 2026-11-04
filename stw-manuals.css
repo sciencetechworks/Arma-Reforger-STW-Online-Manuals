@@ -22,3 +22,5 @@ section,.callout,.contact { border-color:#d6e0e4 !important; border-radius:14px 
 .callout,.note { border-left-color:#197a75 !important; background:#e8f6f3 !important; } .warning,.warn { border-left-color:#9a6114 !important; background:#fff7e9 !important; }
 a { color:#096c70 !important; } code,pre { color:#12202c !important; background:#edf2f6 !important; } th { color:#254154 !important; background:#f1f6f8 !important; }
 @media (max-width:600px) { main { padding:0 14px 42px !important; } header { margin:0 -14px !important; padding:3rem 14px !important; } }
+.community { display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; }
+.community img { width:min(170px,45vw); height:auto; object-fit:contain; }

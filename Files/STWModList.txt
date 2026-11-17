@@ -48,21 +48,21 @@ https://reforger.armaplatform.com/workshop/5B02128D896F7DE8
 # Hmmwv Variants
 https://reforger.armaplatform.com/workshop/69F415A5B15EC350
 # CIE Leopard 2A6
-https://reforger.armaplatform.com/workshop/685952488F7E3CBA
+--https://reforger.armaplatform.com/workshop/685952488F7E3CBANO
 # ACM VT-22 NightRunner
-https://reforger.armaplatform.com/workshop/6A0C332EB3F7CBF4
+--https://reforger.armaplatform.com/workshop/6A0C332EB3F7CBF4NO
 # ACM HH-60W Jolly Green II
-https://reforger.armaplatform.com/workshop/6A6D7BC482790A79
+--https://reforger.armaplatform.com/workshop/6A6D7BC482790A79NO
 #ACM UH-135
-https://reforger.armaplatform.com/workshop/69E32A47B172683E
+--https://reforger.armaplatform.com/workshop/69E32A47B172683ENO
 # REAPER_RHIB
 https://reforger.armaplatform.com/workshop/6934F9C61CE24DE5
 ## ##
 ## MISC ##
 # Were You Raised In A Barn
-https://reforger.armaplatform.com/workshop/0EE9CE408F80A62C
+--https://reforger.armaplatform.com/workshop/0EE9CE408F80A62CNO
 # CRX Enfusion A.I.
-https://reforger.armaplatform.com/workshop/5F268647F8A1A1F4
+--https://reforger.armaplatform.com/workshop/5F268647F8A1A1F4NO
 # AIO - AI Overhaul
 --https://reforger.armaplatform.com/workshop/BD5CE2F755B99A95NO
 # 6TP - Persistent GM Settings
@@ -70,9 +70,9 @@ https://reforger.armaplatform.com/workshop/6AC762C5A6C76568
 # DWP_Weather
 --https://reforger.armaplatform.com/workshop/6954F3B92541BF37NO
 # Atmospheric Weather Mod
-https://reforger.armaplatform.com/workshop/64ED6553B8AF6B62
+https://reforger.armaplatform.com/workshop/64ED6553B8AF6B62NO
 # EO HDR 10
-https://reforger.armaplatform.com/workshop/697D645290BC3D70
+https://reforger.armaplatform.com/workshop/697D645290BC3D70NO
 #Recondos Accessible Packs
 https://reforger.armaplatform.com/workshop/69D749AA6B0012EB
 # Attachment Framework
@@ -106,11 +106,11 @@ https://reforger.armaplatform.com/workshop/68D40B4560B0AF78
 # Cupcakes Stance Indicator
 https://reforger.armaplatform.com/workshop/6A17052EE15B48D9
 # Unrestricted Save Loadout
-https://reforger.armaplatform.com/workshop/67393922C71B26CC
+--https://reforger.armaplatform.com/workshop/67393922C71B26CCNO
 # Wirecutters 2
 https://reforger.armaplatform.com/workshop/62F364B35E9B51B0
 # Taser 7
-https://reforger.armaplatform.com/workshop/68604279A6674309
+--https://reforger.armaplatform.com/workshop/68604279A6674309NO
 # Bacon Loadout Editor
 https://reforger.armaplatform.com/workshop/606B100247F5C709
 # Attachment Framework
@@ -150,7 +150,7 @@ https://reforger.armaplatform.com/workshop/66FAEB0D9CD998F2
 # RIS Laser Attachments
 https://reforger.armaplatform.com/workshop/5ABD0CB57F7E9EB1
 # Smoke Mortar Fix
-https://reforger.armaplatform.com/workshop/64F646B29F299B8A
+--https://reforger.armaplatform.com/workshop/64F646B29F299B8ANO
 # WCS_Weapon_Scripts
 --https://reforger.armaplatform.com/workshop/68F006D910E7546FNO
 # WCS_Scopes
@@ -172,15 +172,19 @@ https://reforger.armaplatform.com/workshop/631C3C1AEE9C90BC
 # TFU Disable GM Budgets
 https://reforger.armaplatform.com/workshop/657E2435156A097F
 # Kova x ATAK MQ9 Plugin
-https://reforger.armaplatform.com/workshop/6A4A15F7E59E95F4
+--https://reforger.armaplatform.com/workshop/6A4A15F7E59E95F4NO
 # Kova x ATAK 3D Map
-https://reforger.armaplatform.com/workshop/6A4A257AE5F281BE
+--https://reforger.armaplatform.com/workshop/6A4A257AE5F281BENO
 # OTAC Gear x KOVA ATAK
 https://reforger.armaplatform.com/workshop/37DEFC0A4CEAB784
 # Owon Rank Unlock
 https://reforger.armaplatform.com/workshop/6F17A5CBF64BF4A6
 # Ambiance - Random RHS Flybys
 --https://reforger.armaplatform.com/workshop/66E4BB51C8A190A1NO
+# GMTasksAndTriggerLinks
+https://reforger.armaplatform.com/workshop/6B29A001A17E4C01
+# GM Easy Loot Config
+https://reforger.armaplatform.com/workshop/DAA6B41C82174B38
 ## ##
 
 ## ACE ##
@@ -271,6 +275,8 @@ https://reforger.armaplatform.com/workshop/665D1AA55B5D8076
 --https://reforger.armaplatform.com/workshop/614B62005CBB8057NO
 # Ruha 
 https://reforger.armaplatform.com/workshop/653CB36244ADBE0F
+# Polos Overhauled Everon
+https://reforger.armaplatform.com/workshop/68D6AEA60DB1C89F
 
 ## ##
 ## STW ##

@@ -52,6 +52,12 @@ Request a drone scan over a selected zone to obtain tactical information before 
 
 Request helicopter transport from pickup point A to destination B. Transport can support rope insertion where available, and the wheel can also request helicopter insertion troops.
 
+## Transport helicopter procedure
+
+Requesting a transport helicopter means asking it to collect the group at point A (LZA) and deliver it to point B. At point B, select a landing zone (LZB) for a landing or a hover point (HOB) to use the rope system for rappelling insertions. Complex flight routes and multiple stops can be issued through the waypoint-marking language. For advanced use, read the complete Transport Helicopters module documentation.
+
+After requesting the helicopter, the radio gives an estimated arrival time at the pickup point. If the helicopter takes too long, an anti-air unit may have shot it down. The radio will normally report the shootdown.
+
 ### Combat support
 
 Request CAS and ground combat support, including APCs, jeeps, and tanks. Mortar support includes explosive rounds, smoke rounds, and illumination flares.

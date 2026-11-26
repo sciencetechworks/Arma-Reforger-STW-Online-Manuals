@@ -89,12 +89,13 @@ def footer(c,doc):
 
 def build(lang):
  t=DATA[lang]; s=make_styles(); story=[Spacer(1,35*mm),Paragraph(t["title"],s["CoverX"]),Paragraph(t["author"],s["SubX"]),Spacer(1,8*mm),Paragraph(t["subtitle"],s["SubX"]),Spacer(1,8*mm),Image(str(IMG/"CaptainSprocketPatch.png"),width=120*mm,height=40*mm),PageBreak()]
- story += [KeepTogether([Paragraph(t["general"],s["H1X"]),Paragraph(t["warning"],s["BodyX"])]), KeepTogether([Paragraph(t["map"],s["H1X"]),Paragraph(t["mapbody"],s["BodyX"]),pics("map",lang,s)]), KeepTogether([Paragraph(t["campaign"],s["H1X"]),Paragraph(t["campaignbody"],s["BodyX"])]),PageBreak(),Paragraph(t["missions"],s["H1X"]),KeepTogether([Paragraph(t["deploymentpointstitle"],s["H2X"]),Paragraph(t["deploymentpoints"],s["BodyX"]),pics("deploymentpoints",lang,s)])]
+ story += [KeepTogether([Paragraph(t["general"],s["H1X"]),Paragraph(t["warning"],s["BodyX"])]), KeepTogether([Paragraph(t["map"],s["H1X"]),Paragraph(t["mapbody"],s["BodyX"]),pics("map",lang,s)]), KeepTogether([Paragraph(t["campaign"],s["H1X"]),Paragraph(t["campaignbody"],s["BodyX"])]),PageBreak(),Paragraph(t["missions"],s["H1X"])]
  for k, body in (("stronghold","strongbody"),("cqb","cqbody"),("sf","sfbody"),("bz","bzbody")): story += [KeepTogether([Paragraph(t[k],s["H2X"]),Paragraph(t[body],s["BodyX"]),pics(k,lang,s)])]
  story += [PageBreak(),KeepTogether([Paragraph(t["surveillance"],s["H1X"]),Paragraph(t["air"],s["BodyX"]),pics("air",lang,s)]),KeepTogether([Paragraph(t["ally"],s["BodyX"]),pics("ally",lang,s)]),PageBreak(),Paragraph(t["wheel"],s["H1X"])]
  for k in ("deployment","recon","transport","support"):
   extra = [Paragraph(t["transportdetail"],s["BodyX"])] if k == "transport" else []
   story += [KeepTogether([Paragraph(t[k],s["H2X"]),Paragraph(t[k+"body"],s["BodyX"])] + extra + [pics(k,lang,s)])]
+  if k == "transport": story += [KeepTogether([Paragraph(t["deploymentpointstitle"],s["H2X"]),Paragraph(t["deploymentpoints"],s["BodyX"]),pics("deploymentpoints",lang,s)])]
  filename = f"STWDivideAndConquerManual-{lang}.pdf"
  SimpleDocTemplate(str(OUT/filename),pagesize=A4,rightMargin=18*mm,leftMargin=18*mm,topMargin=16*mm,bottomMargin=16*mm,title=t["title"],author=t["author"]).build(story,onFirstPage=footer,onLaterPages=footer)
 

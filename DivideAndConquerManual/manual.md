@@ -52,6 +52,10 @@ Request a drone scan over a selected zone to obtain tactical information before 
 
 Request helicopter transport from pickup point A to destination B. Transport can support rope insertion where available, and the wheel can also request helicopter insertion troops.
 
+## Helicopter deployment points
+
+Helicopter deployment points for players are distributed across the scenario, especially at airports. If the server is configured to show them, they are visible directly on the tactical map when zoomed in. Once at a deployment point, select its interaction option to choose the helicopter model, repair the helicopter, or rearm it.
+
 ## Transport helicopter procedure
 
 Requesting a transport helicopter means asking it to collect the group at point A (LZA) and deliver it to point B. At point B, select a landing zone (LZB) for a landing or a hover point (HOB) to use the rope system for rappelling insertions. Complex flight routes and multiple stops can be issued through the waypoint-marking language. For advanced use, read the complete Transport Helicopters module documentation.
